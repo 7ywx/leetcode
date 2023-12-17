@@ -30,8 +30,8 @@ def second_highest_salary(employee: pd.DataFrame) -> pd.Series:
     else:
         second_highest_salary = pd.NA  # 如果只有一个或没有薪水，就用 NA 表示
     # 创建包含第二高薪水的 Dataframe
-    result_df = pd.DataFrame({'SecondHighestSalary': [second_highest_salary]})
-    return result_df
+     result_df = pd.DataFrame({'SecondHighestSalary': [second_highest_salary]})
+     return result_df
 
 df = pd.DataFrame({'Name': ['Alice', 'Bob', 'Charlie', 'David'],
     'salary': [50000, 60000, 55000, 65000]})
