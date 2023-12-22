@@ -23,7 +23,6 @@ def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) 
     df.rename(columns={"name_x":"Employee","name_y":"Department","salary":"Salary"},inplace=True)
     max_salary=df.groupby("Department")["Salary"].transform("max")
     df=df[df["Salary"]==max_salary]
-    print(df)
     return df[["Department","Employee","Salary"]]
 
 employee_data = {
