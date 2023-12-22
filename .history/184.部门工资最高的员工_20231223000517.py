@@ -1,10 +1,21 @@
 import pandas as pd
 
 def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
-    e_d = employee.merge(department, left_on='departmentId', right_on='id',how='inner')
+    # 将employee表和department表根据departmentId和id进行合并
+    e_d = employee.merge(department, left_on='departmentId', right_on='id', how='inner')
+
+    # 给合并后的表添加一个新列max_salary，该列通过groupby函数找到每个name_y（部门）对应的salary的最大值
     e_d['max_salary'] = e_d.groupby('name_y')['salary'].transform('max')
-    department_highest_salary = e_d[e_d.salary == e_d.max_salary].rename(columns={'name_y': 'Department','name_x': 'Employee','salary': 'Salary'})[['Department','Employee','Salary']]
+
+    # 从合并后的表中筛选出salary等于max_salary的行，并重新命名列名
+    department_highest_salary = e_d[e_d.salary == e_d.max_salary].rename(columns={'name_y': '部门', 'name_x': '员工', 'salary': '工资'})
+
+    # 只选择部门、员工和工资这三列返回
+    department_highest_salary = department_highest_salary[['部门', '员工', '工资']]
+
+    # 返回结果
     return department_highest_salary
+
 
 def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
     df=employee.merge(department,left_on="departmentId",right_on="id",how="left")
