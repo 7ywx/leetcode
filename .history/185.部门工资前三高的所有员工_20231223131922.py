@@ -55,24 +55,15 @@ def top_three_salaries(employee: pd.DataFrame, department: pd.DataFrame) -> pd.D
     return conditions
 
 def top_three_salaries(employee: pd.DataFrame, department: pd.DataFrame) -> pd.DataFrame:
-    # 使用left_on和right_on参数将employee和department数据框按照"departmentId"和'id'列进行左连接
     merge_df = pd.merge(employee, department, left_on="departmentId", right_on='id', how='left')
-
-    # 将连接后的数据框的列名进行重命名，包括'name_x'变为'Employee'，'name_y'变为'Department'，'salary'变为'Salary'
     merge_df.rename(columns={'name_x': 'Employee', 'name_y': 'Department', 'salary': 'Salary'}, inplace=True)
-
-    # 对连接后的数据框按照'Department'列分组，根据'Salary'列进行排名，采用密集法（method='dense'），从大到小排序（ascending=False）
     merge_df['rank'] = merge_df.groupby('Department')['Salary'].rank(method='dense', ascending=False)
-
-    # 保留排名前3的记录
     merge_df = merge_df[merge_df['rank'] <= 3]
-
-    # 返回包含'Department'、'Employee'和'Salary'列的数据框
     return merge_df[['Department', 'Employee', 'Salary']]
 
 
 
-# 创建Employee表格
+# Create the Employee table
 Employee = pd.DataFrame({
     'id': [1, 2, 3, 4, 5, 6, 7],
     'name': ['Joe', 'Henry', 'Sam', 'Max', 'Janet', 'Randy', 'Will'],
@@ -80,29 +71,26 @@ Employee = pd.DataFrame({
     'departmentId': [1, 2, 2, 1, 1, 1, 1]
 })
 
-# 创建Department表格
+# Create the Department table
 Department = pd.DataFrame({
     'id': [1, 2],
     'name': ['IT', 'Sales']
 })
 
-# 创建一个包含员工信息的数据帧test1E
-test1E = pd.DataFrame({
-    'id': [1,4],  # 员工id
-    'name': ['Joe', 'Max'],  # 员工名字
-    'salary': [60000, 60000],  # 员工薪水
-    'departmentId': [1, 2]  # 员工部门id
-})
 
-# 创建一个包含部门信息的数据帧test1D
-test1D = pd.DataFrame({
-    'id': [1, 2],  # 部门id
-    'name': ['IT', 'HR']  # 部门名字
-})
+data1 = [
+    {'id': 1, 'name': 'Joe', 'salary': 60000, 'departmentId': 1},
+    {'id': 4, 'name': 'Max', 'salary': 60000, 'departmentId': 2}
+]
 
-# 创建一个空的数据帧test2E，用于存储员工信息
-test2E = pd.DataFrame({ 'id': [], 'name': [], 'salary': [], 'departmentId': [] })
+df1 = pd.DataFrame(data1)
 
-# 创建一个空的数据帧test2D，用于存储部门信息
-test2D = pd.DataFrame({'id': [], 'name': []})
-top_three_salaries(test1E, test1D)
+data3 = [
+    {'id': 1, 'name': 'IT'},
+    {'id': 2, 'name': 'HR'}
+]
+
+df3 = pd.DataFrame(data3, columns=['id', 'name'])
+df4 = pd.DataFrame({ 'id': [], 'name': [], 'salary': [], 'departmentId': [] })
+df5 = pd.DataFrame({'id': [], 'name': []})
+top_three_salaries(Employee, Department)
