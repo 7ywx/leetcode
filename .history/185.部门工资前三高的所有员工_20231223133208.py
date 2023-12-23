@@ -86,23 +86,16 @@ Department = pd.DataFrame({
     'name': ['IT', 'Sales']
 })
 
-# 创建一个包含员工信息的数据帧test1E
 test1E = pd.DataFrame({
-    'id': [1,4],  # 员工id
-    'name': ['Joe', 'Max'],  # 员工名字
-    'salary': [60000, 60000],  # 员工薪水
-    'departmentId': [1, 2]  # 员工部门id
+    'id': [1,4],
+    'name': ['Joe', 'Max'],
+    'salary': [ 60000, 60000],
+    'departmentId': [1, 2]
 })
-
-# 创建一个包含部门信息的数据帧test1D
 test1D = pd.DataFrame({
-    'id': [1, 2],  # 部门id
-    'name': ['IT', 'HR']  # 部门名字
+    'id': [1, 2],
+    'name': ['IT', 'HR']
 })
-
-# 创建一个空的数据帧test2E，用于存储员工信息
 test2E = pd.DataFrame({ 'id': [], 'name': [], 'salary': [], 'departmentId': [] })
-
-# 创建一个空的数据帧test2D，用于存储部门信息
 test2D = pd.DataFrame({'id': [], 'name': []})
 top_three_salaries(test1E, test1D)
