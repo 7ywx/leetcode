@@ -1,10 +1,11 @@
 import pandas as pd
 
 def delete_duplicate_emails(person: pd.DataFrame) -> None:
-    # person.sort_values(by='id',ascending=True,inplace=True).drop_duplicates(subset='email', keep='first', inplace=True)为什么这样不行
-    person.sort_values(by='id',ascending=True,inplace=True)
-    person.drop_duplicates(subset='email',keep='first',inplace=True)
+    person.sort_values(by='id',ascending=True,inplace=True).drop_duplicates(subset='email', keep='first', inplace=True)
     print(person)
+
+    person.drop_duplicates(subset='email', keep='first', inplace=True)
+    # return person
 
 
 data = {
