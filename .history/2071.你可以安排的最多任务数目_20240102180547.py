@@ -22,15 +22,15 @@ class Solution:
         def check(mid: int) -> bool:  # 定义一个检查函数，用于判断是否能完成mid个任务
             p = pills  # 初始化药丸数量
             ws = SortedList(workers[m - mid:])  # 后mid个(最大的mid个)工人的有序列表
-            for i in range(mid - 1, -1, -1):  # 从大到小枚举mid个任务
+            for i in range(mid - 1, -1, -1):  # 从大到小枚举每一个任务
                 # 如果有序集合中最大的元素大于等于 tasks[i]
                 if ws[-1] >= tasks[i]:  # 如果有序集合中最大的工人力量>=当前任务需求
                     ws.pop()  # 移除力量最大的工人
                 else:
                     if p == 0:  # 如果没有剩余的药丸
                         return False  # 返回False，表示无法满足任务需求
-                    rep = ws.bisect_left(tasks[i] - strength)  # 使用二分查找找到tasks[i] - strength的插入位置，如果相等放在左边。
-                    if rep == len(ws):  # 有序集合中不存在 >=task[i]−strength 的元素
+                    rep = ws.bisect_left(tasks[i] - strength)  # 使用二分查找找到离tasks[i] - strength最近的元素的索引
+                    if rep == len(ws):  # 如果查找到的索引已经达到有序集合的末尾
                         return False  # 返回False，表示无法满足任务需求
                     p -= 1  # 药丸数量减1
                     ws.pop(rep)  # 移除指定索引处的元素

@@ -29,8 +29,8 @@ class Solution:
                 else:
                     if p == 0:  # 如果没有剩余的药丸
                         return False  # 返回False，表示无法满足任务需求
-                    rep = ws.bisect_left(tasks[i] - strength)  # 使用二分查找找到tasks[i] - strength的插入位置，如果相等放在左边。
-                    if rep == len(ws):  # 有序集合中不存在 >=task[i]−strength 的元素
+                    rep = ws.bisect_left(tasks[i] - strength)  # 使用二分查找找到tasks[i] - strength索引
+                    if rep == len(ws):  # 如果查找到的索引已经达到有序集合的末尾
                         return False  # 返回False，表示无法满足任务需求
                     p -= 1  # 药丸数量减1
                     ws.pop(rep)  # 移除指定索引处的元素

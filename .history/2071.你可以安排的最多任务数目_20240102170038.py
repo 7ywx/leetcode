@@ -6,7 +6,6 @@
 
 # @lc code=start
 from typing import List
-from sortedcontainers import SortedList
 class Solution:
     def find_worker(self, workers: List[int], task: int, strength: int) -> int:
         for i, worker_strength in enumerate(workers):
@@ -17,20 +16,21 @@ class Solution:
         n, m = len(tasks), len(workers)  # 获取任务列表和工人列表的长度
         tasks.sort()  # 对任务列表进行升序排序
         workers.sort()  # 对工人列表进行升序排序
-        #print(tasks)
 
-        def check(mid: int) -> bool:  # 定义一个检查函数，用于判断是否能完成mid个任务
+        def check(mid: int) -> bool:  # 定义一个检查函数，用于判是否能任务需求
             p = pills  # 初始化药丸数量
-            ws = SortedList(workers[m - mid:])  # 后mid个(最大的mid个)工人的有序列表
-            for i in range(mid - 1, -1, -1):  # 从大到小枚举mid个任务
+            #  工人的有序集合
+            ws = SortedList(workers[m - mid:])  # 创建一个有序列表，用于存储工人列表的尾部
+            # 从大到小枚举每一个任务
+            for i in range(mid - 1, -1, -1):  # 从倒数第二个任务遍历到第一个任务
                 # 如果有序集合中最大的元素大于等于 tasks[i]
-                if ws[-1] >= tasks[i]:  # 如果有序集合中最大的工人力量>=当前任务需求
+                if ws[-1] >= tasks[i]:  # 如果有序集合中最大的工人力量大于等于当前任务需求
                     ws.pop()  # 移除力量最大的工人
                 else:
                     if p == 0:  # 如果没有剩余的药丸
                         return False  # 返回False，表示无法满足任务需求
-                    rep = ws.bisect_left(tasks[i] - strength)  # 使用二分查找找到tasks[i] - strength的插入位置，如果相等放在左边。
-                    if rep == len(ws):  # 有序集合中不存在 >=task[i]−strength 的元素
+                    rep = ws.bisect_left(tasks[i] - strength)  # 使用二分查找找到离tasks[i] - strength最近的元素的索引
+                    if rep == len(ws):  # 如果查找到的索引已经达到有序集合的末尾
                         return False  # 返回False，表示无法满足任务需求
                     p -= 1  # 药丸数量减1
                     ws.pop(rep)  # 移除指定索引处的元素
@@ -40,7 +40,7 @@ class Solution:
         left, right, ans = 1, min(m, n), 0  # 初始化左边界、右边界和答案变量
         while left <= right:  # 当左边界小于等于右边界时循环
             mid = (left + right) // 2  # 计算左边界和右边界的中间值
-            if check(mid):  # 如果能完成mid个任务
+            if check(mid):  # 如果中间值满足任务需求
                 ans = mid  # 更新答案变量
                 left = mid + 1  # 更新左边界
             else:
