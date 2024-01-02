@@ -26,7 +26,7 @@ class Solution:
             for j in range(1, len(workers) + 1):
                 # 不使用药丸，当前工人无法完成当前任务
                 dp[i][j] = dp[i - 1][j]
-                print('a')
+                
                 self.print_2d_array(dp)
 
                 # 使用药丸，当前工人可以完成当前任务

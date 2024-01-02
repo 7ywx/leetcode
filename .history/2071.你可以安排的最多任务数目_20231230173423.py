@@ -6,14 +6,8 @@
 
 # @lc code=start
 from typing import List
+from typing import List
 class Solution:
-    def print_2d_array(self, arr):
-        for row in arr:
-            for element in row:
-                print(element, end=' ')
-            print()
-        print('---------')
-
     def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
         # 排序任务和工人的力量值
         tasks.sort()
@@ -26,16 +20,13 @@ class Solution:
             for j in range(1, len(workers) + 1):
                 # 不使用药丸，当前工人无法完成当前任务
                 dp[i][j] = dp[i - 1][j]
-                print('a')
-                self.print_2d_array(dp)
 
                 # 使用药丸，当前工人可以完成当前任务
                 if tasks[i - 1] <= workers[j - 1] + strength:
                     dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + 1)
-                    self.print_2d_array(dp)
 
         # 返回最大完成任务数
-        print(max(dp[-1]))
+        print(max(dp))
         return max(dp[-1])
         # tasks.sort()
         # workers.sort()
@@ -108,6 +99,6 @@ list1 = [1, 2, 3]
 list2 = ['a', 'b', 'c']
 couples = [(x, y) for x in list1 for y in list2]
 # print(couples)   输出 [(1, 'a'), (1, 'b'), (1, 'c'), (2, 'a'), (2, 'b'), (2, 'c'), (3, 'a'), (3, 'b'), (3, 'c')]
-#soulution.maxTaskAssign(tasks, workers, pills, strength)
-soulution.maxTaskAssign([5,4], [0,0,0], 1, 5)
+soulution.maxTaskAssign(tasks, workers, pills, strength)
+#soulution.maxTaskAssign([5,4], [0,0,0], 1, 5)
 # @lc code=end
