@@ -83,6 +83,7 @@ class Solution:
         carry = 0  # 初始化进位为0
 
         while l1 or l2 or carry:  # 循环条件更新：当有一个链表未结束或还有进位时继续循环
+            carry = 0  # 重置carry为0
             if l1:  # 如果l1节点存在
                 carry += l1.val
                 l1 = l1.next

@@ -78,22 +78,7 @@ from typing import Optional
 from typing import List
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        current = ListNode()  # 创建一个ListNode节点作为current
-        p = current  # 将p指向current节点
-        carry = 0  # 初始化进位为0
 
-        while l1 or l2 or carry:  # 循环条件更新：当有一个链表未结束或还有进位时继续循环
-            if l1:  # 如果l1节点存在
-                carry += l1.val
-                l1 = l1.next
-            if l2:  # 如果l2节点存在
-                carry += l2.val
-                l2 = l2.next
-            carry,val = divmod(carry, 10)  # 将当前sum及进位计算出来
-            p.next = ListNode(val)  # 在当前节点后面创建一个新节点
-            p = p.next  # 更新p节点
-        current.next._print_()
-        return current.next  # 返回结果链表的头节点，因为current是第一个带有进位的节点
         # sum = ListNode(0)  # 创建一个空的ListNode节点作为sum
         # p1 = sum  # 将p1指向sum节点
         # while l1 or l2:

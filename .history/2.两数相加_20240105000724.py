@@ -78,42 +78,27 @@ from typing import Optional
 from typing import List
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        current = ListNode()  # 创建一个ListNode节点作为current
-        p = current  # 将p指向current节点
-        carry = 0  # 初始化进位为0
-
-        while l1 or l2 or carry:  # 循环条件更新：当有一个链表未结束或还有进位时继续循环
-            if l1:  # 如果l1节点存在
-                carry += l1.val
+        sum = ListNode(0)  # 创建一个空的ListNode节点作为sum
+        p1 = sum  # 将p1指向sum节点
+        while l1 or l2:
+            sumVal=0  # sumVal：保存sum节点的值，初始化sumVal为0
+            if l1:  # 如果i小于l1链表的长度，则将l1节点的值加到sumVal上，并将i加1，更新l1节点为l1.next节点
+                sumVal += l1.val
                 l1 = l1.next
-            if l2:  # 如果l2节点存在
-                carry += l2.val
+            if l2:  # 如果j小于l2链表的长度，则将l2节点的值加到sumVal上，并将j加1，更新l2节点为l2.next节点
+                sumVal += l2.val
                 l2 = l2.next
-            carry,val = divmod(carry, 10)  # 将当前sum及进位计算出来
-            p.next = ListNode(val)  # 在当前节点后面创建一个新节点
-            p = p.next  # 更新p节点
-        current.next._print_()
-        return current.next  # 返回结果链表的头节点，因为current是第一个带有进位的节点
-        # sum = ListNode(0)  # 创建一个空的ListNode节点作为sum
-        # p1 = sum  # 将p1指向sum节点
-        # while l1 or l2:
-        #     sumVal=0  # sumVal：保存sum节点的值，初始化sumVal为0
-        #     if l1:  # 如果i小于l1链表的长度，则将l1节点的值加到sumVal上，并将i加1，更新l1节点为l1.next节点
-        #         sumVal += l1.val
-        #         l1 = l1.next
-        #     if l2:  # 如果j小于l2链表的长度，则将l2节点的值加到sumVal上，并将j加1，更新l2节点为l2.next节点
-        #         sumVal += l2.val
-        #         l2 = l2.next
-        #     p1.val += sumVal  # 将p1节点的值加上sumVal
-        #     tens_digit,unit_digit = divmod(sumVal,10)
-        #     if p1.val >= 10:  # 如果p1节点的值（在加上sumVal时）大于等于10
-        #         p1.val = unit_digit  # 将p1节点的值设为个位数
-        #         p1.next = ListNode(tens_digit)  # 创建一个新的ListNode节点，值为十位数，并将其作为p1节点的下一个节点
-        #     if l1 or l2:  # 如果后面还有计算或者p1节点的十位数不为0（p1节点需要进位）
-        #         p1.next = ListNode(tens_digit)  # 创建一个新的ListNode节点，值为十位数，并将其作为p1节点的下一个节点
-        #         p1 = p1.next  # 将p1节点指向下一个节点
-        # sum._print_()
-        # return sum  # 返回sum节点作为结果
+            p1.val += sumVal  # 将p1节点的值加上sumVal
+            unit_digit = p1.val % 10  # 重新计算p1节点的个位数
+            tens_digit = p1.val // 10  # 重新计算p1节点的十位数
+            if p1.val >= 10:  # 如果p1节点的值（在加上sumVal时）大于等于10
+                p1.val = unit_digit  # 将p1节点的值设为个位数
+                p1.next = ListNode(tens_digit)  # 创建一个新的ListNode节点，值为十位数，并将其作为p1节点的下一个节点
+            if l1 or l2:  # 如果后面还有计算或者p1节点的十位数不为0（p1节点需要进位）
+                p1.next = ListNode(tens_digit)  # 创建一个新的ListNode节点，值为十位数，并将其作为p1节点的下一个节点
+                p1 = p1.next  # 将p1节点指向下一个节点
+        sum._print_()
+        return sum  # 返回sum节点作为结果
         # while i<lengthl1 or j<lengthl2:  # 循环直到i和j都遍历完l1和l2链表或者i和j都大于l1和l2链表的长度
         #     sumVal=0  # sumVal：保存sum节点的值，初始化sumVal为0
         #     if i<lengthl1:  # 如果i小于l1链表的长度，则将l1节点的值加到sumVal上，并将i加1，更新l1节点为l1.next节点
