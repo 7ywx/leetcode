@@ -57,11 +57,10 @@ from typing import Optional
 from typing import List
 class Solution:
     def findMedianSortedArrays(self, nums1, nums2):
-        #装逼写法
+        
         nums3, l = sorted(nums1 + nums2), len(nums1) + len(nums2)
         return nums3[l >> 1] if l & 1 else (nums3[(l >> 1) - 1] + nums3[l >> 1] ) / 2.0
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        #暴力写法
         num=nums1+nums2
         num.sort()
         n=len(num)
@@ -69,31 +68,31 @@ class Solution:
             return num[n//2]
         else:
             return (num[n//2]+num[n//2-1])/2
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        def findKth(nums1: List[int], nums2: List[int], k: int) -> int:
-            t,n,i,j = 0,0,0,0
-            while True:
-                if i == len(nums1):
-                    return nums2[j+k-n-1]
-                if j == len(nums2):
-                    return nums1[i+k-n-1]
-                if nums1[i] < nums2[j]:
-                    i += 1
-                    n += 1
-                    t = 1
-                else:
-                    j += 1
-                    n += 1
-                    t = 2
-                if n == k:
-                    return nums1[i-1] if t == 1 else nums2[j-1]
-        length = len(nums1) + len(nums2)
-        if length % 2 == 1:
-            #taget = length // 2 + 1
-            return findKth(nums1, nums2, length // 2 + 1)
-        else:
-            #taget = length // 2 , length // 2 + 1
-            return float((findKth(nums1, nums2, length // 2) + findKth(nums1, nums2, length // 2 + 1))) / 2
+    # def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    #     def findKth(nums1: List[int], nums2: List[int], k: int) -> int:
+    #         t,n,i,j = 0,0,0,0
+    #         while True:
+    #             if i == len(nums1):
+    #                 return nums2[j+k-n-1]
+    #             if j == len(nums2):
+    #                 return nums1[i+k-n-1]
+    #             if nums1[i] < nums2[j]:
+    #                 i += 1
+    #                 n += 1
+    #                 t = 1
+    #             else:
+    #                 j += 1
+    #                 n += 1
+    #                 t = 2
+    #             if n == k:
+    #                 return nums1[i-1] if t == 1 else nums2[j-1]
+    #     length = len(nums1) + len(nums2)
+    #     if length % 2 == 1:
+    #         #taget = length // 2 + 1
+    #         return findKth(nums1, nums2, length // 2 + 1)
+    #     else:
+    #         #taget = length // 2 , length // 2 + 1
+    #         return float((findKth(nums1, nums2, length // 2) + findKth(nums1, nums2, length // 2 + 1))) / 2
 # @lc code=end
 solution = Solution()
 print(solution.findMedianSortedArrays([1,2], [3,4]))
