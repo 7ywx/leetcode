@@ -65,7 +65,7 @@ class Solution:
         for i in range(n):
             if i < right:
                 mirror = 2 * center - i # processed_s[i]为中心的回文子串的关于processed_s[center]对称的中心
-                P[i] = min(right - i, P[mirror]) # 点i的臂长至少为: min(right-i, P[mirror])
+                P[i] = min(right - i, P[mirror]) # 点i的臂长至少为: min(right-i, P[mirror]) 
 
             # 尝试扩展以i为中心的最长回文子串
             a, b = i + (1 + P[i]), i - (1 + P[i])
