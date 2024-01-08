@@ -56,7 +56,7 @@ class Solution:
         processed_s = "#" + processed_s + "#"
 
         n = len(processed_s)
-        P = [0] * n  # P[i]表示以processed_s[i]为中心的最长回文子串的半径
+        P = [0] * n  # P[i]表示以processed_s[i]为中心的最长回文子串的半径（臂长）
 
         right, center = 0, 0  # 当前已知的最右边界和对应的中心
 
@@ -64,10 +64,10 @@ class Solution:
 
         for i in range(n):
             if i < right:
-                mirror = 2 * center - i
-                P[i] = min(right - i, P[mirror])
+                mirror = 2 * center - i # processed_s[i]为中心的回文子串的关于processed_s[center]对称的中心
+                P[i] = min(right - i, P[mirror]) # 点i的臂长至少为: min(right-i, P[mirror]) 
 
-            # 尝试扩展以i为中心的回文子串
+            # 尝试扩展以i为中心的最长回文子串
             a, b = i + (1 + P[i]), i - (1 + P[i])
             while a < n and b >= 0 and processed_s[a] == processed_s[b]:
                 P[i] += 1
@@ -82,7 +82,7 @@ class Solution:
             if P[i] > max_len:
                 max_len, max_center = P[i], i
 
-        start = (max_center - max_len) // 2
+        start = (max_center - max_len) // 2 # 将processed_s的中心位置映射回原字符串s
         end = start + max_len - 1
         return s[start:end + 1]
     # def longestPalindrome(self, s: str) -> str:
