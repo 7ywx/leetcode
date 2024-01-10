@@ -71,24 +71,24 @@
 # @lc code=start
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        # if numRows == 1:
-        #     return s
-        # else:
-        rowNum = ((len(s) // (2 * numRows - 2)) + 1) * numRows
-        s2d = [[''] * rowNum for _ in range(numRows)]
-        for i in range(len(s)):
-            row = i // (2 * numRows - 2)
-            if i < row * (2 * numRows - 2) + numRows:
-                s2d[i-(row * (2*numRows - 2))][row * (numRows - 1)] = s[i]
-            else:
-                s2d[numRows-1-(i-(numRows -1 + row*(2*numRows-2)))][i-(numRows -1 + row*(2*numRows-2))+row * (numRows - 1)] = s[i]
-        result = []
-        for row in s2d:
-            for element in row:
-                if element != '':
-                    result.append(element)
-        # print(''.join(result))
-        return ''.join(result)
+        if numRows == 1:
+            return s
+        else:
+            rowNum = ((len(s) // (2 * numRows - 2)) + 1) * numRows
+            s2d = [[''] * rowNum for _ in range(numRows)]
+            for i in range(len(s)):
+                row = i // (2 * numRows - 2)
+                if i < row * (2 * numRows - 2) + numRows:
+                    s2d[i-(row * (2*numRows - 2))][row * (numRows - 1)] = s[i]
+                else:
+                    s2d[numRows-1-(i-(numRows -1 + row*(2*numRows-2)))][i-(numRows -1 + row*(2*numRows-2))+row * (numRows - 1)] = s[i]
+            result = []
+            for row in s2d:
+                for element in row:
+                    if element != '':
+                        result.append(element)
+            # print(''.join(result))
+            return ''.join(result)
 # @lc code=end
 solution = Solution()
 solution.convert("PAYPALISHIRING", 3)
