@@ -72,6 +72,7 @@ class Solution:
                 return 0
             x //= 10
         return res * sign
+
         # digits = []  # 用于存储 x 的每一位数字
         # if x < 0:
         #     digits.append(-1)  # 如果 x 是负数，则将负号记录在 digits 中
