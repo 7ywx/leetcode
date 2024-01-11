@@ -61,25 +61,24 @@
 # @lc code=start
 class Solution:
     def reverse(self, x: int) -> int:
-        digits = []
+        digits = []  # 用于存储 x 的每一位数字
         if x < 0:
-            digits.append(-1)
-            x = -x
+            digits.append(-1)  # 如果 x 是负数，则将负号记录在 digits 中
+            x = -x  # 将 x 转变为正数
         while x != 0:
-            digits.append(x % 10)
-            x //= 10
-        digits = digits[::-1]
-        num = 0
+            digits.append(x % 10)  # 将 x 的个位数记录在 digits 中
+            x //= 10  # x 去除个位数
+        digits = digits[::-1]  # 将 digits 反转
+        num = 0  # 用于存储反转后的数字
         for i in range(len(digits)):
-            if digits[i] == -1:
+            if digits[i] == -1:  # 如果遇到负号，则将 num 取反
                 num = -num
                 break
-            num += digits[i] * (10 ** i)
-        if not (num < -2**31 or num > 2**31 - 1):
-            return num
+            num += digits[i] * (10 ** i)  # 将每位数字与对应的位数相乘并累加到 num 上
+        if not (num < -2**31 or num > 2**31 - 1):  # 如果 num 的值在 int 的范围内
+            return num  # 返回反转后的数字
         else:
-            return 0
-
+            return 0  # 如果 num 的值超出 int 的范围，则返回 0
 # @lc code=end
 solution = Solution()
 solution.reverse(123)
