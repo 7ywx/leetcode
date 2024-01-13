@@ -98,25 +98,63 @@
 # @lc code=start
 class Solution:
     def myAtoi(self, s: str) -> int:
+        # # 去除开头的空格
+        # s = s.lstrip()
+
+        # if not s:
+        #     return 0  # 字符串为空，返回0
+
+        # # 处理符号
+        # sign = 1
+        # if s[0] == '-':
+        #     sign = -1
+        #     s = s[1:]
+        # elif s[0] == '+':
+        #     s = s[1:]
+
+        # # 读取数字，直到遇到非数字字符
+        # num = 0
+        # for char in s:
+        #     if char.isdigit():
+        #         num = num * 10 + int(char)
+        #     else:
+        #         break
+
+        # # 根据符号和范围返回结果
+        # num *= sign
+        # return max(min(num, 2**31 - 1), -2**31)
+
         num = [str(i) for i in range(10)]
         result = ''
         INT_MAX = 2**31 - 1
         INT_MIN = -2**31
         flag = 0
         for index in range(len(s)):
-            if s[index] == ' ':
+            if s[index] == ' ' and flag == 0:
                 continue
-            elif s[index] == '-' and s[index+1] in num:
-                result += s[index]
+            elif s[index] in ['-','+'] and flag!=1 and index+1<len(s) and s[index+1] in num:
                 flag = 1
-                print(result)
-            elif s[index] in num:
                 result += s[index]
-                print(result)
+            elif s[index] in num:
+                flag = 1
+                result += s[index]
             else:
-                return int(result) if result != '' else 0
-        print(int(result))
-        return int(result)
+                if result != '':
+                    if int(result) > INT_MAX:
+                        return INT_MAX
+                    if int(result) < INT_MIN:
+                        return INT_MIN
+                    return int(result)
+                else:
+                    return 0
+        if result != '':
+            if int(result) > INT_MAX:
+                return INT_MAX
+            if int(result) < INT_MIN:
+                return INT_MIN
+            return int(result)
+        else:
+            return 0
 # @lc code=end
 solution = Solution()
-solution.myAtoi("4193 with words")
+print(solution.myAtoi("00000-42a1234"))
