@@ -63,7 +63,7 @@
 # @lc code=start
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        if x <= 0:
+        if x < 0:
             return False
         x_str = str(x)
         i, j= 0, len(x_str) - 1
