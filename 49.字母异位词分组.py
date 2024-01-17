@@ -54,24 +54,24 @@ from typing import List
 from collections import defaultdict
 # @lc code=start
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        hashtable = {}
-        for s in strs:
-            key = ''.join(sorted(s))
-            if key not in hashtable:
-                hashtable[key] = [s]
-            else:
-                hashtable[key].append(s)
-        return list(hashtable.values())
     # def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-    #     anagrams = defaultdict(list) # 当试图访问 anagrams 中尚未存在的键时，它将自动创建并关联一个空列表作为该键的值。
-
+    #     hashtable = {}
     #     for s in strs:
-    #         # 使用排序后的字符串作为 key，将字母异位词分到同一组
     #         key = ''.join(sorted(s))
-    #         anagrams[key].append(s)
+    #         if key not in hashtable:
+    #             hashtable[key] = [s]
+    #         else:
+    #             hashtable[key].append(s)
+    #     return list(hashtable.values())
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagrams = defaultdict(list) # 当试图访问 anagrams 中尚未存在的键时，它将自动创建并关联一个空列表作为该键的值。
 
-    #     return list(anagrams.values())
+        for s in strs:
+            # 使用排序后的字符串作为 key，将字母异位词分到同一组
+            key = ''.join(sorted(s))
+            anagrams[key].append(s)
+
+        return list(anagrams.values())
     # def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
     #     def is_anagram(s1, s2):
     #         if len(s1) != len(s2):
