@@ -59,7 +59,7 @@ class Solution:
         #     if num == 0:
         #         nums.remove(num)
         #         nums.append(num)
-        #         l = 0
+        l = 0
         for v in nums:
             if v != 0:
                 nums[l] = v
