@@ -49,19 +49,29 @@ from collections import defaultdict
 # @lc code=start
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
+        # 创建一个字典类型的变量result，用于存储列表nums中的元素及其出现次数
         result = defaultdict(list)
+        # 将列表nums中的元素去除重复后，转换为排序后的列表，并存储为set_nums
         set_nums = sorted(list(set(nums)))
+        # 初始化变量i为0
         i = 0
+        # 初始化变量max_len为0，用于存储最长连续序列的长度
         max_len = 0
+        # 循环遍历set_nums列表
         while i < len(set_nums):
+            # 初始化变量sums为1
             sums = 1
+            # 如果当前元素和下一个元素相差为1，则将sums加1，并将i加1
             while i < len(set_nums)-1 and set_nums[i]+1 == set_nums[i+1]:
                 sums += 1
                 i += 1
+            # 如果sums大于max_len，则将max_len更新为sums
             if sums > max_len:
                 max_len = sums
+            # 将i加1
             i += 1
+        # 返回最长连续序列的长度
         return max_len
 # @lc code=end
 solution = Solution()
-solution.longestConsecutive([100,4,200,1,3,2])
+solution.longestConsecutive([100,4,200,0,3,2])
