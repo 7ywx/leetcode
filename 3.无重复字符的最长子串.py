@@ -52,19 +52,50 @@
 #
 #
 #
-
+from collections import defaultdict
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        d = {}
-        left = 0
-        max_len = 0
-        for i in range(len(s)):
-            if s[i] in d and d[s[i]] >= left: #对于每个字符，我们首先判断它是否已经在哈希表中出现过，并且其最后一次出现的位置在left和当前位置之间
-                left = d[s[i]] + 1
-            d[s[i]] = i
-            max_len = max(max_len, i - left + 1)
+        # d=dict()
+        # res=0
+        # n=len(s)
+        # r=0
+        # for l in range(n):
+        #     while r<n:
+        #         last=d.get(s[r],-1)
+        #         if last<l:
+        #             d[s[r]]``1]2
+        # `8r
+        #             r+=1
+        #         else:
+        #             break
+        #     res = max(res, r-l)
+        #     if r==n:
+        #         break
+        # return res
+
+        left, right, max_len, lens = 0, 0, 0, len(s)# 初始化左右窗口，最大长度
+        d = defaultdict(int) # 记录字符的出现次数
+        while right < lens:
+            while d[s[right]]: # 当前字符在哈希表中出现，需要移动左指针
+                d[s[left]] -= 1 # 将当前字符的出现次数减1
+                left += 1 # 移动左指针
+            d[s[right]] += 1
+            if right-left+1 > max_len: # max_len = max(max_len, right-left+1)这个慢
+                max_len = right-left+1
+            if max_len > lens-left-1: # 当前max_len >= left到最后的字符长度，说明已经找到最大max_len，退出循环
+                break
+            right += 1
         return max_len
+
+        # left = 0
+        # max_len = 0
+        # for i in range(len(s)):
+        #     if s[i] in d and d[s[i]] >= left: #对于每个字符，我们首先判断它是否已经在哈希表中出现过，并且其最后一次出现的位置在left和当前位置之间
+        #         left = d[s[i]] + 1
+        #     d[s[i]] = i
+        #     max_len = max(max_len, i - left + 1)
+        # return max_len
 
         # dic, res, i = {}, 0, -1
         # for j in range(len(s)):
