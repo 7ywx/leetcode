@@ -56,24 +56,6 @@ from collections import defaultdict
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        # d=dict()
-        # res=0
-        # n=len(s)
-        # r=0
-        # for l in range(n):
-        #     while r<n:
-        #         last=d.get(s[r],-1)
-        #         if last<l:
-        #             d[s[r]]``1]2
-        # `8r
-        #             r+=1
-        #         else:
-        #             break
-        #     res = max(res, r-l)
-        #     if r==n:
-        #         break
-        # return res
-
         left, right, max_len, lens = 0, 0, 0, len(s)# 初始化左右窗口，最大长度
         d = defaultdict(int) # 记录字符的出现次数
         while right < lens:
