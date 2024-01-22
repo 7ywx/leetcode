@@ -56,7 +56,7 @@ from collections import defaultdict
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        left, right, max_len, lens = 0, 0, 0, len(s)# 初始化左右窗口，最大长度
+        left, right, max_len, lens = 0, 0, 0, len(s) # 初始化左右窗口，最大长度
         d = defaultdict(int) # 记录字符的出现次数
         while right < lens:
             while d[s[right]]: # 当前字符在哈希表中出现，需要移动左指针
