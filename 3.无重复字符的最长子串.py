@@ -59,15 +59,15 @@ class Solution:
         left, right, max_len, lens = 0, 0, 0, len(s) # 初始化左右窗口，最大长度
         d = defaultdict(int) # 记录字符的出现次数
         while right < lens:
-            while d[s[right]]: # 当前字符在哈希表中出现，需要移动左指针
-                d[s[left]] -= 1 # 将当前字符的出现次数减1
+            while d[s[right]]: # 当前字符在哈希表中出现，需要移动左指针直至出现次数为0
+                d[s[left]] -= 1 # 将left指向的字符的出现次数减1
                 left += 1 # 移动左指针
-            d[s[right]] += 1
+            d[s[right]] += 1 # 将right指向的字符的出现次数加1
             if right-left+1 > max_len: # max_len = max(max_len, right-left+1)这个慢
                 max_len = right-left+1
             if max_len > lens-left-1: # 当前max_len >= left到最后的字符长度，说明已经找到最大max_len，退出循环
                 break
-            right += 1
+            right += 1 # 移动右指针,尝试寻找更长的无重复字符子串
         return max_len
 
         # left = 0
