@@ -61,6 +61,12 @@ class Solution:
             prefix_sum_count[prefix_sum] += 1
         print(prefix_sum_count)
         return res
+        # # # 暴力破解
+        # # for i in range(len(nums)):
+        # #     for j in range(i, len(nums)):
+        # #         if hashtable[j+1] - hashtable[i] == k:
+        # #             res += 1
+        # # # print(res)
 # @lc code=end
 solution = Solution()
 solution.subarraySum(nums = [1,2,3], k = 3)
