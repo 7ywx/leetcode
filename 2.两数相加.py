@@ -54,9 +54,6 @@
 #
 #
 #
-
-# @lc code=start
-# Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -74,6 +71,8 @@ class ListNode:
             print(str(node.val)+'->',end='')
             node = node.next
         print()
+# @lc code=start
+# Definition for singly-linked list.
 from typing import Optional
 from typing import List
 class Solution:
@@ -92,8 +91,9 @@ class Solution:
             carry,val = divmod(carry, 10)  # 将当前sum及进位计算出来
             p.next = ListNode(val)  # 在当前节点后面创建一个新节点
             p = p.next  # 更新p节点
-        current.next._print_()
+        # current.next._print_()
         return current.next  # 返回结果链表的头节点，因为current是第一个带有进位的节点
+
         # sum = ListNode(0)  # 创建一个空的ListNode节点作为sum
         # p1 = sum  # 将p1指向sum节点
         # while l1 or l2:
