@@ -61,21 +61,6 @@ class Solution:
             prefix_sum_count[prefix_sum] += 1
         print(prefix_sum_count)
         return res
-        # prefix_sum = [0] * (nums_length + 1) # 前缀和: prefix_sum[i] = nums前i个元素的和, prefix_sum[0] = 0
-        # prefix_sum_count = {0:1} # 前缀和出现次数
-        # res = 0
-        # for i in range(nums_length):
-        #     prefix_sum[i+1] = prefix_sum[i] + nums[i]
-        #     count
-        #     if prefix_sum[i+1] - k in prefix_sum_count:
-        #         res += prefix_sum_count[prefix_sum[i+1] - k]
-        # # # 暴力破解
-        # # for i in range(len(nums)):
-        # #     for j in range(i, len(nums)):
-        # #         if hashtable[j+1] - hashtable[i] == k:
-        # #             res += 1
-        # # # print(res)
-        return res
 # @lc code=end
 solution = Solution()
 solution.subarraySum(nums = [1,2,3], k = 3)
