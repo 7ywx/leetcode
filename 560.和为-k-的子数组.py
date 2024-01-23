@@ -50,17 +50,25 @@ from collections import Counter
 # @lc code=start
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        nums_length = len(nums)
-        res = 0
+        prefix_sum_count = {0:1}
         prefix_sum = 0
-        prefix_sum_count = Counter([0])
-        for i in range(nums_length):
-            prefix_sum += nums[i]
-            if prefix_sum - k in prefix_sum_count:
-                res += prefix_sum_count[prefix_sum - k]
-            prefix_sum_count[prefix_sum] += 1
-        print(prefix_sum_count)
+        res = 0
+        for n in nums:
+            prefix_sum += n
+            res += prefix_sum_count.get(prefix_sum-k,0)
+            prefix_sum_count[prefix_sum] = prefix_sum_count.get(prefix_sum,0) + 1
         return res
+
+        # res = 0
+        # prefix_sum = 0
+        # prefix_sum_count = Counter([0])
+        # for n in nums:
+        #     prefix_sum += n
+        #     if prefix_sum - k in prefix_sum_count:
+        #         res += prefix_sum_count[prefix_sum - k]
+        #     prefix_sum_count[prefix_sum] += 1
+        # return res
+
         # # # 暴力破解
         # # for i in range(len(nums)):
         # #     for j in range(i, len(nums)):
