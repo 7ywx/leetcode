@@ -75,16 +75,16 @@ class Solution:
         res=list()
         for i,num in enumerate(st): # i:索引，num:元素值
             if count[num] > 1: # 有重复元素
-                if num == 0 and count[num] > 2:
-                    res.append([0,0,0])    # 有三个0
+                if num == 0 and count[num] > 2: # 有三个0
+                    res.append([0,0,0])
                 elif (k:= -num*2) in count:
                     res.append([num,num,k])   # 有两个数一样
-            if num < 0: # 三个数都不一样的
+            if num < 0: # 三个数都不一样的（由于st是递增的，当num为正数时，三数之和不可能为0）
                 left = bisect.bisect_left(st,-num-st[-1],i+1) # st[-1]: st最大值, x: st中能使三数和为0的最小可能数(num + st[-1] + x = 0), left: st中第一个>=num-st[-1]的索引
                 # right为什么是-num//2? 答：st是递增的，如果j > -num//2 j就不是第二个数
                 right = bisect.bisect(st,-num//2,left) # -num//2: st中能使三数和为0的最大可能数(num + y + y = 0), right: st中第一个>num//2的索引
                 for j in st[left:right]: # j是第二个数可能的范围
-                    if (k:=-num-j) in count and k != j: # k存在且k != j (num+j+k=0)
+                    if (k:=-num-j) in count and k != j: # k存在且k != j (num+j+k=0，这里要找的是三个数都不一样的，所以要加上k!=j)
                         res.append([num,j,k])
         return res
 # @lc code=end
