@@ -50,12 +50,12 @@ from collections import Counter
 # @lc code=start
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        prefix_sum_count = {0:1}
-        prefix_sum = 0
+        prefix_sum_count = {0:1} # {前缀和:出现次数}
+        prefix_sum = 0 # 包括当前位置的前缀和
         res = 0
         for n in nums:
-            prefix_sum += n
-            res += prefix_sum_count.get(prefix_sum-k,0)
+            prefix_sum += n # prefix_sum意为从当前元素到开始位置的子数组
+            res += prefix_sum_count.get(prefix_sum-k,0) # prefix_sum - (prefix_sum - k) = k 通过前缀和来确定一个子数组
             prefix_sum_count[prefix_sum] = prefix_sum_count.get(prefix_sum,0) + 1
         return res
 
