@@ -47,8 +47,7 @@ class Solution:
                 right = mid - 1  # 更新右边界
 
         return ans  # 返回答案
-
-
+# @lc code=end
 tasks = [3, 2, 1]
 workers = [0, 3, 3]
 pills = 1
@@ -62,4 +61,3 @@ soulution.maxTaskAssign(tasks, workers, pills, strength)
 #soulution.maxTaskAssign([5,4], [0,0,0], 1, 5)
 #soulution.maxTaskAssign([5,9,8,5,9], [1,6,4,2,6], 1, 5)
 #soulution.maxTaskAssign([10,15,30], [0,10,10,10,10], 3, 10)
-# @lc code=end
