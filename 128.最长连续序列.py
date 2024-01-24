@@ -49,8 +49,6 @@ from collections import defaultdict
 # @lc code=start
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        # 创建一个字典类型的变量result，用于存储列表nums中的元素及其出现次数
-        result = defaultdict(list)
         # 将列表nums中的元素去除重复后，转换为排序后的列表，并存储为set_nums
         set_nums = sorted(list(set(nums)))
         # 初始化变量i为0
