@@ -70,8 +70,19 @@ class Solution:
         #         j -= 1
         # # print(maxArea)
         # return maxArea
+        def __print__():
+            for i in range(len(height)):
+                if i == left: print("l",end='\t')
+                elif i == right: print("r",end='\t')
+                else: print("", end='\t')
+            print()
+            for h in height:
+                print(f"{h}", end='\t')
+            print("maxArea:", maxArea, "currentArea:", min(height[left], height[right]) * (right - left))
+            print("\n-----------------------------------------------------------------")
         left, right, maxArea = 0, len(height) - 1, 0
         maxh = max(height)
+        __print__()
         while left < right:
             if height[left] < height[right]:
                 maxArea = max(maxArea, height[left] * (right - left))
@@ -79,6 +90,7 @@ class Solution:
             else:
                 maxArea = max(maxArea, height[right] * (right - left))
                 right -= 1
+            __print__()
             if maxArea >= maxh * (right - left): # 即使后续的高度再大（再大也不能大过maxh），容器的宽度已经变小，面积不可能再大于已经得到的最大面积。
                 break
         return maxArea
