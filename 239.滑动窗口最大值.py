@@ -57,28 +57,30 @@
 import heapq
 from typing import List
 from typing import Optional
+from collections import deque
 # @lc code=start
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         result = []
-        max_queue = deque()
+        max_queue = deque() # 始终保持队列左边第一个的元素是最大值
 
         for i, num in enumerate(nums): # i是滑动窗口的右边界
             # 删除队列中小于当前元素的元素
             while max_queue and nums[max_queue[-1]] < num:
                 max_queue.pop()
-
+            print(max_queue)
             # 添加当前元素的索引到队列中
             max_queue.append(i)
-
+            print(max_queue)
             # 移除不在当前窗口内的索引
             while max_queue and max_queue[0] < i - k + 1:
                 max_queue.popleft()
-
+            print(max_queue)
             # 将当前窗口的最大值添加到结果中
             if i > k - 2: # i >= k - 1
                 result.append(nums[max_queue[0]])
-
+            print(max_queue)
+            print("---")
         return result
 
         # nums_length = len(nums)
