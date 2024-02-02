@@ -49,7 +49,15 @@ from typing import List
 # @lc code=start
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=lambda x: x[0])
+        intervals.sort(key=lambda x: x[0]) # 了解一下sort()
+        '''
+        list.sort(key=None, reverse=False)
+
+        key：可选参数，是一个函数，该函数将应用于列表中的每个元素，然后根据函数返回值对元素进行排序。
+        例如，如果你有一个包含元组的列表，你可以通过 key 参数指定按元组的第二个元素排序。
+
+        reverse：也是一个可选参数，布尔类型，默认为 False，表示升序排序。如果设置为 True，则会对列表进行降序排序。
+        '''
         i = 0
         intervals_len = len(intervals)
         while i < intervals_len - 1:
