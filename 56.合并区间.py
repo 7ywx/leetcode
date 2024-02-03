@@ -49,7 +49,8 @@ from typing import List
 # @lc code=start
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=lambda x: x[0]) # 了解一下sort()
+        #TODO 优化
+        intervals.sort(key=lambda x: x[0])
         '''
         list.sort(key=None, reverse=False)
 
