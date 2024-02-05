@@ -64,6 +64,7 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
+        #TODO 记忆集合的定义和遍历
         # 初始化空行和空列
         zero_row = set()
         zero_col = set()
