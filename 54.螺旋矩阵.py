@@ -111,19 +111,6 @@ class Solution:
             if counter == matrix_len:
                 break
         return res
-
-        # right()
-        # print('left:', i+1, j+1, matrix[i][j])
-        # down()
-        # print('down:', i+1, j+1, matrix[i][j])
-        # left()
-        # print('left:', i+1, j+1, matrix[i][j])
-        # print('top_border:', top_border)
-        # up()
-        # print('up:', i+1, j+1, matrix[i][j])
-        # right()
-        # print('counter:', counter)
-        # print('res:', res)
 # @lc code=end
 solution = Solution()
 print(solution.spiralOrder([[7],[9],[6]]))
