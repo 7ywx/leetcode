@@ -66,17 +66,17 @@ class Solution:
       col = len(matrix[0])  # 获取矩阵的列数
       flag = True  # 标记当前遍历的方向 True：向右遍历 False：向下遍历
       while -1 < i < row and -1 < j < col:  # 当行索引和列索引在有效范围内时
-          if matrix[i][j] == target:  # 如果当前位置的值等于目标值
+          if matrix[i][j] == target:
               return True  # 返回True
-          elif matrix[i][j] < target:  # 如果当前位置的值小于目标值
+          elif matrix[i][j] < target:
               if j != col - 1 and flag:  # 如果列索引不是最后一列且标记为向右遍历
                   j += 1  # 列索引加1
-              else:  # 否则
+              else:  # matrix[i][j] > target
                   i += 1  # 行索引加1
                   flag = True  # 标记为向右遍历
           else:  # 如果当前位置的值大于目标值
               j -= 1  # 列索引减1
-              flag = False  # 标记为向左遍历
+              flag = False  # 标记为向下遍历
       return False  # 如果遍历结束仍未找到目标值，则返回False
 
       # # 恩找
