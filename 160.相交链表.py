@@ -114,7 +114,71 @@ class ListNode:
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        #TODO 长短指针？哈希表？
+        """
+        快慢指针通常用于检测链表中是否有环，或者在链表中找到中点。在相交链表的情况下，它也可以用来找到相交点。
+        在相交链表问题中，可以将其中一个链表的尾部连接到另一个链表的头部，形成一个环。然后使用快慢指针找到环的起始点，该点即为相交点。
+        """
+        # 双链表
+        if not headA or not headB:
+            return None
+
+        # 将链表 A 的尾部连接到链表 B 的头节点
+        tailA = headA
+        while tailA.next:
+            tailA = tailA.next
+        tailA.next = headB
+
+        # 使用快慢指针法找到环的起始节点
+        slow = headA
+        fast = headA
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+            if slow == fast: # 相交
+                # 重置其中一个指针到链表头节点，然后一次移动一步
+                slow = headA
+                while slow != fast:
+                    slow = slow.next
+                    fast = fast.next
+                # 恢复原始链表，返回相交节点
+                tailA.next = None
+                return slow
+
+        # 恢复原始链表，未相交
+        tailA.next = None
+        return None
+
+
+        # 双指针
+        if not headA or not headB:
+            return None
+
+        ptrA, ptrB = headA, headB
+
+        while ptrA != ptrB:
+            # 如果当前链表指针到达末尾，则重定向到另一个链表的头节点
+            ptrA = ptrA.next if ptrA else headB
+            ptrB = ptrB.next if ptrB else headA
+
+        return ptrA
+
+        # 哈希集合 #TODO None的情况
+        node_s=set()
+        cur=headA
+        while cur:
+            node_s.add(cur)
+            cur=cur.next
+        for node in node_s:
+            print(node.val, end=" ")
+        cur=headB
+        while cur:
+            if cur in node_s:
+                return cur
+            cur=cur.next
+
+        # 王道解法
         # 如果两个链表为空，则返回空
         if headA == None or headB == None:
             return None
