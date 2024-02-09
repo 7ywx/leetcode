@@ -137,7 +137,7 @@ class Solution:
             fast = fast.next.next
 
             if slow == fast: # 相交
-                # 重置其中一个指针到链表头节点，然后一次移动一步
+                # 找到环的入口: 重置其中一个指针到链表头节点，然后一次移动一步
                 slow = headA
                 while slow != fast:
                     slow = slow.next
