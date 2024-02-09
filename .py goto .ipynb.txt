@@ -1,1 +1,0 @@
-python -m nbconvert --to notebook --execute your_file.py
