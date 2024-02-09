@@ -114,6 +114,7 @@ class ListNode:
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        #TODO 长短指针？哈希表？
         # 如果两个链表为空，则返回空
         if headA == None or headB == None:
             return None
