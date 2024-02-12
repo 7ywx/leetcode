@@ -56,16 +56,12 @@
 #
 #
 from typing import Optional
+# @lc code=start
+# Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-# @lc code=start
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # # 迭代
@@ -94,22 +90,22 @@ class Solution:
         # # 返回反转后的头节点
         # return p_head
 
-        # # 递归
-        # # 如果链表为空或只有一个节点，则直接返回头节点
-        # if not head or not head.next:
-        #     return head
-        # else:
-        #     # reverse_last: reverse链表尾部节点
-        #     reverse_last = head.next
-        #     # 递归反转链表, reverse: 反转链表的头部节点
-        #     reverse = self.reverseList(head.next)
+        # 递归
+        # 如果链表为空或只有一个节点，则直接返回头节点
+        if not head or not head.next:
+            return head
+        else:
+            # reverse_last: reverse链表尾部节点
+            reverse_last = head.next
+            # 递归反转链表, reverse: 反转链表的头部节点
+            reverse = self.reverseList(head.next)
 
-        #     # 将反转后的链表尾部节点的next指针指向头节点,并将头节点的next指针指向None
-        #     reverse_last.next = head
-        #     head.next = None
+            # 将反转后的链表尾部节点的next指针指向头节点,并将头节点的next指针指向None
+            reverse_last.next = head
+            head.next = None
 
-        #     # 返回反转后的头节点
-        #     return reverse
+            # 返回反转后的头节点
+            return reverse
 # @lc code=end
 def printListNode(head: ListNode):
     while head:
