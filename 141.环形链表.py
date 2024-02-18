@@ -76,16 +76,36 @@ from typing import Optional, List
 #         self.next = None
 
 class Solution:
-    def hasCycle(self, head: Optional[ListNode]) -> bool:
+    # 定义一个函数，用于判断链表是否含有环
+    def hasCycle(self, head: ListNode) -> bool:
+        """
+        :param head: 链表的头结点
+        :type head: ListNode
+        :return: 如果链表含有环则返回True，否则返回False
+        :rtype: bool
+        """
+
+        # 判断链表是否为空或只有一个节点，这两种情况下都不可能形成环，直接返回False
         if not head or not head.next:
             return False
+
+        # 初始化两个指针，slow指针每次移动一个节点，fast指针每次移动两个节点
         slow = head
         fast = head.next
+
+        # 当慢指针slow与快指针fast未相遇时（即没有形成环），持续移动
         while slow != fast:
+            # 如果在fast或fast的下一个节点为空，说明链表已到末尾而未形成环，返回False
             if not fast or not fast.next:
                 return False
+
+            # 慢指针slow向前移动一个节点
             slow = slow.next
+
+            # 快指针fast向前移动两个节点
             fast = fast.next.next
+
+        # 若循环结束，说明slow和fast在某个节点相遇（即形成了环），返回True
         return True
 # @lc code=end
 solution = Solution()
