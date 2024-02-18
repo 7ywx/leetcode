@@ -55,6 +55,7 @@
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         #TODO O(1)空间复杂度
+        # 使用列表存储链表节点的值，然后判断列表是否与其反转后的列表相等
         x = []
         while head:
             x.append(head.val)
