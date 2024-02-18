@@ -98,24 +98,24 @@ class Solution:
 
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
 
+        # 创建一个空列表node_list，用于存储链表节点
         node_list = []
+
+        # 将链表节点加入node_list
         cur = head
-
         while cur:
-
             node_list.append(cur)
-
             cur = cur.next
 
+        # 获取链表的长度
         i = len(node_list)
 
+        # 如果要删除的节点数为第一个节点: 直接返回head.next
         if n == i:
-
             return head.next
+        # 否则: 因为不算头节点, 所以必有i-n-1(要删除的节点的前一个节点)
         else:
-
-            node_list[i-n-1].next = node_list[i-n-1].next.next
-
+            node_list[i-n-1].next = node_list[i-n-1].next.next # (i-n-1: 要删除的节点的前一个节点的索引, i-n: 要删除的节点的索引, i-n+1: 要删除的节点的下一个节点的索引, 因为可能不存在于node_list中, 故而用node_list[i-n-1].next.next)
             return head
 
 
