@@ -95,16 +95,23 @@ class Solution:
         # return head.next
 
         # # 递归
-        # if not list1:
-        #     return list2
-        # if not list2:
-        #     return list1
-        # if list1.val < list2.val:
-        #     list1.next = self.mergeTwoLists(list1.next, list2)
-        #     return list1
+        # # 如果第一个链表为空，则直接返回第二个链表作为结果
+        # if not l1:
+        #     return l2
+
+        # # 如果第二个链表为空，则直接返回第一个链表作为结果
+        # if not l2:
+        #     return l1
+
+        # # 如果当前l1节点的值小于l2节点的值: 将l1的下一个节点与l2进行递归合并，然后将结果赋给l1的next指针
+        # if l1.val < l2.val:
+        #     l1.next = self.mergeTwoLists(l1.next, l2)
+        #     return l1
+
+        # # 否则: 将l2的下一个节点与l1进行递归合并，然后将结果赋给l2的next指针
         # else:
-        #     list2.next = self.mergeTwoLists(list1, list2.next)
-        #     return list2
+        #     l2.next = self.mergeTwoLists(l1, l2.next)
+        #     return l2
 # @lc code=end
 def printListNode(node: ListNode):
     while node:
