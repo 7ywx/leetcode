@@ -59,26 +59,41 @@ class ListNode:
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         # # 双指针
+        # # 如果list1为空，则返回list2
         # if not list1:
         #     return list2
+
+        # # 如果list2为空，则返回list1
         # if not list2:
         #     return list1
+
+        # # 创建一个新的链表节点作为结果的头节点
         # res = ListNode()
         # head = res
+
+        # # 当list1和list2都不为空时，比较它们的值
         # while list1 and list2:
         #     if list1.val < list2.val:
+        #         # 如果list1的值小于list2的值，则将list1添加到结果链表中
         #         res.next = list1
         #         list1 = list1.next
         #         res = res.next
         #     else: # list1.val >= list2.val
+        #         # 如果list1的值大于等于list2的值，则将list2添加到结果链表中
         #         res.next = list2
         #         list2 = list2.next
         #         res = res.next
+        # # 如果list1不为空，则将剩余的节点添加到结果链表中
         # if list1:
         #     res.next = list1
+
+        # # 如果list2不为空，则将剩余的节点添加到结果链表中
         # else:
         #     res.next = list2
+
+        # # 返回结果链表的头节点
         # return head.next
+
         # # 递归
         # if not list1:
         #     return list2
