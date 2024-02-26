@@ -58,6 +58,7 @@ class ListNode:
         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        #TODO 消化吸收
         # 双指针
         # 如果list1为空，则返回list2
         if not list1:
