@@ -58,54 +58,40 @@
 from typing import List, Optional
 # @lc code=start
 # Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
-        current = head.next
-        sortListHead = ListNode() # dummy head
-        sortListHead.next = head
-        sortListLast = head
+
+        # 将链表转换为列表
+        lst = []
+        current = head
         while current:
-            if current.val >= sortListLast.val:
-                sortListLast.next = current
-                sortListLast = current
-                current = current.next
-            else: # 当前节点小于sortListLast节点
-                # 1.寻找插入位置(pre为插入位置的前一个节点)
-                pre = sortListHead
-                while pre.next and pre.next.val < current.val:
-                    pre = pre.next
-                # 2.插入
-                currentNext = current.next
-                current.next = pre.next
-                pre.next = current
-                current = currentNext
-        sortListLast.next = None
-        return sortListHead.next
+            lst.append(current.val)
+            current = current.next
+        lst.sort()
+
+        # 创建头节点并初始化
+        sorted_head = ListNode(lst[0])
+        current = sorted_head
+
+        # 遍历列表从第二个元素开始，依次创建节点并连接起来
+        for item in lst[1:]:
+            new_node = ListNode(item)
+            current.next = new_node
+            current = current.next  # 移动到下一个节点
+
+        return sorted_head
 # @lc code=end
 def printListNode(head: ListNode):
     while head:
         print(head.val, end=" -> ")
         head = head.next
     print()
-
-def create_linked_list(lst):
-    # 创建头节点并初始化
-    head = ListNode(lst[0])
-    current = head
-
-    # 遍历列表从第二个元素开始，依次创建节点并连接起来
-    for item in lst[1:]:
-        new_node = ListNode(item)
-        current.next = new_node
-        current = current.next  # 移动到下一个节点
-
-    return head
 
 solution = Solution()
 head =  create_linked_list([4,2,1,3])
