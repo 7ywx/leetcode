@@ -58,60 +58,60 @@ class ListNode:
         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        # # 双指针
-        # # 如果list1为空，则返回list2
-        # if not list1:
-        #     return list2
+        # 双指针
+        # 如果list1为空，则返回list2
+        if not list1:
+            return list2
 
-        # # 如果list2为空，则返回list1
-        # if not list2:
-        #     return list1
+        # 如果list2为空，则返回list1
+        if not list2:
+            return list1
 
-        # # 创建一个新的链表节点作为结果的头节点
-        # res = ListNode()
-        # head = res
+        # 创建一个新的链表节点作为结果的头节点
+        res = ListNode()
+        head = res
 
-        # # 当list1和list2都不为空时，比较它们的值
-        # while list1 and list2:
-        #     if list1.val < list2.val:
-        #         # 如果list1的值小于list2的值，则将list1添加到结果链表中
-        #         res.next = list1
-        #         list1 = list1.next
-        #         res = res.next
-        #     else: # list1.val >= list2.val
-        #         # 如果list1的值大于等于list2的值，则将list2添加到结果链表中
-        #         res.next = list2
-        #         list2 = list2.next
-        #         res = res.next
-        # # 如果list1不为空，则将剩余的节点添加到结果链表中
-        # if list1:
-        #     res.next = list1
+        # 当list1和list2都不为空时，比较它们的值
+        while list1 and list2:
+            if list1.val < list2.val:
+                # 如果list1的值小于list2的值，则将list1添加到结果链表中
+                res.next = list1
+                list1 = list1.next
+                res = res.next
+            else: # list1.val >= list2.val
+                # 如果list1的值大于等于list2的值，则将list2添加到结果链表中
+                res.next = list2
+                list2 = list2.next
+                res = res.next
+        # 如果list1不为空，则将剩余的节点添加到结果链表中
+        if list1:
+            res.next = list1
 
-        # # 如果list2不为空，则将剩余的节点添加到结果链表中
-        # else:
-        #     res.next = list2
+        # 如果list2不为空，则将剩余的节点添加到结果链表中
+        else:
+            res.next = list2
 
-        # # 返回结果链表的头节点
-        # return head.next
+        # 返回结果链表的头节点
+        return head.next
 
-        # # 递归
-        # # 如果第一个链表为空，则直接返回第二个链表作为结果
-        # if not l1:
-        #     return l2
+        # 递归
+        # 如果第一个链表为空，则直接返回第二个链表作为结果
+        if not l1:
+            return l2
 
-        # # 如果第二个链表为空，则直接返回第一个链表作为结果
-        # if not l2:
-        #     return l1
+        # 如果第二个链表为空，则直接返回第一个链表作为结果
+        if not l2:
+            return l1
 
-        # # 如果当前l1节点的值小于l2节点的值: 将l1的下一个节点与l2进行递归合并，然后将结果赋给l1的next指针
-        # if l1.val < l2.val:
-        #     l1.next = self.mergeTwoLists(l1.next, l2)
-        #     return l1
+        # 如果当前l1节点的值小于l2节点的值: 将l1的下一个节点与l2进行递归合并，然后将结果赋给l1的next指针
+        if l1.val < l2.val:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+            return l1
 
-        # # 否则: 将l2的下一个节点与l1进行递归合并，然后将结果赋给l2的next指针
-        # else:
-        #     l2.next = self.mergeTwoLists(l1, l2.next)
-        #     return l2
+        # 否则: 将l2的下一个节点与l1进行递归合并，然后将结果赋给l2的next指针
+        else:
+            l2.next = self.mergeTwoLists(l1, l2.next)
+            return l2
 # @lc code=end
 def printListNode(node: ListNode):
     while node:
