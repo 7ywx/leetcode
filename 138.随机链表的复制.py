@@ -156,6 +156,7 @@ def build_linked_list_from_2d_list(head_data):
 
     # 返回真实链表的头节点
     return dummy_head.next
+
 def print_linked_list(head: Node):
     """
     打印Node链表,random打印指向的值
