@@ -55,37 +55,59 @@
 # 进阶：你可以在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序吗？
 #
 #
-
+from typing import List, Optional
 # @lc code=start
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        current = head.next
+        sortListHead = ListNode() # dummy head
+        sortListHead.next = head
+        sortListLast = head
+        while current:
+            if current.val >= sortListLast.val:
+                sortListLast.next = current
+                sortListLast = current
+                current = current.next
+            else: # 当前节点小于sortListLast节点
+                # 1.寻找插入位置(pre为插入位置的前一个节点)
+                pre = sortListHead
+                while pre.next and pre.next.val < current.val:
+                    pre = pre.next
+                # 2.插入
+                currentNext = current.next
+                current.next = pre.next
+                pre.next = current
+                current = currentNext
+        sortListLast.next = None
+        return sortListHead.next
 # @lc code=end
+def printListNode(head: ListNode):
+    while head:
+        print(head.val, end=" -> ")
+        head = head.next
+    print()
 
-def build_linked_list_from_2d_list(head_data):
-    """
-    用一个列表来创建Node链表
-    """
-    # 创建一个字典用于快速查找节点
-    node_dict = {}
-    dummy_head = Node(0)  # 创建虚拟头节点
-    current = dummy_head
+def create_linked_list(lst):
+    # 创建头节点并初始化
+    head = ListNode(lst[0])
+    current = head
 
-    # 创建只带val的链表
-    for index, (val, random_index) in enumerate(head_data):
-        node_dict[index] = Node(x=val, random=random_index)
-        current.next = node_dict[index]
-        current = current.next
+    # 遍历列表从第二个元素开始，依次创建节点并连接起来
+    for item in lst[1:]:
+        new_node = ListNode(item)
+        current.next = new_node
+        current = current.next  # 移动到下一个节点
 
-    current = dummy_head.next
-    # 补充random指针
-    while current:
-        current.random = node_dict.get(current.random)
-        current = current.next
+    return head
 
-    # 返回真实链表的头节点
-    return dummy_head.next
+solution = Solution()
+head =  create_linked_list([4,2,1,3])
+sorted_head = solution.sortList(head)
+printListNode(sorted_head)
