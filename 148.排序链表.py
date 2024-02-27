@@ -64,6 +64,57 @@ class ListNode:
         self.next = next
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # 自顶向下归并排序
+        def sortFunc(head: ListNode, tail: ListNode) -> ListNode:
+            """
+            找到链表的中点，以中点为分界，将链表拆分成两个子链表。
+            寻找链表的中点可以使用快慢指针的做法，
+            快指针每次移动 2 步，慢指针每次移动 1 步，
+            当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
+            :param head: 链表的头节点
+            :param tail: 链表的尾节点
+            :return: 排序后的链表的头节点
+            """
+            if not head:
+                return head
+            if head.next == tail:
+                head.next = None
+                return head
+            slow = fast = head
+            while fast != tail:
+                slow = slow.next
+                fast = fast.next
+                if fast != tail:
+                    fast = fast.next
+            mid = slow
+            return merge(sortFunc(head, mid), sortFunc(mid, tail))
+
+        def merge(head1: ListNode, head2: ListNode) -> ListNode:
+            """
+            合并两个有序链表的函数
+            :param head1: 第一个有序链表的头节点
+            :param head2: 第二个有序链表的头节点
+            :return: 合并后的有序链表的头节点
+            """
+            dummyHead = ListNode(0)
+            temp, temp1, temp2 = dummyHead, head1, head2
+            while temp1 and temp2:
+                if temp1.val <= temp2.val:
+                    temp.next = temp1
+                    temp1 = temp1.next
+                else:
+                    temp.next = temp2
+                    temp2 = temp2.next
+                temp = temp.next
+            if temp1:
+                temp.next = temp1
+            elif temp2:
+                temp.next = temp2
+            return dummyHead.next
+
+        return sortFunc(head, None)
+
+        # 链表->数组->链表
         current = head.next
         sortListHead = ListNode() # dummy head
         sortListHead.next = head
