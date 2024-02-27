@@ -64,6 +64,7 @@ class ListNode:
         self.next = next
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        #TODO 自底向上归并排序
         # 自顶向下归并排序
         def sortFunc(head: ListNode, tail: ListNode) -> ListNode:
             """
