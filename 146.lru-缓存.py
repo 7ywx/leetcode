@@ -68,6 +68,7 @@
 #
 #
 
+#标签 OrderedDict
 # @lc code=start
 class LRUCache:
     def __init__(self, capacity: int):
