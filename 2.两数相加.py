@@ -88,7 +88,7 @@ class Solution:
             if l2:  # 如果l2节点存在
                 carry += l2.val
                 l2 = l2.next
-            carry,val = divmod(carry, 10)  # 将当前sum及进位计算出来
+            carry, val = divmod(carry, 10)  # 将当前sum及进位计算出来
             p.next = ListNode(val)  # 在当前节点后面创建一个新节点
             p = p.next  # 更新p节点
         # current.next._print_()
