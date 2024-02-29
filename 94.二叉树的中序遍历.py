@@ -67,16 +67,34 @@ class TreeNode:
 #         self.right = right
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        # # 颜色标记法
+        # """
+        # - 使用颜色标记节点的状态，新节点为白色，已访问的节点为灰色。
+        # - 如果遇到的节点为白色，则将其标记为灰色，然后将其右子节点、自身、左子节点依次入栈。
+        # - 如果遇到的节点为灰色，则将节点的值输出。
+        # """
+        # WHITE, GRAY = 0, 1
+        # res = []
+        # stack = [(WHITE, root)]
+        # while stack:
+        #     color, node = stack.pop()
+        #     if node is None: continue
+        #     if color == WHITE:
+        #         stack.append((WHITE, node.right))
+        #         stack.append((GRAY, node))
+        #         stack.append((WHITE, node.left))
+        #     else:
+        #         res.append(node.val)
+        # return res
 
-
-        # 递归
-        res = []
-        if not root:
-            return res
-        res.extend(self.inorderTraversal(root.left))
-        res.append(root.val)
-        res.extend(self.inorderTraversal(root.right))
-        return res
+        # # 递归
+        # res = []  # 存储中序遍历结果的列表
+        # if not root:  # 如果根节点为空，则返回空列表
+        #     return res
+        # res += (self.inorderTraversal(root.left))  # or res.extend() 递归调用左子树的中序遍历，并将结果添加到res列表中
+        # res.append(root.val)  # 将当前节点的值添加到res列表中
+        # res += (self.inorderTraversal(root.right))  # 递归调用右子树的中序遍历，并将结果添加到res列表中
+        # return res  # 返回中序遍历结果的列表
 # @lc code=end
 solution = Solution()
 root = TreeNode(val=1, left=None, right=TreeNode(val=2,left=TreeNode(3),right=None))
