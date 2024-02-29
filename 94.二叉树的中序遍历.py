@@ -67,7 +67,7 @@ class TreeNode:
 #         self.right = right
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        # 迭代
+        # # 迭代
         # res = []  # 存储结果的列表
         # stack = []  # 存储节点的栈
         # while root or stack:  # 当根节点或栈不为空时
