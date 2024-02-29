@@ -67,6 +67,18 @@ class TreeNode:
 #         self.right = right
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        # 迭代
+        # res = []  # 存储结果的列表
+        # stack = []  # 存储节点的栈
+        # while root or stack:  # 当根节点或栈不为空时
+        #     while root:  # 当根节点不为空时
+        #         stack.append(root)  # 将根节点压入栈中
+        #         root = root.left  # 将根节点指向左子节点
+        #     root = stack.pop()  # 弹出栈顶节点
+        #     res.append(root.val)  # 将节点的值添加到结果列表中
+        #     root = root.right  # 将根节点指向右子节点
+        # return res  # 返回结果列表
+
         # # 颜色标记法
         # """
         # - 使用颜色标记节点的状态，新节点为白色，已访问的节点为灰色。
