@@ -67,26 +67,40 @@ class TreeNode:
 #         self.right = right
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        #标签 迭代
-        if not root:
-            return []
-        stack = [root]
-        res = []
-        while stack:
-            node = stack.pop()
-            res.append(node.val)
-            if node.left:
-                stack.append(node.left)
-            if node.right:
-                stack.append(node.right)
-        print(res)
-        return res[::-1]
+        # # 栈
+        # if not root:
+        #     return []
+        # stack = []
+        # res = []
+        # while root or stack:
+        #     while root:
+        #         stack.append(root)
+        #         root = root.left
+        #     root = stack.pop()
+        #     res.append(root.val)
+        #     root = root.left
+
+        # #标签迭代
+        # if not root:
+        #     return []
+        # stack = [root]
+        # res = []
+        # while stack:
+        #     node = stack.pop()
+        #     res.append(node.val)
+        #     if node.left:
+        #         stack.append(node.left)
+        #     if node.right:
+        #         stack.append(node.right)
+        # print(res)
+        # return res[::-1]
 
         # # 递归
         # if not root:
         #     return []
         # return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val]
 # @lc code=end
+#标签 构建二叉树
 def build_tree(nodes):
     if not nodes:
         return None
