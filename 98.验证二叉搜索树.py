@@ -60,6 +60,7 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        #标签 二叉树的中序遍历（迭代）
         res = [float('-inf')]  # 存储结果的列表
         stack = []  # 存储节点的栈
         while root or stack:  # 当根节点或栈不为空时
