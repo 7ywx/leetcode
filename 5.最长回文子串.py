@@ -47,6 +47,7 @@
 
 # @lc code=start
 class Solution:
+    # TODO v4
     def longestPalindrome(self, s: str) -> str:
         if len(s) < 2:
             return s
