@@ -85,9 +85,9 @@ class Solution:
         start = (max_center - max_len) // 2 # 将processed_s的中心位置映射回原字符串s
         end = start + max_len - 1
         return s[start:end + 1]
-    def longestPalindrome(self, s: str) -> str:
-        # chatgpt写的 中心扩展
 
+    # v3 chatgpt中心扩展 (277ms 击败83.43%使用 Python3 的用户)
+    def longestPalindrome(self, s: str) -> str:
         n = len(s)
         if n < 2:
             return s
@@ -95,7 +95,7 @@ class Solution:
         def expand_around_center(left, right):
             '''
             子串开始不断地向两边扩展。
-            如果两边的字母相同，我们就可以继续扩展，例如从 P(i+1,j−1)P(i+1,j-1)P(i+1,j−1) 扩展到 P(i,j)P(i,j)P(i,j)；
+            如果两边的字母相同，我们就可以继续扩展，例如从 P(i+1,j-1) 扩展到 P(i,j);
             如果两边的字母不同，我们就可以停止扩展，因为在这之后的子串都不能是回文串了。
             '''
             while left >= 0 and right < len(s) and s[left] == s[right]:
