@@ -1,7 +1,17 @@
 # Python 语法和常用函数备忘录
+
 ## Python 语法
-### 1. [```if target - num in hashtable python```](1.两数之和.cpp):
+
+### 1. [```if target - num in hashtable```](1.两数之和.cpp):
 - 在 ```if a in hashtable:``` 这样的条件判断中，Python会检查字典（哈希表）hashtable 的键（keys）中是否包含变量 a。也就是说，它不会查找值（values），而是查找键。
+
+### 2. 列表推导式
+`[expression for item in iterable if condition]`
+- **expression**：一个表达式，用于计算每个 item 应该在新列表中的值。
+- **item**：迭代变量，在遍历 iterable 时的当前项。
+- **iterable**：任意可迭代对象，如列表、元组、字符串或生成器等。
+- **if condition**：可选条件，仅当此条件为 True 时，当前 item 才会被包含在新列表中。
+
 ## Python 常用函数
 ### 1. enumerate(iterable, start=0)
 - iterable：必需参数，接受任何可迭代对象。
