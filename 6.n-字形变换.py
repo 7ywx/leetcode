@@ -71,37 +71,35 @@
 # @lc code=start
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        # chatgpt
-        # # 如果只有一行或行数大于等于字符串长度，直接返回原字符串
-        # if numRows == 1 or numRows >= len(s):
-        #     return s
+        # v2.1 chatgpt解 chatgpt写的注释更好 50ms
+        # 如果只有一行或行数大于等于字符串长度，直接返回原字符串
+        if numRows == 1 or numRows >= len(s):
+            return s
 
-        # # 创建一个列表，用于存储每一行的字符串
-        # result = [''] * numRows
-        # print(result)
-        # index, step = 0, 1  # index表示当前行的索引，step表示行索引的变化方向
+        # 创建一个列表，用于存储每一行的字符串
+        result = [''] * numRows
+        index, step = 0, 1  # index表示当前行的索引，step表示行索引的变化方向(1:向下，-1:向上)
 
-        # # 遍历原始字符串
-        # for char in s:
-        #     # 将字符添加到相应行的字符串中
-        #     result[index] += char
-        #     # 根据Z字形变换的规律更新行索引和方向
-        #     if index == 0:
-        #         step = 1  # 当索引到达最顶部时，行索引向下移动
-        #     elif index == numRows - 1:
-        #         step = -1  # 当索引到达最底部时，行索引向上移动
-        #     index += step
+        # 遍历原始字符串
+        for char in s:
+            # 将字符添加到相应行的字符串中
+            result[index] += char
+            # 根据Z字形变换的规律更新行索引和方向
+            if index == 0:
+                step = 1  # 当索引到达最顶部时，行索引向下移动
+            if index == numRows - 1:
+                step = -1  # 当索引到达最底部时，行索引向上移动
+            index += step
 
-        # # 将每一行的字符串连接起来得到最终结果
-        # print(result)
-        # return ''.join(result)
+        # 将每一行的字符串连接起来得到最终结果
+        return ''.join(result)
 
-        # 最优解
+        # v2.0 50ms
         # 如果numRows小于2，则直接返回该字符串
         if numRows < 2:
             return s
         # 创建一个空列表，列数与numRows相同。第i列存储转换后第i行的字符
-        res = ["" for _ in range(numRows)]
+        result = [''] * numRows
         # 当前元素转换后在第i行
         i = 0
         # flag表示当前处于 Z 字形排列的方向（+1：向下移动，-1：向上移动）
@@ -118,25 +116,25 @@ class Solution:
         # 将res列表中的字符串连接成一个字符串，并返回
         return "".join(res)
 
-    # def convert(self, s: str, numRows: int) -> str:
-    #     if numRows == 1:
-    #         return s
-    #     else:
-    #         rowNum = ((len(s) // (2 * numRows - 2)) + 1) * numRows
-    #         s2d = [[''] * rowNum for _ in range(numRows)]
-    #         for i in range(len(s)):
-    #             row = i // (2 * numRows - 2)
-    #             if i < row * (2 * numRows - 2) + numRows:
-    #                 s2d[i-(row * (2*numRows - 2))][row * (numRows - 1)] = s[i]
-    #             else:
-    #                 s2d[numRows-1-(i-(numRows -1 + row*(2*numRows-2)))][i-(numRows -1 + row*(2*numRows-2))+row * (numRows - 1)] = s[i]
-    #         result = []
-    #         for row in s2d:
-    #             for element in row:
-    #                 if element != '':
-    #                     result.append(element)
-    #         # print(''.join(result))
-    #         return ''.join(result)
+        # v1.0 自己写的 300ms
+        if numRows == 1:
+            return s
+        else:
+            rowNum = ((len(s) // (2 * numRows - 2)) + 1) * numRows
+            s2d = [[''] * rowNum for _ in range(numRows)]
+            for i in range(len(s)):
+                row = i // (2 * numRows - 2)
+                if i < row * (2 * numRows - 2) + numRows:
+                    s2d[i-(row * (2*numRows - 2))][row * (numRows - 1)] = s[i]
+                else:
+                    s2d[numRows-1-(i-(numRows -1 + row*(2*numRows-2)))][i-(numRows -1 + row*(2*numRows-2))+row * (numRows - 1)] = s[i]
+            result = []
+            for row in s2d:
+                for element in row:
+                    if element != '':
+                        result.append(element)
+            # print(''.join(result))
+            return ''.join(result)
 # @lc code=end
 solution = Solution()
 print(solution.convert("PAYPALISHIRING", 3))
