@@ -71,7 +71,7 @@
 # @lc code=start
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        #chatgpt
+        # chatgpt
         # # 如果只有一行或行数大于等于字符串长度，直接返回原字符串
         # if numRows == 1 or numRows >= len(s):
         #     return s
