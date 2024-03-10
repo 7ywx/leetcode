@@ -97,18 +97,18 @@ class Solution:
         # return ''.join(result)
 
 
-        # 如果给定字符串的行数小于2，则直接返回该字符串
+        # 如果numRows小于2，则直接返回该字符串
         if numRows < 2:
             return s
-        # 创建一个空列表，行数与给定字符串的行数相同
+        # 创建一个空列表，列数与numRows相同。第i列存储转换后第i行的字符
         res = ["" for _ in range(numRows)]
-        # 初始化索引值i为0
+        # 当前元素转换后在第i行
         i = 0
-        # 初始化标志位flag为-1（+1：向下移动，-1：向上移动）
+        # flag表示当前处于 Z 字形排列的方向（+1：向下移动，-1：向上移动）
         flag = -1
         # 遍历给定字符串的每个字符
         for c in s:
-            # 将字符c添加到res列表的第i行
+            # 将字符c添加到res列表的第i列
             res[i] += c
             # 如果i等于0或numRows-1（即将要遍历最后一行），则将标志位flag取反
             if i == 0 or i == numRows-1:
@@ -139,7 +139,7 @@ class Solution:
     #         return ''.join(result)
 # @lc code=end
 solution = Solution()
-solution.convert("PAYPALISHIRING", 3)
+print(solution.convert("PAYPALISHIRING", 3))
 print("--")
-solution.convert("PAYPALISHIRING", 4)
-solution.convert("A", 1)
+# print(solution.convert("PAYPALISHIRING", 4))
+# print(solution.convert("A", 1))
