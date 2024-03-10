@@ -96,7 +96,7 @@ class Solution:
         # print(result)
         # return ''.join(result)
 
-
+        # 最优解
         # 如果numRows小于2，则直接返回该字符串
         if numRows < 2:
             return s
