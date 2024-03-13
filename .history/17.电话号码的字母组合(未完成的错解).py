@@ -72,24 +72,20 @@ class Solution:
         }
         digits_num = [num_map[digit] for digit in digits]
 
-        def backtrack(depth, path, used):
+        def backtrack(depth, path):
             # 将当前路径添加到结果集中
             if depth == digits_len:
                 result.append(''.join(path[:]))
                 return
 
             # 递归处理下一个元素
-            for i in range(digits_len):
-                if not used[i]:
-                    used[i] = True
-                    for j in range(len(digits_num[i])):
-                        path.append(digits_num[i][j])
-                        backtrack(depth + 1, path, used)
-                        path.pop()  # 回溯，移除当前元素
-                    used[i] = False
-
+            for i in range(depth, digits_len):
+                for j in range(len(digits_num[i])):
+                    path.append(digits_num[i][j])
+                    backtrack(depth + 1, path)
+                    path.pop()  # 回溯，移除当前元素
         result = []
-        backtrack(0, [], [False for _ in range(digits_len)])
+        backtrack(0, [])
         return result
 # @lc code=end
 solution = Solution()
