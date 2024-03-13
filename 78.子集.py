@@ -44,46 +44,24 @@
 #
 #
 #
-
+from typing import List, Optional
 # @lc code=start
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        nums_len = len(nums)
-        used = [False] * nums_len
-        res = []
-        def dfs(nums, size, depth, path, used, res):
-            """
-            深度优先搜索函数，用于生成所有可能的组合。
+        #TODO 过于烧脑
+        def backtrack(start, path):
+            # 将当前路径添加到结果集中
+            result.append(path[:])
 
-            :param nums: 给定的数字列表。
-            :param size: 数字列表的大小。
-            :param depth: 当前搜索的深度。
-            :param path: 当前搜索路径。
-            :param used: 标记哪些数字已被使用。
-            :param res: 存储所有可能的组合结果。
-            """
-            # 当搜索深度等于列表大小时，将当前路径加入结果集
-            res.append(path[:])
-            return
+            # 递归处理下一个元素
+            for i in range(start, len(nums)):
+                path.append(nums[i])
+                backtrack(i + 1, path)
+                path.pop()  # 回溯，移除当前元素
 
-            # 遍历数字列表，尝试将未使用的数字加入当前路径
-            for i in range(size):
-                if not used[i]:
-                    used[i] = True
-                    path.append(nums[i])
-
-            # # 遍历数字列表，尝试将未使用的数字加入当前路径
-            # for i in range(size):
-            #     if not used[i]:
-            #         used[i] = True
-            #         path.append(nums[i])
-
-            #         # 递归进行下一层搜索
-            #         dfs(nums, size, depth + 1, path, used, res)
-
-            #         # 回溯：撤销上一步操作，标记该数字为未使用
-            #         used[i] = False
-            #         path.pop()
-        dfs(nums, nums_len, 0, [], used, res)
-        return res
+        result = []
+        backtrack(0, [])
+        return result
 # @lc code=end
+solution = Solution()
+print(solution.subsets([1,2,3]))
