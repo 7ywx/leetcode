@@ -47,6 +47,7 @@
 
 # @lc code=start
 class Solution:
+    # TODO v4
     def longestPalindrome(self, s: str) -> str:
         if len(s) < 2:
             return s
@@ -85,104 +86,86 @@ class Solution:
         start = (max_center - max_len) // 2 # 将processed_s的中心位置映射回原字符串s
         end = start + max_len - 1
         return s[start:end + 1]
-    # def longestPalindrome(self, s: str) -> str:
-    #     # chatgpt写的 中心扩展
 
-    #     n = len(s)
-    #     if n < 2:
-    #         return s
+    # v3 chatgpt中心扩展 (277ms 击败83.43%使用 Python3 的用户)
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        if n < 2:
+            return s
 
-    #     def expand_around_center(left, right):
-    #         '''
-    #         子串开始不断地向两边扩展。
-    #         如果两边的字母相同，我们就可以继续扩展，例如从 P(i+1,j−1)P(i+1,j-1)P(i+1,j−1) 扩展到 P(i,j)P(i,j)P(i,j)；
-    #         如果两边的字母不同，我们就可以停止扩展，因为在这之后的子串都不能是回文串了。
-    #         '''
-    #         while left >= 0 and right < len(s) and s[left] == s[right]:
-    #             left -= 1
-    #             right += 1
-    #         return left + 1, right - 1
+        def expand_around_center(left, right):
+            '''
+            子串开始不断地向两边扩展。
+            如果两边的字母相同，我们就可以继续扩展，例如从 P(i+1,j-1) 扩展到 P(i,j);
+            如果两边的字母不同，我们就可以停止扩展，因为在这之后的子串都不能是回文串了。
+            '''
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return left + 1, right - 1
 
-    #     start, end = 0, 0 # 最长回文子串的起始位置和结束位置
+        start, end = 0, 0 # 最长回文子串的起始位置和结束位置
 
-    #     for i in range(n):
-    #         left1, right1 = expand_around_center(i, i)  # 奇数长度的回文子串
-    #         left2, right2 = expand_around_center(i, i + 1)  # 偶数长度的回文子串
+        for i in range(n):
+            left1, right1 = expand_around_center(i, i)  # 奇数长度的回文子串
+            left2, right2 = expand_around_center(i, i + 1)  # 偶数长度的回文子串
 
-    #         if right1 - left1 > end - start:
-    #             start, end = left1, right1
-    #         if right2 - left2 > end - start:
-    #             start, end = left2, right2
+            if right1 - left1 > end - start:
+                start, end = left1, right1
+            if right2 - left2 > end - start:
+                start, end = left2, right2
 
-    #     return s[start:end + 1]
+        return s[start:end + 1]
 
-    # def longestPalindrome(self, s: str) -> str:
-        #  chatgpt写的 动态规划
+    # v2 chatgpt动态规划 (1846ms 击败55.12%使用 Python3 的用户)
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        if n < 2:
+            return s
+        # 创建一个二维数组来存储回文子串的信息，dp[i][j]表示s[i:j+1]是否为回文子串
+        dp = [[False] * n for _ in range(n)]
 
-        # n = len(s)
-        # if n < 2:
-        #     return s
-        # # 创建一个二维数组来存储回文子串的信息，dp[i][j]表示s[i:j+1]是否为回文子串
-        # dp = [[False] * n for _ in range(n)]
+        start, max_length = 0, 1  # 初始化最长回文子串的起始位置和长度
 
-        # start, max_length = 0, 1  # 初始化最长回文子串的起始位置和长度
+        # 所有长度为1的子串都是回文的
+        for i in range(n):
+            dp[i][i] = True
 
-        # # 所有长度为1的子串都是回文的
-        # for i in range(n):
-        #     dp[i][i] = True
+        # 遍历长度为2的子串
+        for i in range(n - 1):
+            if s[i] == s[i + 1]:
+                dp[i][i + 1] = True
+                start = i
+                max_length = 2
 
-        # # 遍历长度为2的子串
-        # for i in range(n - 1):
-        #     if s[i] == s[i + 1]:
-        #         dp[i][i + 1] = True
-        #         start = i
-        #         max_length = 2
+        # 遍历长度大于2的子串
+        for length in range(3, n + 1): # length: 3-n
+            for i in range(n - length + 1): # i: 0-能够支撑长度 >= length的子串的最左边界
+                j = i + length - 1  # 子串的结束位置
+                if dp[i + 1][j - 1] and s[i] == s[j]: # 如果去掉头尾后的子串是回文串，且头尾字符相等
+                    dp[i][j] = True
+                    start = i
+                    max_length = length
+        return s[start:start + max_length]
 
-        # # 遍历长度大于2的子串
-        # for length in range(3, n + 1):
-        #     for i in range(n - length + 1):
-        #         j = i + length - 1  # 子串的结束位置
-        #         if dp[i + 1][j - 1] and s[i] == s[j]: # 如果去掉头尾后的子串是回文串，且头尾字符相等
-        #             dp[i][j] = True
-        #             start = i
-        #             max_length = length
-        # return s[start:start + max_length]
-
-    # def longestPalindrome(self, s: str) -> str:
-        # # def is_palindrome(s):
-        # #     return s == s[::-1]
-        # def check_filter_substrings(s, x):
-        #     result = [s[start:end] for start in range(len(s)-x+1) for end in range(start+x, len(s)+1)]
-        #     for substr in result:
-        #         if substr == substr[::-1]:
-        #             return (True, substr)
-        #     return (False, "")
-
-        # # result = set()
-        # # for i in range(len(s)+1):
-        # #     for j in range(i+1, len(s)+1):
-        # #         result.add(s[i:j])
-        # '''
-        # left, right, ans = 1, len(s), 0  # 初始化左边界、右边界和答案变量
-        # while left <= right:  # 当左边界小于等于右边界时循环
-        #     mid = (left + right) // 2  # 计算左边界和右边界的中间值
-        #     if check(mid):  # 如果能完成mid个任务
-        #         ans = mid  # 更新答案变量
-        #         left = mid + 1  # 更新左边界
-        #     else:
-        #         right = mid - 1  # 更新右边界
-        # return ans  # 返回答案
-        # '''
-        # left, right, ans = 1, len(s), ''  # 初始化左边界、右边界和答案变量
-        # while left <= right:  # 当左边界小于等于右边界时循环
-        #     mid = (left + right) // 2  # 计算左边界和右边界的中间值
-        #     is_palindrome, substr = check_filter_substrings(s, mid)
-        #     if is_palindrome: # 如果能完成mid个任务
-        #         ans = substr  # 更新答案变量
-        #         left = mid + 1  # 更新左边界
-        #     else:
-        #         right = mid - 1  # 更新右边界
-        # return ans  # 返回答案
+    # v1 时间复杂度太差
+    def longestPalindrome(self, s: str) -> str:
+        def check_filter_substrings(s, x):
+            result = [s[start:end] for start in range(len(s)-x+1) for end in range(start+x, len(s)+1)]
+            for substr in result:
+                if substr == substr[::-1]:
+                    return (True, substr)
+            return (False, "")
+        left, right, ans = 1, len(s), ''  # 初始化左边界、右边界和答案变量
+        while left <= right:  # 当左边界小于等于右边界时循环
+            mid = (left + right) // 2  # 计算左边界和右边界的中间值
+            is_palindrome, substr = check_filter_substrings(s, mid)
+            if is_palindrome: # 如果能完成mid个任务
+                ans = substr  # 更新答案变量
+                left = mid + 1  # 更新左边界
+            else:
+                right = mid - 1  # 更新右边界
+        return ans  # 返回答案
 # @lc code=end
 solution = Solution()
 solution.longestPalindrome("babad")

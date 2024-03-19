@@ -56,6 +56,7 @@ from collections import defaultdict
 # @lc code=start
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        # 标签 滑动窗口
         left, right, max_len, lens = 0, 0, 0, len(s) # 初始化左右窗口，最大长度
         d = defaultdict(int) # 记录字符的出现次数
         while right < lens:
@@ -65,7 +66,7 @@ class Solution:
             d[s[right]] += 1 # 将right指向的字符的出现次数加1
             if right-left+1 > max_len: # max_len = max(max_len, right-left+1)这个慢
                 max_len = right-left+1
-            if max_len > lens-left-1: # 当前max_len >= left到最后的字符长度，说明已经找到最大max_len，退出循环
+            if max_len > lens-left-1: # 早停机制 当前max_len >= left到最后的字符长度，说明已经找到最大max_len，退出循环
                 break
             right += 1 # 移动右指针,尝试寻找更长的无重复字符子串
         return max_len
