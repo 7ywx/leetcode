@@ -64,7 +64,31 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        # 双指针交换
+        n = len(nums)
+        p0 = p1 = 0
+        for i in range(n):
+            if nums[i] == 1:
+                nums[i], nums[p1] = nums[p1], nums[i]
+                p1 += 1
+            elif nums[i] == 0:
+                nums[i], nums[p0] = nums[p0], nums[i]
+                if p0 < p1:
+                    nums[i], nums[p1] = nums[p1], nums[i]
+                p0 += 1
+                p1 += 1
 
+        # 单指针交换
+        n = len(nums)
+        ptr = 0
+        for i in range(n):
+            if nums[i] == 0:
+                nums[i], nums[ptr] = nums[ptr], nums[i]
+                ptr += 1
+        for i in range(ptr, n):
+            if nums[i] == 1:
+                nums[i], nums[ptr] = nums[ptr], nums[i]
+                ptr += 1
 
         # 哈希表
         hashtable = defaultdict(int)
