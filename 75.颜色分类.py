@@ -66,10 +66,19 @@ class Solution:
         """
 
 
+        # 哈希表
+        hashtable = defaultdict(int)
+        for num in nums:
+            hashtable[num] += 1
+        index = 0
+        for i in range(3):
+            for j in range(hashtable[i]):  # 遍历次数
+                nums[index] = i
+                index += 1
+
         # 冒泡排序
         for i in range(len(nums)):
             for j in range(i+1, len(nums)):
                 if nums[i] > nums[j]:
                     nums[i], nums[j] = nums[j], nums[i]
-                print(nums)
 # @lc code=end
