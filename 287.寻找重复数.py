@@ -69,6 +69,7 @@ from typing import List
 # @lc code=start
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
+        #TODO 快慢指针找环入口
         fast = slow = 0  # 初始化快慢指针
         # 使用快慢指针寻找环的入口
         while True: # nums[fast] and nums[nums[fast]] in range(len(nums))
