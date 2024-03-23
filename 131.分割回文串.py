@@ -41,9 +41,38 @@
 #
 #
 #
-
+from typing import List, Optional
 # @lc code=start
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        
+        #TODO 搞懂
+        dp = [[[]]]
+        # dp[i]表示s[:i]所有可能的分割方案
+        for i in range(1, len(s) + 1):
+            dp.append([])
+            for j in range(i):
+                tmp = s[j:i]
+                if tmp == tmp[::-1]:
+                    dp[-1].extend(l + [tmp] for l in dp[j])
+        return dp[-1]
+
+        # 回溯
+        path = []
+        res = []
+        s_len = len(s)
+        def isPalindrome(s: str)->bool:
+            return s == s[::-1]
+        def dfs(startIndex): # startIndex: [0, ]
+            if startIndex == s_len:
+                res.append(path[:])
+                return
+            for i in range(startIndex, s_len): # 分割线画在startIndex元素的后面
+                if isPalindrome(s[startIndex:i+1]):
+                    path.append(s[startIndex:i+1])
+                    dfs(i+1)
+                    path.pop()
+        dfs(0)
+        return res
 # @lc code=end
+s = Solution()
+print(s.partition("aab"))
