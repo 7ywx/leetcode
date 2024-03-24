@@ -77,7 +77,7 @@ class Solution:
 
         # 二分查找
         while left != right - 1:
-            mid = (left + right) // 2
+            mid = (left + right) >> 1 # 二分查找的中点, (left + right) // 2
             if nums[mid] < target:  # 目标值在右半部分
                 left = mid
             elif target < nums[mid]:  # 目标值在左半部分
