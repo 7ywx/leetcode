@@ -69,6 +69,37 @@ class Solution:
         返回值:
         布尔值，如果字符串中的括号组合合法，则返回True；否则返回False。
         """
+        n = len(s)
+        if n == 0 or n % 2:
+            return False
+
+        result = []
+        for i in range(n):
+            if s[i] == "(" or s[i] == "[" or s[i] == "{":
+                result.append(s[i])
+            else:
+                if not result:  # 检查是否为空
+                    return False
+
+                if s[i] == ")" and result[-1] != "(":
+                    return False
+                elif s[i] == "]" and result[-1] != "[":
+                    return False
+                elif s[i] == "}" and result[-1] != "{":
+                    return False
+
+                result.pop()  # 直接使用pop来取出最后一个元素
+
+        return not result  # 最终检查是否栈为空
+
+
+        dic = {'{': '}',  '[': ']', '(': ')', '?': '?'}
+        stack = ['?']
+        for c in s:
+            if c in dic: stack.append(c)
+            elif dic[stack.pop()] != c: return False
+        return len(stack) == 1
+
         stack = []  # 用于存储打开的括号的栈
         for i in s:
             if i == '(' or i == '{' or i == '[':
@@ -84,4 +115,6 @@ class Solution:
                     stack.pop()  # 如果当前字符为']'且栈顶为'['，则匹配成功，弹出栈顶元素
                 else:
                     return False  # 其他情况为匹配失败，返回False
-        return True if len(stack) == 0 else False  # 最后栈为空则表示所有括号都已合法匹配，返回True；否则返回False# @lc code=end
+        return not stack  # 如果栈为空，则表示所有括号都已合法匹配，返回True；否则返回False
+        # return True if len(stack) == 0 else False  # 最后栈为空则表示所有括号都已合法匹配，返回True；否则返回False
+# @lc code=end
