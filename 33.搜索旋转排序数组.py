@@ -72,6 +72,12 @@ class Solution:
         返回值:
         如果目标值存在于数组中，则返回其索引；否则返回-1。
         """
+
+
+
+
+
+        # start = nums.index(min(nums))
         nums_len = len(nums) # 获取数组长度
 
         # 如果数组只有一个元素，直接判断是否为目标值，是则返回0，否则返回-1
@@ -83,6 +89,7 @@ class Solution:
         left, right = 0, nums_len - 1 # 初始化双指针
 
         while left <= right: # 二分查找
+            # left + (right - left) // 2 可以防止left + right溢出
             mid = (left + right) // 2 # 计算中间位置
             mid_true = (mid + start) % nums_len # 考虑旋转后的真正中间位置
 
@@ -94,11 +101,11 @@ class Solution:
                 left = mid + 1
         return -1 # 如果未找到目标值，返回-1
 
-
-        # for num in nums:
-        #     if num == target:
-        #         return nums.index(num)
-        # return -1
+        # 直接遍历数组，找到目标值并返回其索引
+        for num in nums:
+            if num == target:
+                return nums.index(num)
+        return -1
 # @lc code=end
 s = Solution()
 print(s.search([4,5,6,7,0,1,2], 0))
