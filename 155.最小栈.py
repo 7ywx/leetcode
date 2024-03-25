@@ -11,8 +11,7 @@
 # Dislikes: 0
 # Total Accepted:    562.7K
 # Total Submissions: 943.8K
-# Testcase Example:  '["MinStack","push","push","push","getMin","pop","top","getMin"]\n' +
-  '[[],[-2],[0],[-3],[],[],[],[]]'
+# Testcase Example:  '["MinStack","push","push","push","getMin","pop","top","getMin"]\n' + '[[],[-2],[0],[-3],[],[],[],[]]'
 #
 # 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
 #
