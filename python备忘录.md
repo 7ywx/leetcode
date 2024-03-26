@@ -45,3 +45,23 @@
   - value：要查找的值。
   - start：可选参数，默认为0，表示要搜索的起始位置。
   - stop：可选参数，默认为len(list)，表示要搜索的结束位置。
+
+- ### 7. heapq 模块函数
+
+  - **heapq.heappush(heap, item)**:
+    - 将元素 `item` 推入堆 `heap` 中，同时保持堆的特性（对于最小堆来说，堆顶元素始终是最小的）。
+
+  - **heapq.heappop(heap)**:
+    - 移除并返回堆 `heap` 中最小的元素。对于默认的小顶堆，就是堆顶元素。
+
+  - **heapq.heappushpop(heap, item)**:
+    - 先将 `item` 推入堆 `heap` 中，然后立即弹出并返回堆中最小的元素。
+
+  - **heapq.heapify(iterable)**:
+    - 把一个可迭代对象 `iterable` 转换成一个合法的堆结构。
+
+  - **heapq.nsmallest(n, iterable[, key])**:
+    - 返回 `iterable` 中最小的 `n` 个元素组成的列表，使用堆排序算法实现高效查找。
+
+  - **heapq.nlargest(n, iterable[, key])**:
+    - 返回 `iterable` 中最大的 `n` 个元素组成的列表，同样使用堆排序算法实现高效查找。这两个函数均支持可选的 `key` 参数，用于指定元素比较时使用的函数。
