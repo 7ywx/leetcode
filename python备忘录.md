@@ -65,3 +65,7 @@
 
   - **heapq.nlargest(n, iterable[, key])**:
     - 返回 `iterable` 中最大的 `n` 个元素组成的列表，同样使用堆排序算法实现高效查找。这两个函数均支持可选的 `key` 参数，用于指定元素比较时使用的函数。
+- ### 8. 表示无穷大的方法
+  - **math.inf**
+  - **float('inf')**
+  - **float('-inf')**
