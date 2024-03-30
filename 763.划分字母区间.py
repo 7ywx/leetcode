@@ -51,16 +51,29 @@ from typing import List
 # @lc code=start
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
-        #TODO yield 语法 last字典
+        """
+        分割字符串中的连续子串，使得每个子串中的字符都只出现一次。
+
+        参数:
+        s: 字符串，需要进行分割的原始字符串。
+
+        返回值:
+        List[int]: 包含每个分割后子串长度的列表。
+        """
+        # 创建一个字典，用于存储每个字符在字符串中最后一次出现的索引
         last = {}
+        # 获取字符串中不同字符的数量
         n = len(set(s))
+        # 从字符串末尾向前遍历，记录每个字符的最后一次出现位置
         for c in range(len(s)-1, -1, -1):
             if s[c] not in last:
                 last[s[c]] = c
             if len(last) == n:
                 break
+        # 初始化起始和结束索引
         start, end = 0, last[s[0]]
         res = []
+        # 遍历字符串，根据结束索引将字符串分割成子串，并记录子串长度
         for i in range(len(s)):
             if i == end:
                 res.append(end-start+1)
@@ -68,8 +81,8 @@ class Solution:
                 if i != len(s)-1:
                     end = last[s[i+1]]
             else:
-                # end = max(end, last[s[i]])
-                if last[s[i]] > end:
+                # 更新结束索引为当前字符的最远出现位置
+                if last[s[i]] > end: # end = max(end, last[s[i]])
                     end = last[s[i]]
         return res
 # @lc code=end
