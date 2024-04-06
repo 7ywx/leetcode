@@ -68,13 +68,6 @@ class Solution:
                     if tail[0] > 0 and dp[tail[0] - 1] > 0:
                         temp *= dp[tail[0] - 1]
                     dp[i] = temp
-                    # temp = 1
-                    # for index, t in enumerate(tail):
-                    #     if t > 0 and tail[index - 1] + 1 != t:
-                    #         temp *= nums[t] * dp[t-1]
-                    #     else:
-                    #         temp *= nums[t]
-                    # dp[i] = temp
                 else:
                     if len(tail) == 1:
                         dp[i] = nums[i]
@@ -85,40 +78,9 @@ class Solution:
                         if tail[1] > 0 and dp[tail[1]-1] > 0:
                             temp *= dp[tail[1]-1]
                         dp[i] = temp
-                    # temp = 1
-                    # for t in range(1, len(tail)):
-                    #     if tail[t] > 0 and tail[t-1] + 1 != tail[t]:
-                    #         temp *= nums[tail[t]] * dp[tail[t]-1]
-                    #     else:
-                    #         temp *= nums[tail[t]]
-                    # dp[i] = temp if len(tail) != 1 else nums[i]
             else:
                 tail.clear()
         return max(dp)
-
-        # dp = [nums[0]] + [0] * (len(nums)-1)
-        # tail = []
-        # if nums[0] < 0:
-        #     tail.append(0)
-        # for i in range(1, len(nums)):
-        #     if nums[i] == 0:
-        #         tail.clear()
-        #     elif nums[i] < 0:
-        #         if not tail:
-        #             tail.append(i)
-        #             dp[i] = nums[i]
-        #         else:
-        #             if tail[0] != i-1:
-        #                 dp[i] = dp[i-1] * nums[tail.pop()] * nums[i]
-        #             else:
-        #                 t = tail.pop()
-        #                 if dp[t-1] > 0:
-        #                     dp[i] = dp[t-1] * nums[t] * nums[i]
-        #                 else:
-        #                     dp[i] = nums[t] * nums[i]
-        #     else:
-        #         dp[i] = max(nums[i] * dp[i - 1], nums[i])
-        # return max(dp)
 
         # dp = nums[:]
         # for i in range(1, len(nums)):
