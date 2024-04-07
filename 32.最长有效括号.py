@@ -103,5 +103,5 @@ class Solution:
 
 # @lc code=end
 s = Solution()
-print(s.longestValidParentheses("(()"))
-print(s.longestValidParentheses(")()())"))
+# print(s.longestValidParentheses("(()"))
+print(s.longestValidParentheses("()(())"))
