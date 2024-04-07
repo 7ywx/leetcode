@@ -66,6 +66,7 @@
 # @lc code=start
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
+        #TODO dp还有优化空间
         # 动态规划 v1.1 对于dp的初始化进行了优化
         dp = [[1]*n] + [[1]+[0] * (n-1) for _ in range(m-1)]
         #print(dp)
