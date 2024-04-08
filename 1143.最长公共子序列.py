@@ -66,7 +66,7 @@ class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         text1_len = len(text1)
         text2_len = len(text2)
-        # dp[i][j]: text1[:i+1] 和 text2[:j+1] 的最长公共子序列的长度
+        # dp[i][j]: text2[:i+1] 和 text1[:j+1] 的最长公共子序列的长度
         dp = [[0] * (text1_len) for _ in range(text2_len)]
         for i in range(text2_len):
             for j in range(text1_len):
