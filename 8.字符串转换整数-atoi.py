@@ -99,7 +99,7 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
         # 去除开头的空格
-        s = s.lstrip()
+        s = s.lstrip() ``
 
         if not s:
             return 0  # 字符串为空，返回0
