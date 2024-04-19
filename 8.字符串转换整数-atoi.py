@@ -115,7 +115,7 @@ class Solution:
         # 读取数字，直到遇到非数字字符
         num = 0
         for char in s:
-            if char.isdigit(): #TODO python备忘录-函数
+            if char.isdigit():
                 num = num * 10 + int(char)
             else:
                 break
