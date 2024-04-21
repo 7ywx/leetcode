@@ -97,6 +97,7 @@
 class Solution:
 
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        #TODO python备忘录到这
 
         # 创建一个空列表node_list，用于存储链表节点
         node_list = []
