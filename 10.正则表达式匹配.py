@@ -64,7 +64,7 @@
 # @lc code=start
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
-
+        #TODO 动态规划
         m, n = len(s) + 1, len(p) + 1
         dp = [[False] * n for _ in range(m)]
         dp[0][0] = True

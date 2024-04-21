@@ -80,6 +80,7 @@ class Solution:
                 print(f"{h}", end='\t')
             print("maxArea:", maxArea, "currentArea:", min(height[left], height[right]) * (right - left))
             print("\n-----------------------------------------------------------------")
+        #TODO 算法思想
         left, right, maxArea = 0, len(height) - 1, 0
         maxh = max(height)
         __print__()
