@@ -57,7 +57,7 @@
   - **heapq.heappushpop(heap, item)**:
     - 先将 `item` 推入堆 `heap` 中，然后立即弹出并返回堆中最小的元素。
 
-  - **heapq.heapify(iterable)**:
+  - ***heapq.heapify(iterable)***:
     - 把一个可迭代对象 `iterable` 转换成一个合法的堆结构。
 
   - **heapq.nsmallest(n, iterable[, key])**:
