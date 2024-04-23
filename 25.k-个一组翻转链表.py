@@ -68,12 +68,11 @@ class ListNode:
         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode], tail: Optional[ListNode]) -> Optional[ListNode]:
-        # 递归
         # 如果链表为空或只有一个节点，则直接返回头节点
         if head == tail:
             return head
         else:
-            # reverse_last: reverse链表尾部节点
+            # reverse_last: reverse链表倒数第二个节点
             reverse_last = head.next
             # 递归反转链表, reverse: 反转链表的头部节点
             reverse = self.reverseList(head.next, tail)
