@@ -72,6 +72,7 @@ class Solution:
         返回值:
         如果目标值存在于数组中，则返回其索引；否则返回-1。
         """
+        # v2 二分查找
         nums_len = len(nums) # 获取数组长度
 
         # 如果数组只有一个元素，直接判断是否为目标值，是则返回0，否则返回-1
@@ -95,7 +96,7 @@ class Solution:
                 left = mid + 1
         return -1 # 如果未找到目标值，返回-1
 
-        # 直接遍历数组，找到目标值并返回其索引
+        # v1 直接遍历数组，找到目标值并返回其索引
         for num in nums:
             if num == target:
                 return nums.index(num)
