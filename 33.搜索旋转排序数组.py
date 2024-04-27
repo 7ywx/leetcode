@@ -72,12 +72,6 @@ class Solution:
         返回值:
         如果目标值存在于数组中，则返回其索引；否则返回-1。
         """
-
-
-
-
-
-        # start = nums.index(min(nums))
         nums_len = len(nums) # 获取数组长度
 
         # 如果数组只有一个元素，直接判断是否为目标值，是则返回0，否则返回-1
