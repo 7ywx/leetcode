@@ -58,6 +58,7 @@
 # @lc code=start
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
+        # DP
         n = len(s)
         dp = [0] * n  # 初始化 DP 数组，存储以索引 i 结尾的最长有效括号子串的长度
         max_length = 0  # 记录最长有效括号子串的长度
@@ -74,6 +75,7 @@ class Solution:
 
         return max_length  # 返回最长有效括号子串的长度
 
+        # 栈
         # 初始化栈和有效性数组
         stack = []
         isValid = [False] * (len(s)) # 记录每个位置是否是合法的括号
