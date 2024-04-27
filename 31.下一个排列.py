@@ -69,6 +69,7 @@ from typing import List, Optional
 # @lc code=start
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
+        # TODO 算法思想
         """
         Do not return anything, modify nums in-place instead.
         1. 从后向前 查找第一个 相邻升序 的元素对 (i,j)，满足 A[i] < A[j]。此时 [j,end) 必然是降序
