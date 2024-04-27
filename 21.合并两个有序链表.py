@@ -58,6 +58,7 @@ class ListNode:
         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        #TODO 消化吸收
         # 双指针
         # 如果list1为空，则返回list2
         if not list1:
@@ -94,7 +95,6 @@ class Solution:
         # 返回结果链表的头节点
         return head.next
 
-        #TODO 递归的思路还是比较精彩的
         # 递归
         # 如果第一个链表为空，则直接返回第二个链表作为结果
         if not l1:

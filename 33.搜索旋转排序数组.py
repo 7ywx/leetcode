@@ -101,7 +101,7 @@ class Solution:
                 left = mid + 1
         return -1 # 如果未找到目标值，返回-1
 
-        # 直接遍历数组，找到目标值并返回其索引
+        # v1 直接遍历数组，找到目标值并返回其索引
         for num in nums:
             if num == target:
                 return nums.index(num)
