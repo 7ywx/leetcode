@@ -64,7 +64,7 @@
 # @lc code=start
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
-
+        # v3.0
         m, n = len(s) + 1, len(p) + 1
         dp = [[False] * n for _ in range(m)]
         dp[0][0] = True
@@ -88,6 +88,7 @@ class Solution:
         #     print()  # 在每行结束时换行
         return dp[-1][-1]
 
+        # v2.0
         # # 初始化一维数组，dp[j] 表示 s 的前 i 个字符是否与 p 的前 j 个字符匹配
         # dp = [False] * (len(p) + 1)
         # dp[0] = True
@@ -112,6 +113,7 @@ class Solution:
 
         # return dp[len(p)]
 
+        # v1.0
         # dp = [[False] * (len(p) + 1) for _ in range(len(s) + 1)] # 构建二维动态规划数组，dp[i][j] 表示 s 的前 i 个字符是否与 p 的前 j 个字符匹配
 
         # dp[0][0] = True # 空字符串与空模式匹配
@@ -138,31 +140,6 @@ class Solution:
         #     print()  # 在每行结束时换行
 
         # return dp[len(s)][len(p)]
-
-        # i, j = 0, 0
-        # while i < len(s) and j < len(p):
-        #     if s[i] == p[j] or p[j] == '.' and p[j+1] != '*':
-        #         i += 1
-        #         j += 1
-        #     elif p[j] == '*':
-        #         if p[j - 1] == s[i] or p[j - 1] == '.':
-        #             i += 1
-        #             j += 1
-        #         elif p[j - 1] != s[i] and p[j - 1] != '.': # 匹配0个，j往后
-        #             j += 1
-        #     else:
-        #         if p[j+1] == '*':
-        #             j += 2
-        #             continue
-        #         return False
-        # if i == len(s) and j == len(p):
-        #     return True
-        # elif i < len(s) and j == len(p):
-        #     return False
-        # elif i == len(s) and j < len(p):
-        #     while j < len(p) and p[j] == '*':
-        #         j += 1
-        #     return j == len(p)
 # @lc code=end
 solution = Solution()
 print(solution.isMatch(s = "aab", p = "c*a*b"))
