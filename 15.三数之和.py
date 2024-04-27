@@ -70,7 +70,6 @@ import bisect
 # @lc code=start
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        #TODO 算法思想
         count = Counter(nums) # 后续可以通过 count[num] 来快速获取某个元素 num 在列表中出现的次数
         st = sorted(count)  # 键由小到大排序(nums去重后排序)
         res=list()
