@@ -55,24 +55,39 @@ from typing import List, Optional
 # @lc code=start
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
+        """
+        寻找目标值在有序数组中的起始和结束索引。
+
+        参数:
+        nums: List[int] -- 有序整数列表。
+        target: int -- 目标值。
+
+        返回值:
+        List[int] -- 包含目标值起始和结束索引的列表，如果目标值不存在，则返回 [-1, -1]。
+        """
         nums_len = len(nums)
+        # 当数组为空时，直接返回 [-1, -1]
         if nums_len == 0:
             return [-1, -1]
         left = 0
         right = nums_len - 1
+        # 二分查找定位目标值所在区间
         while left <= right:
             mid = (left + right) // 2
             if nums[mid] < target:
                 left = mid + 1
             elif target < nums[mid]:
                 right = mid - 1
-            else: # nums[mid] == target
+            else: # 找到了目标值
+                # 确定目标值的起始索引
                 left, right = mid, mid
                 while left > 0 and nums[left - 1] == target:
                     left -= 1
+                # 确定目标值的结束索引
                 while right < nums_len - 1 and nums[right + 1] == target:
                     right += 1
                 return [left, right]
+        # 如果未找到目标值，返回 [-1, -1]
         return [-1, -1]
 # @lc code=end
 s = Solution()
