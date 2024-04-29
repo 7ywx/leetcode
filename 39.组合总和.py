@@ -67,7 +67,7 @@ class Solution:
         链接：https://leetcode.cn/problems/combination-sum/solutions/14697/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-2/
         来源：力扣（LeetCode）
         """
-        def dfs(candidates, begin, size, path, res, target):
+        def dfs(candidates, begin, size, path, target):
             if target < 0:
                 return
             if target == 0:
@@ -75,7 +75,7 @@ class Solution:
                 return
 
             for index in range(begin, size):
-                dfs(candidates, index, size, path + [candidates[index]], res, target - candidates[index])
+                dfs(candidates, index, size, path + [candidates[index]], target - candidates[index])
                 # Python3 的 [1, 2] + [3] 语法生成了新的列表，一层一层传到根结点以后，直接 res.append(path) 就可以了；
                 # 对于可变类型（如列表或字典），则情况较为复杂，因为它们在赋值操作时实际上是引用的复制，但在函数内部对内容进行修改仍可能影响到外部的变量。
         size = len(candidates)
@@ -83,7 +83,7 @@ class Solution:
             return []
         path = []
         res = []
-        dfs(candidates, 0, size, path, res, target)
+        dfs(candidates, 0, size, path, target)
         return res
 
         #TODO 列表的列表去重
