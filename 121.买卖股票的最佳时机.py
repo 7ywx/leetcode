@@ -52,61 +52,77 @@ from typing import List
 # @lc code=start
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        # 前缀最小值
-        minprice = int(1e5)
-        maxprofit = 0
+        # v2.1 前缀最小值 78ms 97%
+        minprice = int(1e5)  # 初始化最小价格为一个较大的数
+        maxprofit = 0  # 初始化最大利润为0
+
         for price in prices:
-            # maxprofit = max(price - minprice, maxprofit)
-            # minprice = min(minprice, price)
+            # 每天计算当前价格（当前卖出的价格）与之前最小价格的差值，与当前最大利润比较，取较大值。
             if price - minprice > maxprofit:
                 maxprofit = price - minprice
+            # 如果当前价格小于最小价格，则更新最小价格。
             if price < minprice:
                 minprice = price
-            print(f'maxprofit = {maxprofit}, minprice = {minprice}')
+
         return maxprofit
 
-        # n = len(prices)
-        # dp = [[0] * 2 for _ in range(n)]
-        # for i in range(n):
-        #     if i - 1 == -1:
-        #         # base case
-        #         dp[i][0] = 0
-        #         dp[i][1] = -prices[i]
-        #         continue
-        #     dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
-        #     dp[i][1] = max(dp[i - 1][1], -prices[i])
-        # return dp[n - 1][0]
+        # v1.2 动态规划 400ms 10%
+        n = len(prices)
+        # dp[i][0] 表示第i天持有股票时的最大利润。
+        # dp[i][1] 表示第i天不持有股票时的最大利润。
+        dp = [[0] * 2 for _ in range(n)]
 
-        # # 初始化利润为0，并创建一个字典用于存储每个位置后的最大价格
-        # profit = 0
-        # suffixMax = {}
-        # # 确保最后一个位置后的最大价格为0
-        # suffixMax[len(prices) - 1] = 0
-        # # 从倒数第二天开始向前遍历，计算每个位置后的最大价格
-        # for i in range(len(prices)-2, -1, -1):
-        #     if prices[i+1] > suffixMax[i+1]:
-        #         suffixMax[i] = prices[i+1]
-        #     else:
-        #         suffixMax[i] = suffixMax[i+1]
-        # # 重新初始化利润为0，然后遍历列表计算最大利润
-        # profit = 0
-        # for i in range(len(prices)-1):
-        #     if suffixMax[i] - prices[i] > profit:
-        #         profit = suffixMax[i] - prices[i]
-        # return profit
+        for i in range(n):
+            # 初始化第一天的持有和不持有股票的最大利润。
+            if i - 1 == -1:
+                dp[i][0] = 0
+                dp[i][1] = -prices[i]
+                continue
 
-        # profit = 0
-        # for i in range(len(prices)-1):
-        #     if max(prices[i+1:]) - prices[i] > profit:
-        #         profit = max(prices[i+1:]) - prices[i]
-        # return profit
+            # 计算每一天的最大利润。
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+            dp[i][1] = max(dp[i - 1][1], -prices[i])
 
-        # profit = 0
-        # for i in range(len(prices)):
-        #     for j in range(i+1, len(prices)):
-        #         if (prices[j] - prices[i]) > profit:
-        #             profit = prices[j] - prices[i]
-        # return profit
+        # 返回最后一天不持有股票时的最大利润。
+        return dp[n - 1][0]
+
+        # v2.0 后缀最大价格 190ms 30%
+        # 初始化利润为0，并创建一个字典用于存储每个位置后的最大价格
+        profit = 0
+        suffixMax = {}
+
+        # 确保最后一个位置后的最大价格为0
+        suffixMax[len(prices) - 1] = 0
+
+        # 从倒数第二天开始向前遍历，计算每个位置后的最大价格
+        for i in range(len(prices)-2, -1, -1):
+            if prices[i+1] > suffixMax[i+1]:
+                suffixMax[i] = prices[i+1]
+            else:
+                suffixMax[i] = suffixMax[i+1]
+
+        # 重新初始化利润为0，然后遍历列表计算最大利润
+        profit = 0
+        for i in range(len(prices)-1):
+            # 今天买入后，计算今天卖出的最大利润
+            if suffixMax[i] - prices[i] > profit:
+                profit = suffixMax[i] - prices[i]
+        return profit
+
+        # v1.1 暴力解法 200/212 未通过
+        profit = 0
+        for i in range(len(prices)-1):
+            if max(prices[i+1:]) - prices[i] > profit:
+                profit = max(prices[i+1:]) - prices[i]
+        return profit
+
+        # v1.0 暴力解法 199/212 未通过
+        profit = 0
+        for i in range(len(prices)):
+            for j in range(i+1, len(prices)):
+                if (prices[j] - prices[i]) > profit:
+                    profit = prices[j] - prices[i]
+        return profit
 # @lc code=end
 s = Solution()
 s.maxProfit([7,1,5,3,6,4])
