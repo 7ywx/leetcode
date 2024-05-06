@@ -69,14 +69,16 @@ class Solution:
         # 解法1：深拷贝
         nums_len = len(nums)
         temp = copy.deepcopy(nums)
+        # temp = nums[:]
         for i in range(nums_len):
             nums[(i+k)%nums_len] = temp[i]
 
         # 解法2：原地
 
+
         # 解法3：列表拼接实现轮转
         l = len(nums)
-        k = k % l
+        k = k % l # 减少不必要的旋转次数
         num1 = nums[0:l-k]
         num2 = nums[l-k::]
         num3 = num2 + num1
