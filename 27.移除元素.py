@@ -96,6 +96,7 @@ class Solution:
             使用 remove() 时，如果列表中没有该值，会抛出 ValueError。
             使用 pop() 时，如果索引超出了列表的范围，会抛出 IndexError。
         '''
+        # popIndex-pop
         n = len(nums)
         popIndex = []
         for i in range(n):
@@ -106,6 +107,7 @@ class Solution:
             nums.pop(i)
         return n
 
+        # count-remove
         n = len(nums)
         valNum = nums.count(val)
         for i in range(valNum):
