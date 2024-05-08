@@ -60,7 +60,9 @@ class Solution:
     def jump(self, nums: List[int]) -> int:
         # 官方题解
         n = len(nums)
-        maxPos, end, step = 0, 0, 0
+        maxPos = 0 # 记录当前能到达的最远位置
+        end = 0 # 记录当前位置的边界
+        step = 0 # 记录跳跃次数
         for i in range(n - 1):
             # maxPos = max(maxPos, i + nums[i])
             if i + nums[i] > maxPos:
