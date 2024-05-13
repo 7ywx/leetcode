@@ -65,18 +65,35 @@ from typing import List
 # @lc code=start
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        """
+        寻找最小的开始位置，使得从该位置开始能够遍历整个gas列表而不需要额外的燃料。
+
+        参数:
+        gas -- 一个整数列表，表示每个加油站提供的燃料量。
+        cost -- 一个整数列表，表示从一个加油站到下一个加油站所需的燃料成本。
+
+        返回值:
+        如果能找到一个位置，使得从该位置开始能够遍历整个gas列表，返回最小的开始位置索引；
+        如果不能完成遍历，返回-1。
+        """
+        # 计算每个加油站的剩余燃料，即提供的燃料量减去到该加油站的成本
         rest = [g - c for g, c in zip(gas, cost)]
+        # 如果所有加油站的剩余燃料总和小于0，表示无法遍历整个列表，返回-1
         if sum(rest) < 0:
             return -1
+        # 初始化油箱中的燃料量和开始位置
         tank = 0
         start = 0
+        # 遍历每个加油站的剩余燃料，累计油箱中的燃料量
         for i, r in enumerate(rest):
             tank += r
+            # 如果油箱中的燃料量小于0，说明从开始位置到当前位置的加油站无法遍历，更新开始位置
             if tank < 0:
                 tank = 0
                 start = i + 1
         return start
 
+        # # 暴力法 v1 超时
         # n = len(gas)
         # def check(i):
         #     tank = 0
