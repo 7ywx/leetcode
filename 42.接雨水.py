@@ -57,9 +57,9 @@ class Solution:
         post_max = 0
         while left < right:
             # pre_max = max(pre_max, height[left])
-            # post_max = max(post_max, height[right])
             if pre_max < height[left]:
                 pre_max = height[left]
+            # post_max = max(post_max, height[right])
             if post_max < height[right]:
                 post_max = height[right]
             if pre_max < post_max:
