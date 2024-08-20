@@ -63,7 +63,7 @@ class Solution:
         for i in range(len(strs[0])):
             # 对于后续每个字符串，检查当前字符是否与第一个字符串的对应字符相同
             for j in range(1, len(strs)):
-                # 如果当前字符串已经遍历完或者当前字符不匹配，则返回当前的最长公共前缀
+                # 如果已经超出当前字符串的长度或者当前字符不匹配，则返回当前的最长公共前缀
                 if i >= len(strs[j]) or strs[j][i] != strs[0][i]:
                     return ans
             # 如果所有字符串的当前字符都匹配，则将该字符添加到最长公共前缀中
