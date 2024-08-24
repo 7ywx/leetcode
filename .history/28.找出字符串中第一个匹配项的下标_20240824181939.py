@@ -70,19 +70,14 @@ class Solution:
             return 0
         next = [0] * len(needle)
         self.getNext(next, needle)
-        i = 0 # haystack的指针
-        j = 0 # needle的指针
-        while i < len(haystack):
+        j = 0
+        for i in range(len(haystack)):
+            while j > 0 and haystack[i] != needle[j]:
+                j = next[j - 1]
             if haystack[i] == needle[j]:
-                i += 1
                 j += 1
-                if j == len(needle):
-                    return i - j
-            else:
-                if j == 0:
-                    i += 1
-                else:
-                    j = next[j - 1]
+            if j == len(needle):
+                return i - len(needle) + 1
         return -1
 
         # return haystack.find(needle)
