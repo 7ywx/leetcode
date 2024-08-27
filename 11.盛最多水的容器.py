@@ -80,6 +80,8 @@ class Solution:
                 print(f"{h}", end='\t')
             print("maxArea:", maxArea, "currentArea:", min(height[left], height[right]) * (right - left))
             print("\n-----------------------------------------------------------------")
+
+        # 类似双指针，但是不是每次都移动指针，而是移动高度较小的指针，因为容器的容积取决于较小的高度。类似167题
         left, right, maxArea = 0, len(height) - 1, 0
         maxh = max(height)
         __print__()
