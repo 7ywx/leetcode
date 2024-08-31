@@ -85,7 +85,7 @@ class Solution:
 
                 # right为什么是-num//2? 答：st是递增的，如果j > -num//2 j就不是第二个数
                 right = bisect.bisect(st,-num//2,left) # -num//2: st中能使三数和为0的最大可能数(num + y + y = 0), right: st中第一个>num//2的索引
-                print(f"left = {left}, right = {right}")
+
                 for j in st[left:right]: # j是第二个数可能的范围
                     if (k:=-num-j) in count and k != j: # k存在且k != j (num+j+k=0，这里要找的是三个数都不一样的，所以要加上k!=j)
                         res.append([num,j,k])
