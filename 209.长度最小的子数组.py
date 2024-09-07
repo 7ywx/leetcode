@@ -76,6 +76,7 @@ class Solution:
         return bestResult if bestResult != float('inf') else 0
 # @lc code=end
 
+#标签 滑动窗口
 # 最长模版
 '''
 # 初始化指针和结果
