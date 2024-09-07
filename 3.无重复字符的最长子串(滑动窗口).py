@@ -70,43 +70,6 @@ class Solution:
                 break
             right += 1 # 移动右指针,尝试寻找更长的无重复字符子串
         return max_len
-
-        # left = 0
-        # max_len = 0
-        # for i in range(len(s)):
-        #     if s[i] in d and d[s[i]] >= left: #对于每个字符，我们首先判断它是否已经在哈希表中出现过，并且其最后一次出现的位置在left和当前位置之间
-        #         left = d[s[i]] + 1
-        #     d[s[i]] = i
-        #     max_len = max(max_len, i - left + 1)
-        # return max_len
-
-        # dic, res, i = {}, 0, -1
-        # for j in range(len(s)):
-        #     if s[j] in dic:
-        #         i = max(dic[s[j]], i) # 更新左指针 i
-        #     dic[s[j]] = j # 哈希表记录
-        #     res = max(res, j - i) # 更新结果
-        # return res
-
-        # # 初始化变量
-        # start = 0  # 滑动窗口的起始位置
-        # end = 0  # 滑动窗口的结束位置
-        # max_length = 0  # 记录最长子串的长度
-        # char_set = []  # 记录已经出现过的字
-        # # 遍历字符串
-        # while end < len(s):
-        #     # 如果当前字符已经出现过，移动窗口的起始位置到上一次出现的该字符的下一个位置
-        #     if s[end] in char_set:
-        #         max_length = max(max_length, end - start)
-        #         start += 1
-        #         char_set = [s[start]]
-        #         end = start + 1
-        #     else:
-        #         char_set.append(s[end])
-        #         max_length = max(max_length, end - start + 1)
-        #         end += 1
-        # #print(max_length)
-        # return max_length
 # @lc code=end
 s = "dvdf"
 s0 = "pwwkew"
