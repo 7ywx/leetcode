@@ -56,6 +56,7 @@ from collections import Counter
 # @lc code=start
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
+        # 给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
         result = []
         len_p, len_s = len(p), len(s)
 
