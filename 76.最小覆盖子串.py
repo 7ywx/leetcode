@@ -72,31 +72,82 @@ from typing import List
 from collections import Counter
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        #TODO 优化+注释
-        def judge(s_count, t_count) -> bool:
-            for k in t_count.keys():
-                if t_count[k] > s_count[k]:
-                    return False
-            return True
-        left, right, s_len = 0, len(t)-1, len(s)
-        min_left = 0
-        min_right = 0
-        min_len = s_len + 1
-        s_count = Counter(s[left:right+1])
-        t_count = Counter(t)
+        t = Counter(t)
+        s_len = len(s)
+        left, right, window, min_len = 0, 0, Counter(), s_len + 1
+        min_left, min_right = 0, s_len
+        less = len(t) # window（滑动窗口）有 less 种字母的出现次数 < t 中的字母出现次数
         while right < s_len:
-            if judge(s_count, t_count):
-                if min_len > right - left + 1:
-                    min_len = right - left + 1
+            window[s[right]] += 1
+            if window[s[right]] == t[s[right]]:
+                less -= 1
+
+            while less == 0: # window >= t
+                if right - left + 1 < min_len:
                     min_left = left
                     min_right = right
-                s_count[s[left]] -= 1
+                    min_len = right - left + 1
+
+                if window[s[left]] == t[s[left]]:
+                    less += 1
+                window[s[left]] -= 1
                 left += 1
-            else:
-                right += 1
-                if right < s_len:
-                    s_count[s[right]] += 1
-        return s[min_left:min_right+1] if min_len <= s_len else "" # min_len < s_len + 1
+
+            right += 1
+
+        return s[min_left:min_right+1] if min_len < s_len + 1 else ""
+
 # @lc code=end
 s = Solution()
-s.minWindow("ADOBECODEBANC", "ABC")
+print(s.minWindow("a", "a"))
+# 最长模版
+'''
+# 初始化指针和结果
+left, right, result, bestResult = 0, 0, 0, 0
+
+# 循环直到右指针到达结尾
+while (右指针没有到结尾):
+    # 窗口扩大，加入right对应元素，更新当前result
+    result += 加入元素(right)
+
+    # 检查当前result是否不满足要求
+    while (result不满足要求):
+        # 窗口缩小，移除left对应元素，left右移
+        result -= 移除元素(left)
+        left += 1
+
+    # 如果当前result更优，更新最佳结果
+    bestResult = max(bestResult, result)
+
+    # 右指针右移
+    right += 1
+
+# 返回最佳结果
+return bestResult
+'''
+
+# 最短模版
+'''
+# 初始化指针和结果
+left, right, result, bestResult = 0, 0, inf, inf
+
+# 循环直到右指针到达结尾
+while (右指针没有到结尾):
+    # 窗口扩大，加入right对应元素，更新当前result
+    result += 加入元素(right)
+
+    # 检查当前result是否满足要求
+    while (result满足要求):
+        # 如果当前result更优，更新最佳结果
+        bestResult = min(bestResult, result)
+
+        # 窗口缩小，移除left对应元素，left右移
+        result -= 移除元素(left)
+        left += 1
+
+    # 右指针右移
+    right += 1
+
+# 返回最佳结果
+return bestResult
+'''
