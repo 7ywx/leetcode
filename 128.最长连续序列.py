@@ -49,27 +49,36 @@ from collections import defaultdict
 # @lc code=start
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        # 将列表nums中的元素去除重复后，转换为排序后的列表，并存储为set_nums
-        set_nums = sorted(list(set(nums)))
-        # 初始化变量i为0
-        i = 0
-        # 初始化变量max_len为0，用于存储最长连续序列的长度
-        max_len = 0
-        # 循环遍历set_nums列表
-        while i < len(set_nums):
-            # 初始化变量sums为1
-            sums = 1
-            # 如果当前元素和下一个元素相差为1，则将sums加1，并将i加1
-            while i < len(set_nums)-1 and set_nums[i]+1 == set_nums[i+1]:
-                sums += 1
-                i += 1
-            # 如果sums大于max_len，则将max_len更新为sums
-            if sums > max_len:
-                max_len = sums
-            # 将i加1
-            i += 1
-        # 返回最长连续序列的长度
-        return max_len
+        # 哈希表
+        longest_streak = 0
+        num_set = set(nums)
+
+        for num in num_set:
+            if num - 1 not in num_set:
+                current_num = num
+                current_streak = 1
+
+                while current_num + 1 in num_set:
+                    current_num += 1
+                    current_streak += 1
+
+                longest_streak = max(longest_streak, current_streak)
+
+        return longest_streak
+
+        # 滑动窗口
+        nums = sorted(set(nums))
+        if len(nums) < 3:
+            return len(nums)
+        left, right = 0, 0
+        result = 0
+        while right < len(nums):
+            while right < len(nums) - 1 and nums[right] + 1 == nums[right + 1]:
+                right += 1
+            if right - left + 1 > result:
+                result = right - left + 1
+            left = right = right + 1
+        return result
 # @lc code=end
 solution = Solution()
 solution.longestConsecutive([100,4,200,0,3,2])
