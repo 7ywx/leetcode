@@ -55,7 +55,7 @@
 # @lc code=start
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        s = s.split()
+        s = s.split() # split方法用于根据指定的分隔符将字符串分割成多个子字符串，并返回一个列表
         if len(pattern) != len(s): return False
         fun = {}
         for i, j in zip(pattern, s):
