@@ -68,8 +68,6 @@ class Solution:
 
         # 滑动窗口
         nums = sorted(set(nums))
-        if len(nums) < 3:
-            return len(nums)
         left, right = 0, 0
         result = 0
         while right < len(nums):
@@ -81,4 +79,4 @@ class Solution:
         return result
 # @lc code=end
 solution = Solution()
-solution.longestConsecutive([100,4,200,0,3,2])
+solution.longestConsecutive([2,4])
