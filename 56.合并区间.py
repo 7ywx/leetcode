@@ -69,7 +69,6 @@ class Solution:
                 intervals_len -= 1
             else:
                 i += 1
-        # print(intervals)
         return intervals
 # @lc code=end
 solution = Solution()
