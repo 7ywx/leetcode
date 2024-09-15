@@ -49,27 +49,39 @@ from typing import List
 # @lc code=start
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        #TODO 优化
         intervals.sort(key=lambda x: x[0])
-        '''
-        list.sort(key=None, reverse=False)
 
-        key：可选参数，是一个函数，该函数将应用于列表中的每个元素，然后根据函数返回值对元素进行排序。
-        例如，如果你有一个包含元组的列表，你可以通过 key 参数指定按元组的第二个元素排序。
-
-        reverse：也是一个可选参数，布尔类型，默认为 False，表示升序排序。如果设置为 True，则会对列表进行降序排序。
-        '''
-        i = 0
-        intervals_len = len(intervals)
-        while i < intervals_len - 1:
-            if intervals[i][1] >= intervals[i + 1][0]:
-                if intervals[i][1] < intervals[i + 1][1]: # intervals[i][1] = max(intervals[i][1], intervals[i + 1][1])
-                    intervals[i][1] = intervals[i + 1][1]
-                intervals.pop(i + 1) # remove(x)：从列表中移除第一个出现的指定值的元素
-                intervals_len -= 1
+        merged = []
+        for interval in intervals:
+            # 如果列表为空，或者当前区间与上一区间不重合，直接添加
+            if not merged or merged[-1][1] < interval[0]:
+                merged.append(interval)
             else:
-                i += 1
-        return intervals
+                # 否则的话，我们就可以与上一区间进行合并
+                merged[-1][1] = max(merged[-1][1], interval[1])
+
+        return merged
+
+        # intervals.sort(key=lambda x: x[0])
+        # '''
+        # list.sort(key=None, reverse=False)
+
+        # key：可选参数，是一个函数，该函数将应用于列表中的每个元素，然后根据函数返回值对元素进行排序。
+        # 例如，如果你有一个包含元组的列表，你可以通过 key 参数指定按元组的第二个元素排序。
+
+        # reverse：也是一个可选参数，布尔类型，默认为 False，表示升序排序。如果设置为 True，则会对列表进行降序排序。
+        # '''
+        # i = 0
+        # intervals_len = len(intervals)
+        # while i < intervals_len - 1:
+        #     if intervals[i][1] >= intervals[i + 1][0]:
+        #         if intervals[i][1] < intervals[i + 1][1]: # intervals[i][1] = max(intervals[i][1], intervals[i + 1][1])
+        #             intervals[i][1] = intervals[i + 1][1]
+        #         intervals.pop(i + 1) # remove(x)：从列表中移除第一个出现的指定值的元素
+        #         intervals_len -= 1
+        #     else:
+        #         i += 1
+        # return intervals
 # @lc code=end
 solution = Solution()
 solution.merge([[1,3],[2,6],[8,10],[15,18]])
