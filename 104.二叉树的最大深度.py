@@ -57,7 +57,7 @@
 #         self.right = right
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        # dfs
+        # dfs 后序遍历（最后访问根）
         if not root:
             return 0
 
