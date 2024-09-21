@@ -57,6 +57,7 @@
 #         self.right = right
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
+        # dfs
         if not root:
             return 0
 
@@ -64,4 +65,17 @@ class Solution:
         right_depth = self.maxDepth(root.right)
 
         return max(left_depth, right_depth) + 1
+
+        # bfs
+        if not root: return 0
+        queue, res = [root], 0
+        while queue:
+            tmp = []
+            for node in queue:
+                if node.left: tmp.append(node.left)
+                if node.right: tmp.append(node.right)
+            queue = tmp
+            res += 1
+        return res
+
 # @lc code=end
