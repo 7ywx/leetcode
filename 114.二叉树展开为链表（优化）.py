@@ -70,6 +70,7 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
+        # 直接先根遍历得出先序遍历结果，再以此重构原来的二叉树
         preorderList = list()
         def preorderTraversal(root: TreeNode):
             if root:
@@ -84,18 +85,19 @@ class Solution:
             prev.left = None
             prev.right = curr
 
-        # # 自己写的
-        # def preorderTraversal(root: Optional[TreeNode]) -> List[int]:
-        #     if not root:
-        #         return []
-        #     return [root.val] + preorderTraversal(root.left) + preorderTraversal(root.right)
-        # res = preorderTraversal(root)
-        # for i in range(len(res)):
-        #     root.left = None
-        #     root.val = res[i]
-        #     if root.right:
-        #         root = root.right
-        #     elif i < len(res) - 1:
-        #         root.right = TreeNode()
-        #         root = root.right
+        # 直接先根遍历得出先序遍历结果，再以此重构原来的二叉树
+        def preorderTraversal(root: Optional[TreeNode]) -> List[int]:
+            if not root:
+                return []
+            return [root.val] + preorderTraversal(root.left) + preorderTraversal(root.right)
+        res = preorderTraversal(root)
+        cur = root
+        for i in range(len(res)):
+            cur.left = None
+            cur.val = res[i]
+            if cur.right:
+                cur = cur.right
+            elif i < len(res) - 1:
+                cur.right = TreeNode()
+                cur = cur.right
 # @lc code=end
