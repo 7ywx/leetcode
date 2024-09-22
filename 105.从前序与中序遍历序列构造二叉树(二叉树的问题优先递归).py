@@ -63,12 +63,26 @@ class TreeNode:
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        #标签 还是重要的递归思想
-        #TODO 迭代 更快的递归
+        def recur(root, left, right):
+            if left > right: return                               # 递归终止
+            node = TreeNode(preorder[root])                       # 建立根节点
+            i = dic[preorder[root]]                               # 划分根节点、左子树、右子树
+            node.left = recur(root + 1, left, i - 1)              # 开启左子树递归
+            # > **TIPS：** `i - left + root + 1`含义为 `根节点索引 + 左子树长度 + 1`
+            node.right = recur(i - left + root + 1, i + 1, right) # 开启右子树递归
+            return node                                           # 回溯返回根节点
+
+        dic, preorder = {}, preorder
+        for i in range(len(inorder)):
+            dic[inorder[i]] = i
+        return recur(0, 0, len(inorder) - 1)
+
+
+        #TODO 迭代
         if not preorder or not inorder:
             return None
         root = TreeNode(preorder[0], None, None)
-        root_index = inorder.index(root.val)
+        root_index = inorder.index(root.val) # 同时是左子树节点的个数
         root.left = self.buildTree(preorder[1:root_index+1], inorder[:root_index])
         root.right = self.buildTree(preorder[root_index+1:], inorder[root_index+1:])
         return root
