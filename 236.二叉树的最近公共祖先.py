@@ -94,15 +94,6 @@ class Solution:
         # 如果两个子树都没找到节点，则返回 None
         return left if left else right
 
-        # if not root or root == p or root == q:
-        #     return root
-        # left = self.lowestCommonAncestor(root.left, p, q)
-        # right = self.lowestCommonAncestor(root.right, p, q)
-        # if not left:
-        #     return right
-        # if not right:
-        #     return left
-        # return root
 # @lc code=end
 
 # 示例用法
