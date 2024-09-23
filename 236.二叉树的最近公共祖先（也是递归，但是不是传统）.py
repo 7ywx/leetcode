@@ -93,7 +93,6 @@ class Solution:
         # 如果只有一个子树找到了节点，则说明该节点是公共祖先
         # 如果两个子树都没找到节点，则返回 None
         return left if left else right
-
 # @lc code=end
 
 # 示例用法
