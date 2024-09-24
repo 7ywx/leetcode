@@ -59,3 +59,58 @@ public class Skiing {
         return maxPath;
     }
 }
+/*import java.util.Scanner;
+import static java.lang.Math.max;
+// 注意类名必须为 Main, 不要有任何 package xxx 信息
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        // 注意 hasNext 和 hasNextLine 的区别
+        while (in.hasNextInt()) { // 注意 while 处理多个 case
+            int a = in.nextInt();
+            int b = in.nextInt();
+
+            int [][] skiMap = new int[a][b];
+            for (int i = 0; i < b; i++){
+                for (int j = 0; j < a; j++){
+                    skiMap[i][j] = in.nextInt();
+                }
+            }
+
+            int longestPat = longestPath(skiMap);
+            System.out.println(longestPat);
+        }
+    }
+    public static int longestPath(int[][] skiMap){
+        if (skiMap == null || skiMap.length==0 || skiMap[0].length==0) return 0;
+
+        int rows = skiMap.length;
+        int cols = skiMap[0].length;
+        int [][] dp = new int[rows][cols];
+        for (int i = 0; i < rows;i++){
+            for(int j= 0;j<cols;j++){
+                dp[i][j] = 1;
+            }
+        }
+
+        for (int r = 0; r <rows;r++){
+            for(int c = 0; c<cols;c++){
+                for (int[] dir : new int[][]{{-1, 0}, {1,0}, {0,-1}, {0,1}}) {
+                    int nr = r + dir[0];
+                    int nc = c+dir[1];
+                    if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && skiMap[nr][nc] < skiMap[r][c]){
+                        dp[r][c] = Math.max(dp[r][c], dp[nr][nc] + 1);
+                    }
+                }
+            }
+        }
+        int max = 0;
+        for (int[] row : dp){
+            for (int length:row){
+                max = Math.max(max, length);
+            }
+        }
+        return max;
+
+    }
+} */
