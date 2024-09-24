@@ -60,7 +60,6 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        # 标签  BFS 层序遍历
         """
         算法流程：
             1. 特例处理： 当根节点为空，则返回空列表 [] 。
