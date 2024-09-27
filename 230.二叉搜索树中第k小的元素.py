@@ -63,19 +63,31 @@ class TreeNode:
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        #标签 中序遍历 迭代
+        # 递归
+        inorder = []
+        def dfs(root):
+            if root.left: dfs(root.left)
+            if root: inorder.append(root.val)
+            if root.right: dfs(root.right)
+        dfs(root)
+        return inorder[k-1]
+
+        # 迭代
         res = []
         stack = []
         i = 0
         while stack or root:
+            # 先访问最左节点
             while root:
                 stack.append(root)
                 root = root.left
+            # 再访问根
             root = stack.pop()
             res.append(root.val)
             i += 1
             if i == k:
                 return res[-1]
+            # 最后访问右节点
             root = root.right
 # @lc code=end
 def build_tree(nodes):
