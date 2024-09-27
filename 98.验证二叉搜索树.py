@@ -59,17 +59,53 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    #TODO 这三个
+    # 后序
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        #标签 二叉树的中序遍历（迭代）
-        res = [float('-inf')]  # 存储结果的列表
+        def dfs(node: Optional[TreeNode]) -> Tuple:
+            if node is None:
+                return inf, -inf
+            l_min, l_max = dfs(node.left)
+            r_min, r_max = dfs(node.right)
+            x = node.val
+            # 也可以在递归完左子树之后立刻判断，如果发现不是二叉搜索树，就不用递归右子树了
+            if x <= l_max or x >= r_min:
+                return -inf, inf
+            return min(l_min, x), max(r_max, x)
+        return dfs(root)[1] != inf
+
+    # 中序
+    pre = -inf
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if root is None:
+            return True
+        if not self.isValidBST(root.left) or root.val <= self.pre:
+            return False
+        self.pre = root.val
+        return self.isValidBST(root.right)
+
+    # 前序
+    def isValidBST(self, root: Optional[TreeNode], left=-inf, right=inf) -> bool:
+        if root is None:
+            return True
+        x = root.val
+        return left < x < right and \
+                self.isValidBST(root.left, left, x) and \
+                self.isValidBST(root.right, x, right)
+
+
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        # 二叉树的中序遍历（迭代）
+        # res = [float('-inf')]  # 存储结果的列表
+        res = float('-inf')
         stack = []  # 存储节点的栈
         while root or stack:  # 当根节点或栈不为空时
             while root:  # 当根节点不为空时
                 stack.append(root)  # 将根节点压入栈中
                 root = root.left  # 将根节点指向左子节点
             root = stack.pop()  # 弹出栈顶节点
-            if root.val > res[-1]:
-                res.append(root.val)  # 将节点的值添加到结果列表中
+            if root.val > res:
+                res = root.val  # 将节点的值添加到结果列表中
             else:
                 return False
             root = root.right  # 将根节点指向右子节点
