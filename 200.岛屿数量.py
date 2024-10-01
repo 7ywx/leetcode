@@ -65,13 +65,12 @@ def print_grid(grid: List[List[str]]) -> None:
 # @lc code=start
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        #TODO 优化
         res = 0
         n = len(grid)
         m = len(grid[0])
         def infect(x, y):
             if grid[x][y] == '1':
-                grid[x][y] = '-1'
+                grid[x][y] = '-1' # 防止重复感染
                 if x > 0:
                     infect(x-1, y)
                 if x < n-1:
