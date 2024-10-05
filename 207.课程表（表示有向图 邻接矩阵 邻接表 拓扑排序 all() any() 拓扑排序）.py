@@ -58,6 +58,24 @@ import collections
 # @lc code=start
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        def dfs(i, adjacency, flags):
+            if flags[i] == -1: return True
+            if flags[i] == 1: return False
+            flags[i] = 1
+            for j in adjacency[i]:
+                if not dfs(j, adjacency, flags): return False
+            flags[i] = -1
+            return True
+
+        adjacency = [[] for _ in range(numCourses)]
+        flags = [0 for _ in range(numCourses)] # 0: 未访问, 1: 正在访问, -1: 已访问
+        for cur, pre in prerequisites:
+            adjacency[pre].append(cur)
+        for i in range(numCourses):
+            if not dfs(i, adjacency, flags): return False
+        return True
+
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         # 标签 表示有向图 邻接矩阵 邻接表 拓扑排序 all() any()
         # 模板 拓扑排序
         """
@@ -79,7 +97,7 @@ class Solution:
         # 构造入度为0的课程列表
         indegreeZero = [i for i in range(numCourses) if indegree[i] == 0]
 
-        # 进行拓扑排序的过程
+        # BFS TopSort 进行拓扑排序的过程
         while indegreeZero:
             i = indegreeZero.pop()  # 当前入度为0的课程
             for j in adjacency.get(i, []):  # 获取当前课程的后继课程列表 (读完当前课程，后继课程入度-1)
