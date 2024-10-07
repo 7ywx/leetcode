@@ -121,7 +121,6 @@ class Solution:
                             q.append((nxt, step + 1))
                             print(f"q:{q}")
 
-
         # 如果搜索完所有可能的基因变异，仍然没有到达结束基因，返回-1
         return -1
 # @lc code=end
