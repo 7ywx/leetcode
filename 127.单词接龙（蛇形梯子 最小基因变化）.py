@@ -98,6 +98,4 @@ class Solution:
             # 这里增加步数
             step += 1
         return 0
-
-
 # @lc code=end
