@@ -45,17 +45,38 @@ from typing import List, Optional
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         #TODO 没有get到
-        def dfs(s, left, right, res):
+        res = []
+        def backtracking(stack, left, right, path):
             if left == 0 and right == 0:
-                res.append(s)
+                nonlocal res
+                res.append("".join(path[:]))
                 return
             if left > 0:
-                dfs(s + '(', left - 1, right, res)
-            if right > left:
-                dfs(s + ')', left, right - 1, res)
-        res = []
-        dfs('', n, n, res)
+                path.append("(")
+                stack.append("(")
+                backtracking(stack, left-1, right, path)
+                path.pop()
+                stack.pop()
+            if right > 0 and stack:
+                path.append(")")
+                stack.pop()
+                backtracking(stack, left, right-1, path)
+                path.pop()
+                stack.append("(")
+        backtracking([], n, n, [])
         return res
+
+        # def dfs(s, left, right, res):
+        #     if left == 0 and right == 0:
+        #         res.append(s)
+        #         return
+        #     if left > 0:
+        #         dfs(s + '(', left - 1, right, res)
+        #     if right > left:
+        #         dfs(s + ')', left, right - 1, res)
+        # res = []
+        # dfs('', n, n, res)
+        # return res
 # @lc code=end
 solution = Solution()
 print(solution.generateParenthesis(3))
