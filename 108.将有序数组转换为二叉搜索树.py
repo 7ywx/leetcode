@@ -57,6 +57,6 @@
 #         self.right = right
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-        #标签 递归 完全不会 得反复研究
+        #标签 递归
         return TreeNode(nums[n//2], self.sortedArrayToBST(nums[:n//2]), self.sortedArrayToBST(nums[n//2+1:])) if (n := len(nums)) > 0 else None
 # @lc code=end
