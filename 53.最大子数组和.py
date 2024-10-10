@@ -72,21 +72,19 @@ class Solution:
             if current_max > global_max: global_max = current_max
         return global_max
 
-        # for i in range(1, len(nums)):
-        #     if nums[i-1] > 0:
-        #         nums[i] = nums[i-1] + nums[i]
-        # return max(nums)
+        for i in range(1, len(nums)):
+            if nums[i-1] > 0:
+                nums[i] = nums[i-1] + nums[i]
+        return max(nums)
 
-        # # 动态规划
-        # dp = [0] * len(nums) # dp[i] 表示以 nums[i] 结尾的连续子数组的最大和。
-        # for i, num in enumerate(nums):
-        #     if i == 0:
-        #         dp[i] = num
-        #     else:
-        #         dp[i] = max(dp[i-1] + num, num) # 当前元素要么独立构成一个最大子数组（即只有它自己），要么与前面某个子数组连接形成一个新的最大子数组。
-        # # print(max(dp))
-        # print(dp)
-        # return max(dp)
+        # 动态规划
+        dp = [0] * len(nums) # dp[i] 表示以 nums[i] 结尾的连续子数组的最大和。
+        for i, num in enumerate(nums):
+            if i == 0:
+                dp[i] = num
+            else:
+                dp[i] = max(dp[i-1] + num, num) # 当前元素要么独立构成一个最大子数组（即只有它自己），要么与前面某个子数组连接形成一个新的最大子数组。
+        return max(dp)
 # @lc code=end
 solution = Solution()
 solution.maxSubArray([-2,1,-3,4,-1,2,1,-5,4])
