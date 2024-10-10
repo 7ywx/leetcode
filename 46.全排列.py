@@ -62,6 +62,22 @@ class Solution:
 
         返回值:### 参数传递的方式
         """
+
+        res = []
+        def backtracking(path, used): # 0:没用 1:用了
+            if len(path) == len(nums):
+                res.append(path[:])
+                return
+            for i in range(len(used)):
+                if used[i] == 0:
+                    path.append(nums[i])
+                    used[i] = 1
+                    backtracking(path, used)
+                    path.pop()
+                    used[i] = 0
+        backtracking([], [0] * len(nums))
+        return res
+
         # v2.1 40ms左右 #TODO 没理解
         def backtrack(first = 0):
             # 所有数都填完了
