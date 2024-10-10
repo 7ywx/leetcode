@@ -61,11 +61,25 @@
 #
 #
 from typing import List, Optional
+from collections import defaultdict
 # @lc code=start
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         def fund(target, i, j):
+            """
+            根据给定的目标值，在棋盘上搜索位置。
+
+            参数：
+            target -- 搜索的目标值
+            i -- 当前位置的行坐标
+            j -- 当前位置的列坐标
+
+            返回：
+            包含满足条件的位置坐标的列表
+            """
             res = []
+
+            # 当起始坐标为默认值时，在整个棋盘上搜索目标值的位置
             if i == -1 and j == -1:
                 for i in range(len(board)):
                     for j in range(len(board[0])):
@@ -73,6 +87,7 @@ class Solution:
                             res.append((i, j))
                 return res
             else:
+                # 当给定了具体的当前位置时，只搜索当前位置的上下左右四个方向
                 if i > 0 and board[i - 1][j] == target:
                     res.append((i - 1, j))
                 if j > 0 and board[i][j - 1] == target:
@@ -82,36 +97,7 @@ class Solution:
                 if j < len(board[0]) - 1 and board[i][j + 1] == target:
                     res.append((i, j + 1))
                 return res
-        # def near(i, j, target):
-        #     res = []
-        #     if i > 0 and board[i - 1][j] == target:
-        #         res.append((i - 1, j))
-        #     if j > 0 and board[i][j - 1] == target:
-        #         res.append((i, j - 1))
-        #     if i < len(board) - 1 and board[i + 1][j] == target:
-        #         res.append((i + 1, j))
-        #     if j < len(board[0]) - 1 and board[i][j + 1] == target:
-        #         res.append((i, j + 1))
-        #     return res
         def dfs(i, j, k):
-            # if k == 0:
-            #     first = fund(word[k])
-            #     if not first:
-            #         return False
-            #     for x, y in first:
-            #         board[x][y] = '#'
-            #         if not dfs(x, y, k + 1):
-            #             board[x][y] = word[k]
-            # elif k < len(word):
-            #     near = near(i, j, word[k])
-            #     if not near:
-            #         return False
-            #     for x, y in near:
-            #         board[x][y] = '#'
-            #         if not dfs(x, y, k + 1):
-            #             board[x][y] = word[k]
-            # elif k == len(word):
-            #     return True
             if k == len(word):
                 return True
             else:
@@ -119,19 +105,15 @@ class Solution:
                 if not near:
                     return False
                 for x, y in near:
-                    board[x][y] = '#'
+                    board[x][y] = '#' # （x,y）标记为已使用
                     if dfs(x, y, k + 1):
                         return True
-                    board[x][y] = word[k]
-                    # board[x][y] = '#'
-                    # if dfs(x, y, k + 1):
-                    #     return True
-                    # board[x][y] = word[k]
+                    board[x][y] = word[k] # 回溯
                 return False
         return dfs(-1, -1, 0)
 
 # @lc code=end
 s = Solution()
-# print(s.exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED"))
-# print(s.exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "SEE"))
+print(s.exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED"))
+print(s.exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "SEE"))
 print(s.exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCB"))
