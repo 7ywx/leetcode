@@ -111,40 +111,40 @@ class Solution:
             cur = cur.next  # 准备合并下一个节点
         return dummy.next  # 哨兵节点的下一个节点就是新链表的头节点
 
-        # # 如果列表为空，则返回None
-        # if not lists:
-        #     return None
-        # # 合并两个链表的函数
-        # def merge(l1: ListNode, l2: ListNode) -> ListNode:
-        #     # 创建一个虚拟节点作为合并后的链表的头节点
-        #     dummy = ListNode()
-        #     # 定义当前节点为虚拟节点
-        #     cur = dummy
-        #     # 当两个链表都不为空时，进行循环合并
-        #     while l1 and l2:
-        #         # 如果l1节点的值小于l2节点的值，则将l1节点添加到合并后的链表中，并将l1指针后移
-        #         if l1.val < l2.val:
-        #             cur.next = l1
-        #             l1 = l1.next
-        #         # 否则将l2节点添加到合并后的链表中，并将l2指针后移
-        #         else:
-        #             cur.next = l2
-        #             l2 = l2.next
-        #         # 将当前节点指针后移
-        #         cur = cur.next
-        #     # 如果l1链表不为空，则将剩余的节点添加到合并后的链表中
-        #     if l1:
-        #         cur.next = l1
-        #     # 如果l2链表不为空，则将剩余的节点添加到合并后的链表中
-        #     else:
-        #         cur.next = l2
-        #     # 返回合并后的链表的头节点
-        #     return dummy.next
-        # # 将第一个链表赋值给res
-        # res = lists[0]
-        # # 遍历剩余的链表，依次将每个链表与res合并
-        # for i in range(1, len(lists)):
-        #     res = merge(res, lists[i])
-        # # 返回合并后的链表
-        # return res
+        # 如果列表为空，则返回None
+        if not lists:
+            return None
+        # 合并两个链表的函数
+        def merge(l1: ListNode, l2: ListNode) -> ListNode:
+            # 创建一个虚拟节点作为合并后的链表的头节点
+            dummy = ListNode()
+            # 定义当前节点为虚拟节点
+            cur = dummy
+            # 当两个链表都不为空时，进行循环合并
+            while l1 and l2:
+                # 如果l1节点的值小于l2节点的值，则将l1节点添加到合并后的链表中，并将l1指针后移
+                if l1.val < l2.val:
+                    cur.next = l1
+                    l1 = l1.next
+                # 否则将l2节点添加到合并后的链表中，并将l2指针后移
+                else:
+                    cur.next = l2
+                    l2 = l2.next
+                # 将当前节点指针后移
+                cur = cur.next
+            # 如果l1链表不为空，则将剩余的节点添加到合并后的链表中
+            if l1:
+                cur.next = l1
+            # 如果l2链表不为空，则将剩余的节点添加到合并后的链表中
+            else:
+                cur.next = l2
+            # 返回合并后的链表的头节点
+            return dummy.next
+        # 将第一个链表赋值给res
+        res = lists[0]
+        # 遍历剩余的链表，依次将每个链表与res合并
+        for i in range(1, len(lists)):
+            res = merge(res, lists[i])
+        # 返回合并后的链表
+        return res
 # @lc code=end
