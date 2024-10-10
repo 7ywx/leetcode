@@ -64,31 +64,14 @@ class ListNode:
         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # # 迭代
-        # # 如果链表为空或只有一个节点，则直接返回头节点
-        # if not head or not head.next:
-        #     return head
-
-        # # 初始化指针
-        # p_head = head  # 1
-        # p_next = p_head.next  # 2
-        # p_next_next = p_next.next  # 3
-
-        # # 初始链表反转，将head.next = None
-        # p_next.next = p_head  # 2 -> 1
-        # p_head = p_next  # 2
-        # p_next = p_next_next  # 3
-        # head.next = None
-
-        # # 循环反转链表
-        # while p_next:
-        #     p_next_next = p_next.next  # 4
-        #     p_next.next = p_head  # 3 -> 2
-        #     p_head = p_next  # 3
-        #     p_next = p_next_next  # 4
-
-        # # 返回反转后的头节点
-        # return p_head
+        # 迭代
+        cur, pre = head, None
+        while cur:
+            tmp = cur.next # 暂存后继节点 cur.next
+            cur.next = pre # 修改 next 引用指向
+            pre = cur      # pre 暂存 cur
+            cur = tmp      # cur 访问下一节点
+        return pre
 
         # 递归
         # 如果链表为空或只有一个节点，则直接返回头节点
