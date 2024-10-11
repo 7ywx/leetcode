@@ -70,6 +70,19 @@ class Solution:
         返回值:
         布尔值，如果s可以由字典中的单词组成，则返回True；否则返回False。
         """
+        wordDict = set(wordDict)
+        trueList = []
+
+        for i in range(len(s)):
+            if s[:i+1] in wordDict:
+                trueList.append(i)
+            elif trueList:
+                for t in trueList:
+                    if s[t+1: i+1] in wordDict:
+                        trueList.append(i)
+                        break
+        return trueList[-1]==len(s)-1 if trueList else False
+
         dp = [False] * (len(s) + 1) # 初始化动态规划数组，dp[i]表示s[0:i]是否可以由wordDict中的单词组成
         dp[0] = True # 空字符串可以由字典中的单词组成
         for i in range(1, len(s) + 1):
