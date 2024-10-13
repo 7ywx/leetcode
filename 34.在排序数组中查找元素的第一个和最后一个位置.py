@@ -65,10 +65,6 @@ class Solution:
         返回值:
         List[int] -- 包含目标值起始和结束索引的列表，如果目标值不存在，则返回 [-1, -1]。
         """
-        nums_len = len(nums)
-        # 当数组为空时，直接返回 [-1, -1]
-        if nums_len == 0:
-            return [-1, -1]
         left = 0
         right = nums_len - 1
         # 二分查找定位目标值所在区间
