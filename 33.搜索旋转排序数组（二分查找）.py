@@ -72,6 +72,27 @@ class Solution:
         返回值:
         如果目标值存在于数组中，则返回其索引；否则返回-1。
         """
+        # v3 一次二分
+        if not nums:
+            return -1
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[0] <= nums[mid]: # mid与nums[0]在同一个递增段
+                if nums[0] <= target < nums[mid]:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+            else: # mid与nums[-1]在同一个递增段
+                if nums[mid] < target <= nums[-1]:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+        return -1
+
+        # v2 找到旋转点 再二分查找
         nums_len = len(nums) # 获取数组长度
 
         # 如果数组只有一个元素，直接判断是否为目标值，是则返回0，否则返回-1
