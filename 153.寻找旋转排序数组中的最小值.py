@@ -70,7 +70,6 @@ from typing import List
 # @lc code=start
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        #标签 二分查找
         left, right = 0, len(nums) - 1
         while left < right: # 区间不为空
             mid = left + (right - left) // 2
@@ -79,15 +78,6 @@ class Solution:
             else:
                 left = mid + 1
         return nums[left]
-
-        # res = nums[0]
-        # for i in range(1, len(nums)):
-        #     if nums[i] < res:
-        #         res = nums[i]
-        #         break
-        # return res
-
-        # return min(nums)
 # @lc code=end
 def printStation(nums, l, r):
     nums_len = len(nums)
