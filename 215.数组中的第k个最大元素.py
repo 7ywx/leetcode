@@ -44,11 +44,35 @@
 #
 #
 #
-
+from typing import List
+import random
 # @lc code=start
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        #TODO 快速选择算法
+        # 快速选择算法
+        def quick_select(nums, k):
+            # 随机选择基准数
+            pivot = random.choice(nums)
+            big, equal, small = [], [], []
+            # 将大于、小于、等于 pivot 的元素划分至 big, small, equal 中
+            for num in nums:
+                if num > pivot:
+                    big.append(num)
+                elif num < pivot:
+                    small.append(num)
+                else:
+                    equal.append(num)
+            if k <= len(big):
+                # 第 k 大元素在 big 中，递归划分
+                return quick_select(big, k)
+            if len(nums) - len(small) < k:
+                # 第 k 大元素在 small 中，递归划分
+                return quick_select(small, k - len(nums) + len(small))
+            # 第 k 大元素在 equal 中，直接返回 pivot
+            return pivot
+
+        return quick_select(nums, k)
+
 
         # return heapq.nlargest(k, nums)[-1]
 
@@ -64,3 +88,57 @@ class Solution:
         # 堆顶是最小的那个，即第 k 个最大元素
         return pq[0]
 # @lc code=end
+# nums = [5,3,6,4,1,2,8,7]
+# def QuickSort(num):
+#  if len(num) <= 1: #边界条件
+#   return num
+#  key = num[0] #取数组的第一个数为基准数
+#  llist,rlist,mlist = [],[],[key] #定义空列表，分别存储小于/大于/等于基准数的元素
+#  for i in range(1,len(num)): #遍历数组，把元素归类到3个列表中
+#   if num[i] > key:
+#    rlist.append(num[i])
+#   elif num[i] < key:
+#    llist.append(num[i])
+#   else:
+#    mlist.append(num[i])
+#  return QuickSort(llist)+mlist+QuickSort(rlist) #对左右子列表快排，拼接3个列表并返回
+# print(QuickSort(nums))
+
+def quick_sort_hoare(arr, low, high):
+    if low < high:
+        # Partition the array and get the pivot index
+        pi = partition_hoare(arr, low, high)
+
+        # Recursively sort elements before and after partition
+        quick_sort_hoare(arr, low, pi)
+        quick_sort_hoare(arr, pi + 1, high)
+
+def partition_hoare(arr, low, high):
+    # Choose the middle element as pivot
+    pivot = arr[random.randint(low, high)] # arr[(low + high) // 2]
+    i = low - 1
+    j = high + 1
+
+    while True:
+        # Move i to the right until finding an element that is greater than or equal to the pivot
+        i += 1
+        while arr[i] < pivot:
+            i += 1
+
+        # Move j to the left until finding an element that is less than or equal to the pivot
+        j -= 1
+        while arr[j] > pivot:
+            j -= 1
+
+        # If the pointers have crossed, partitioning is done
+        if i >= j:
+            return j
+
+        # Swap elements at i and j
+        arr[i], arr[j] = arr[j], arr[i]
+
+# 示例数组
+example_array = [10, 7, 8, 9, 1, 5]
+# 调用快速排序函数
+quick_sort_hoare(example_array, 0, len(example_array) - 1)
+print("Sorted array:", example_array)
