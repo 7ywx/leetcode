@@ -55,7 +55,7 @@
 #
 #
 #
-
+from functools import reduce
 # @lc code=start
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
@@ -74,5 +74,10 @@ class Solution:
         只出现一次的元素是 3，其他元素都出现了两次，因此最终结果是 3。
         这就是为什么利用异或运算可以找出数组中只出现一次的元素的原因。
         """
+        ans = nums[0]
+        for i in range(1, len(nums)):
+            ans = ans ^ nums[i]
+        return ans
+
         return reduce(lambda x, y: x ^ y, nums)
 # @lc code=end
