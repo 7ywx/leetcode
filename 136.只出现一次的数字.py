@@ -59,7 +59,8 @@
 # @lc code=start
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        #TODO 用逻辑运算符表示异或
+        # 用逻辑运算符表示异或
+        # （a & not b) or (not a & b)
         """
         异或运算的性质：
             - 任何数和自身异或都等于 0，即 a ⊕ a = 0。
