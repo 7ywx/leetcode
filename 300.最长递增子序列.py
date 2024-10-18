@@ -63,6 +63,17 @@ from typing import List
 # @lc code=start
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
+        # 自己写的
+        dp = [1] * len(nums)
+        for i in range(1, len(nums)):
+            maxLen = 1
+            for j in range(i-1, -1, -1):
+                if nums[j] < nums[i] and dp[j] + 1 > maxLen:
+                    maxLen = dp[j] + 1
+            dp[i] = maxLen
+        return max(dp)
+
+
         n = len(nums)
         dp = [1] * n  # 创建一个长度为n的数组，用于存储以每个元素为结尾的最长递增子序列的长度，初始值都为1
 
@@ -73,5 +84,5 @@ class Solution:
         return max(dp)  # 返回dp数组中的最大值，即最长递增子序列的长度
 # @lc code=end
 s = Solution()
-# print(s.lengthOfLIS([10,9,2,5,3,7,101,18]))
-print(s.lengthOfLIS([0,1,0,3,2,3]))
+print(s.lengthOfLIS([10,9,2,5,3,7,101,18]))
+# print(s.lengthOfLIS([0,1,0,3,2,3]))
