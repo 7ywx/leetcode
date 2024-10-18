@@ -56,6 +56,21 @@ from typing import List
 # @lc code=start
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
+        # 自己写的
+        if amount == 0: return 0
+        dp = [-1] * amount
+        for i in range(len(dp)):
+            if i+1 in coins:
+                dp[i] = 1
+            else:
+                minCoin = float('inf')
+                for c in coins:
+                    if -1 < i - c < len(dp):
+                        if dp[i-c] + 1 < minCoin:
+                            minCoin = dp[i-c] + 1
+                dp[i] = minCoin
+        return dp[-1] if dp[-1] != float('inf') else -1
+
         dp = [0] + [amount+1] * amount # dp[i]表示凑成i所需要的最小硬币数, amount+1表示不可达状态
         for i in range(1, amount+1):
             for coin in coins:
