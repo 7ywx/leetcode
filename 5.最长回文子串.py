@@ -48,6 +48,24 @@
 # @lc code=start
 class Solution:
     # TODO v4
+    # 正序
+    def longestPalindrome(self, s: str) -> str:
+        # dp
+        ans = 1 # 记录最长回文子串的长度
+        start = 0 # 最长回文子串的起始位置
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+
+        for right in range(n):
+            for left in range(right, -1, -1):
+                if right - left > 2: # right - left + 1 > 3 子串长度大于3
+                    dp[left][right] = s[left] == s[right] and dp[left+1][right-1]
+                else:
+                    dp[left][right] = s[left] == s[right]
+                if dp[left][right] and right - left + 1 > ans:
+                    ans = right - left + 1
+                    start = left
+        return s[start:start+ans]
     def longestPalindrome(self, s: str) -> str:
         if len(s) < 2:
             return s
@@ -168,4 +186,4 @@ class Solution:
         return ans  # 返回答案
 # @lc code=end
 solution = Solution()
-solution.longestPalindrome("babad")
+solution.longestPalindrome("aaaaa")
