@@ -74,7 +74,7 @@ class Solution:
 
         for i in range(n):
             # 初始化第一天的持有和不持有股票的最大利润。
-            if i - 1 == -1:
+            if i == 0:
                 dp[i][0] = 0
                 dp[i][1] = -prices[i]
                 continue
@@ -96,6 +96,7 @@ class Solution:
 
         # 从倒数第二天开始向前遍历，计算每个位置后的最大价格
         for i in range(len(prices)-2, -1, -1):
+            # 如果当前位置后的最大价格小于等于前一个位置后的最大价格，则当前位置后的最大价格等于前一个位置后的最大价格
             if prices[i+1] > suffixMax[i+1]:
                 suffixMax[i] = prices[i+1]
             else:
