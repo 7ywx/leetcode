@@ -71,4 +71,5 @@ def plot_newton_iterations(number, guesses):
 # 示例用法
 number = 98
 guesses = sqrt_newton_method(number)
-plot_newton_iterations(number, guesses)
+# plot_newton_iterations(number, guesses)
+print(guesses)
