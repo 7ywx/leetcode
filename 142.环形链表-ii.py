@@ -83,7 +83,7 @@ class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # https://leetcode.cn/problems/linked-list-cycle-ii/solutions/12616/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/?envType=study-plan-v2&envId=top-100-liked
 
-        # 找环的入口
+        # 快慢指针
         slow = head
         fast = head
 
@@ -99,5 +99,18 @@ class Solution:
                     fast = fast.next
                 return slow
         # 未相交
+        return None
+
+        # 集合法
+        visited = set()
+        cur = head
+        while cur:
+            if cur not in visited:
+                visited.add(cur)
+            else:
+                return cur
+
+            cur = cur.next
+
         return None
 # @lc code=end
