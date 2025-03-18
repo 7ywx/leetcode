@@ -70,6 +70,48 @@ import bisect
 # @lc code=start
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # 双指针
+        # 对数组进行排序，以便后续使用双指针技术
+        nums.sort()
+        # 初始化答案列表，用于存储满足条件的三元组
+        ans = []
+
+        # 遍历排序后的数组，寻找所有不重复的三元组，其和为零
+        for i in range(len(nums)):
+
+            # 如果当前数字大于零，则三数之和一定大于零，结束循环
+            if nums[i] > 0:
+                break
+            # 如果当前元素与前一个元素相同，跳过此元素，避免重复的三元组出现
+            if i > 0 and nums[i-1] == nums[i]:
+                continue
+            # 初始化双指针，left指向i后的第一个位置，right指向数组的最后一个位置
+            left, right = i + 1, len(nums) - 1
+
+            # 当left小于right时，执行循环，寻找和为零的三元组
+            while left < right:
+                # 如果三数之和小于零，移动left指针，使总和增加
+                if nums[i] + nums[left] + nums[right] < 0:
+                    left += 1
+                # 如果三数之和大于零，移动right指针，使总和减少
+                elif nums[i] + nums[left] + nums[right] > 0:
+                    right -= 1
+                else:
+                    # 找到和为零的三元组，添加到答案列表中
+                    ans.append([nums[i], nums[left], nums[right]])
+                    # 移动left指针，直到遇到不同的元素，避免重复的三元组
+                    while left < right and nums[left] == nums[left+1]:
+                        left += 1
+                    # 移动right指针，直到遇到不同的元素，避免重复的三元组
+                    while left < right and nums[right-1] == nums[right]:
+                        right -= 1
+                    # 在找到三元组后，同时移动双指针，继续寻找下一组可能的三元组
+                    left += 1
+                    right -= 1
+        # 返回所有找到的不重复的三元组
+        return ans
+
+        # 哈希法
         count = Counter(nums) # 后续可以通过 count[num] 来快速获取某个元素 num 在列表中出现的次数
         st = sorted(count)  # 键由小到大排序(nums去重后排序)
         res = []
@@ -92,5 +134,6 @@ class Solution:
         return res
 # @lc code=end
 solution = Solution()
-print(solution.threeSum([-1,0,1]))
+print(solution.threeSum([-1,0,1,2,-1,-4]))
+
 # solution.threeSum([0,1,1])
