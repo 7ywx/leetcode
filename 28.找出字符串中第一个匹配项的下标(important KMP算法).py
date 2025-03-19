@@ -49,27 +49,29 @@
 from typing import List
 # @lc code=start
 class Solution:
-    def getNext(self, next: List[int], s: str) -> None:
+    def buildNext(self, s: str) -> List[int]:
         #标签 next数组 KMP算法
-        prefix_len = 0
+        next = [0]
+        prefix_len = 0 # 当前共同前后缀长度
         i = 1
+        # ABACABAB
         while i < len(s):
             if s[i] == s[prefix_len]:
                 prefix_len += 1
-                next[i] = prefix_len
+                next.append(prefix_len)
                 i += 1
             else:
                 if prefix_len == 0:
-                    next[i] = 0
+                    next.append(0)
                     i += 1
                 else:
                     prefix_len = next[prefix_len - 1]
             # print(f"next_{i} = {next}")
+        return next
     def strStr(self, haystack: str, needle: str) -> int:
         if len(needle) == 0:
             return 0
-        next = [0] * len(needle)
-        self.getNext(next, needle)
+        next = self.buildNext(needle)
         i = 0 # haystack的指针
         j = 0 # needle的指针
         while i < len(haystack):
@@ -77,7 +79,7 @@ class Solution:
                 i += 1
                 j += 1
                 if j == len(needle):
-                    return i - j
+                    return i - j # 匹配成功，返回主串匹配的下标
             else:
                 if j == 0:
                     i += 1
