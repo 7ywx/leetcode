@@ -65,7 +65,7 @@ class Solution:
         max_queue = deque() # 存储的是索引，始终保持队列左边第一个的元素是最大值
 
         for i, num in enumerate(nums): # i是滑动窗口的右边界
-            # 删除队列中小于当前元素的元素
+            # 删除队列中小于当前元素的元素 维持单调递减
             while max_queue and nums[max_queue[-1]] < num:
                 max_queue.pop()
             print("删除队列中小于当前元素的元素:", max_queue)
