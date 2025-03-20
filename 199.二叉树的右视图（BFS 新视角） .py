@@ -61,6 +61,9 @@
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         """
+        思路：
+        序遍历的时候，判断是否遍历到单层的最后面的元素，如果是，就放进result数组中，随后返回result就可以了。
+
         算法流程：
             1. 特例处理： 当根节点为空，则返回空列表 [] 。
             2. 初始化： 结果列表 res = [] ，包含根节点的队列 queue = [root] 。
