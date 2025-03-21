@@ -59,7 +59,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    #TODO 这三个
+    # 中序遍历得到数组，判断是不是严格单调递增
+
     # 后序
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         def dfs(node: Optional[TreeNode]) -> Tuple:
