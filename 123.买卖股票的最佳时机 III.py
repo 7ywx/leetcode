@@ -87,6 +87,7 @@ class Solution:
             dp2 = max(dp2, dp1 + prices[i])
             dp3 = max(dp3, dp2 - prices[i])
             dp4 = max(dp4, dp3 + prices[i])
+            print(dp1, dp2, dp3, dp4)
         return dp4
 
 
@@ -102,7 +103,7 @@ class Solution:
         return dp[-1][4]
 
 # @lc code=end
-
+Solution().maxProfit([3,2,6,5,0,3])
 
 
 #

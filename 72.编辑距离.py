@@ -1,4 +1,4 @@
-#
+ #
 # @lc app=leetcode.cn id=72 lang=python3
 #
 # [72] 编辑距离
@@ -76,5 +76,8 @@ class Solution:
                 else:
                     # 从dp[i-1][j]（删除）、dp[i][j-1]（插入）、dp[i-1][j-1]（替换）
                     dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
+        for row in dp:
+            print(row)
         return dp[-1][-1]
 # @lc code=end
+Solution().minDistance("horse", "ros")

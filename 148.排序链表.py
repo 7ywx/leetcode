@@ -66,76 +66,94 @@ class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         #TODO 自底向上归并排序
         # 自顶向下归并排序
-        def sortFunc(head: ListNode, tail: ListNode) -> ListNode:
-            """
-            找到链表的中点，以中点为分界，将链表拆分成两个子链表。
-            寻找链表的中点可以使用快慢指针的做法，
-            快指针每次移动 2 步，慢指针每次移动 1 步，
-            当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
-            :param head: 链表的头节点
-            :param tail: 链表的尾节点
-            :return: 排序后的链表的头节点
-            """
-            if not head:
-                return head
-            if head.next == tail:
-                head.next = None
-                return head
-            slow = fast = head
-            while fast != tail:
-                slow = slow.next
-                fast = fast.next
-                if fast != tail:
-                    fast = fast.next
-            mid = slow
-            return merge(sortFunc(head, mid), sortFunc(mid, tail))
+        if not head or not head.next: return head # termination.
+        # cut the LinkedList at the mid index.
+        slow, fast = head, head.next
+        while fast and fast.next:
+            fast, slow = fast.next.next, slow.next
+        mid, slow.next = slow.next, None # save and cut.
+        # recursive for cutting.
+        left, right = self.sortList(head), self.sortList(mid)
+        # merge `left` and `right` linked list and return it.
+        h = res = ListNode(0)
+        while left and right:
+            if left.val < right.val: h.next, left = left, left.next
+            else: h.next, right = right, right.next
+            h = h.next
+        h.next = left if left else right
+        return res.next
 
-        def merge(head1: ListNode, head2: ListNode) -> ListNode:
-            """
-            合并两个有序链表的函数
-            :param head1: 第一个有序链表的头节点
-            :param head2: 第二个有序链表的头节点
-            :return: 合并后的有序链表的头节点
-            """
-            dummyHead = ListNode(0)
-            temp, temp1, temp2 = dummyHead, head1, head2
-            while temp1 and temp2:
-                if temp1.val <= temp2.val:
-                    temp.next = temp1
-                    temp1 = temp1.next
-                else:
-                    temp.next = temp2
-                    temp2 = temp2.next
-                temp = temp.next
-            if temp1:
-                temp.next = temp1
-            elif temp2:
-                temp.next = temp2
-            return dummyHead.next
 
-        return sortFunc(head, None)
+        # def sortFunc(head: ListNode, tail: ListNode) -> ListNode:
+        #     """
+        #     找到链表的中点，以中点为分界，将链表拆分成两个子链表。
+        #     寻找链表的中点可以使用快慢指针的做法，
+        #     快指针每次移动 2 步，慢指针每次移动 1 步，
+        #     当快指针到达链表末尾时，慢指针指向的链表节点即为链表的中点。
+        #     :param head: 链表的头节点
+        #     :param tail: 链表的尾节点
+        #     :return: 排序后的链表的头节点
+        #     """
+        #     if not head:
+        #         return head
+        #     if head.next == tail:
+        #         head.next = None
+        #         return head
+        #     slow = fast = head
+        #     while fast != tail:
+        #         slow = slow.next
+        #         fast = fast.next
+        #         if fast != tail:
+        #             fast = fast.next
+        #     mid = slow
+        #     return merge(sortFunc(head, mid), sortFunc(mid, tail))
+
+        # def merge(head1: ListNode, head2: ListNode) -> ListNode:
+        #     """
+        #     合并两个有序链表的函数
+        #     :param head1: 第一个有序链表的头节点
+        #     :param head2: 第二个有序链表的头节点
+        #     :return: 合并后的有序链表的头节点
+        #     """
+        #     dummyHead = ListNode(0)
+        #     temp, temp1, temp2 = dummyHead, head1, head2
+        #     while temp1 and temp2:
+        #         if temp1.val <= temp2.val:
+        #             temp.next = temp1
+        #             temp1 = temp1.next
+        #         else:
+        #             temp.next = temp2
+        #             temp2 = temp2.next
+        #         temp = temp.next
+        #     if temp1:
+        #         temp.next = temp1
+        #     elif temp2:
+        #         temp.next = temp2
+        #     return dummyHead.next
+
+        # return sortFunc(head, None)
 
         # 链表->数组->链表
-        current = head.next
-        sortListHead = ListNode() # dummy head
-        sortListHead.next = head
-        sortListLast = head
-        while current:
-            if current.val >= sortListLast.val:
-                sortListLast.next = current
-                sortListLast = current
-                current = current.next
-            else: # 当前节点小于sortListLast节点
-                # 1.寻找插入位置(pre为插入位置的前一个节点)
-                pre = sortListHead
-                while pre.next and pre.next.val < current.val:
-                    pre = pre.next
-                # 2.插入
-                currentNext = current.next
-                current.next = pre.next
-                pre.next = current
-                current = currentNext
-        return sortListHead.next
+        # current = head.next
+        # sortListHead = ListNode() # dummy head
+        # sortListHead.next = head
+        # sortListLast = head
+        # while current:
+        #     if current.val >= sortListLast.val:
+        #         sortListLast.next = current
+        #         sortListLast = current
+        #         current = current.next
+        #     else: # 当前节点小于sortListLast节点
+        #         # 1.寻找插入位置(pre为插入位置的前一个节点)
+        #         pre = sortListHead
+        #         while pre.next and pre.next.val < current.val:
+        #             pre = pre.next
+        #         # 2.插入
+        #         currentNext = current.next
+        #         current.next = pre.next
+        #         pre.next = current
+        #         current = currentNext
+        # return sortListHead.next
 # @lc code=end
 def printListNode(head: ListNode):
     while head:
