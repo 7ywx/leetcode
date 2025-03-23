@@ -118,7 +118,7 @@ class Solution:
         快慢指针通常用于检测链表中是否有环，或者在链表中找到中点。在相交链表的情况下，它也可以用来找到相交点。
         在相交链表问题中，可以将其中一个链表的尾部连接到另一个链表的头部，形成一个环。然后使用快慢指针找到环的起始点，该点即为相交点。
         """
-        # 双链表
+        # 快慢指针找环入口
         if not headA or not headB:
             return None
 
@@ -151,7 +151,7 @@ class Solution:
         return None
 
 
-        # 双指针
+        # 双指针（等比例法）
         if not headA or not headB:
             return None
 
@@ -193,7 +193,7 @@ class Solution:
             lenB += 1
             B = B.next
 
-        # 将指针A和指针B移动到长度较小的链表的末尾
+        # 通过移动较长的链表，使两链表长度相等
         if lenA > lenB:
             for i in range(lenA - lenB):
                 A = A.next

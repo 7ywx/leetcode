@@ -7,7 +7,7 @@ def sqrt_newton_method(number, epsilon=1e-6):
 
     guesses = [number]  # 存储每次迭代的猜测值
     while abs(guesses[-1] * guesses[-1] - number) > epsilon:
-        new_guess = (guesses[-1] + number / guesses[-1]) / 2.0
+        new_guess = (guesses[-1] + number / guesses[-1]) / 2.0 # 关键是这
         guesses.append(new_guess)
 
     return guesses
@@ -71,4 +71,5 @@ def plot_newton_iterations(number, guesses):
 # 示例用法
 number = 98
 guesses = sqrt_newton_method(number)
-plot_newton_iterations(number, guesses)
+# plot_newton_iterations(number, guesses)
+print(guesses)

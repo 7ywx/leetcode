@@ -69,18 +69,15 @@ class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
-        # 求左子树和右子树的深度
-        leftHeight = self.height(root.left)
-        rightHeight = self.height(root.right)
 
-        # 如果左子树的深度 = 右子树的深度，左子树为满二叉树
-        # 节点数 = 左子树的深度 + 右子树的深度 + 根节点
-        if leftHeight == rightHeight:
-            return (2 ** leftHeight - 1) + self.countNodes(root.right) + 1
-        # 如果左子树的深度 ＞ 右子树的深度，右子树为满二叉树
-        # 节点数 = 左子树的深度 + 右子树的深度 + 根节点
-        else:
-            return (2 ** rightHeight - 1) + self.countNodes(root.left) + 1
+        # 利用完全二叉树的性质来判断是不是满二叉树
+        count = 0
+        left = root.left; right = root.right
+        while left and right:
+            count+=1
+            left = left.left; right = right.right
+        if not left and not right: # 如果同时到底说明是满二叉树，反之则不是
+            return (2<<count)-1
 
         return 1 + self.countNodes(root.left) + self.countNodes(root.right)
 # @lc code=end

@@ -97,6 +97,26 @@
 class Solution:
 
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        # 创建一个虚拟节点，并将其下一个指针设置为链表的头部
+        dummy_head = ListNode(0, head)
+
+        # 创建两个指针，慢指针和快指针，并将它们指向虚拟节点
+        slow = fast = dummy_head
+
+        # 快指针比慢指针快 n+1 步
+        for i in range(n+1):
+            fast = fast.next
+
+        # 移动两个指针，直到快速指针到达链表的末尾
+        while fast:
+            slow = slow.next
+            fast = fast.next
+
+        # 通过更新第 (n-1) 个节点的 next 指针删除第 n 个节点
+        slow.next = slow.next.next
+
+        return dummy_head.next
+
 
         # 创建一个空列表node_list，用于存储链表节点
         node_list = []
@@ -117,26 +137,5 @@ class Solution:
         else:
             node_list[i-n-1].next = node_list[i-n-1].next.next # (i-n-1: 要删除的节点的前一个节点的索引, i-n: 要删除的节点的索引, i-n+1: 要删除的节点的下一个节点的索引, 因为可能不存在于node_list中, 故而用node_list[i-n-1].next.next)
             return head
-
-
-        # i = 0
-
-        # node_dict = {}
-
-        # while head:
-
-        #     node_dict[i] = head
-
-        #     head = head.next
-
-        #     i += 1
-
-        # if n == i:
-        #     return node_dict[0].next
-        # else:
-
-        #     node_dict[i-n-1].next = node_dict[i-n-1].next.next
-
-        #     return node_dict[0]
 
 # @lc code=end

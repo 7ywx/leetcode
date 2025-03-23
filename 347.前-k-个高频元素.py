@@ -68,27 +68,27 @@ class Solution:
 
         return [key for val, key in heap]
 
-        # res = []
-        # new_nums = Counter(nums)
-        # # 注意这里的items()返回的是一个元组，上下文的下标操作是对元组进行的，不是对字典操作的
-        # sorted_nums = sorted(new_nums.items(), key=lambda x: x[1], reverse=True)
-        # for i in range(k):
-        #     res.append(sorted_nums[i][0])
-        # return res
+        res = []
+        new_nums = Counter(nums)
+        # 注意这里的items()返回的是一个元组，上下文的下标操作是对元组进行的，不是对字典操作的
+        sorted_nums = sorted(new_nums.items(), key=lambda x: x[1], reverse=True)
+        for i in range(k):
+            res.append(sorted_nums[i][0])
+        return res
 
-        # hashtable = collections.defaultdict(int)
-        # res = []
-        # for num in nums:
-        #     hashtable[num] += 1
-        # value = hashtable.values()
-        # counterList = heapq.nlargest(k, hashtable.values())
-        # for counter in counterList:
-        #     for key, value in hashtable.items():
-        #         if value == counter:
-        #             res.append(key)
-        #             break
-        #     del hashtable[res[-1]]
-        # return res
+        hashtable = collections.defaultdict(int)
+        res = []
+        for num in nums:
+            hashtable[num] += 1
+        value = hashtable.values()
+        counterList = heapq.nlargest(k, hashtable.values())
+        for counter in counterList:
+            for key, value in hashtable.items():
+                if value == counter:
+                    res.append(key)
+                    break
+            del hashtable[res[-1]]
+        return res
 # @lc code=end
 s = Solution()
 s.topKFrequent([1,1,1,2,2,3], 2)

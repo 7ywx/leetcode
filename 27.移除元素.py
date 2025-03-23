@@ -75,6 +75,24 @@
 # @lc code=start
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
+        # 双指针
+        # 初始化数组长度
+        n = len(nums)
+        # 初始化左右指针
+        left, right = 0, 0
+        # 遍历数组
+        while right < n:
+            # 如果右指针指向的元素不等于val
+            if nums[right] != val:
+                # 将右指针指向的元素赋值给左指针指向的位置
+                nums[left] = nums[right]
+                # 左指针向右移动一位
+                left += 1
+            # 右指针向右移动一位
+            right += 1
+        # 返回左指针的位置，即为移除指定值后的数组长度
+        return left
+
         '''
         删除依据：
 
@@ -97,20 +115,30 @@ class Solution:
             使用 pop() 时，如果索引超出了列表的范围，会抛出 IndexError。
         '''
         # popIndex-pop
+        # 初始化变量n为列表nums的长度
         n = len(nums)
+        # 创建一个空列表用于存储待删除元素的索引
         popIndex = []
+        # 遍历nums列表，寻找值为val的元素
         for i in range(n):
+            # 如果找到值为val的元素，记录其索引，并减少n的值
             if nums[i] == val:
                 popIndex.append(i)
                 n -= 1
+        # 逆序遍历待删除元素的索引列表，以避免删除操作影响后续元素的索引
         for i in popIndex[::-1]:
             nums.pop(i)
+        # 返回修改后的列表长度
         return n
 
         # count-remove
+        # 获取列表长度
         n = len(nums)
+        # 统计列表中val的出现次数
         valNum = nums.count(val)
+        # 循环移除列表中所有的val
         for i in range(valNum):
             nums.remove(val)
+        # 返回移除val后列表的长度
         return n - valNum
 # @lc code=end

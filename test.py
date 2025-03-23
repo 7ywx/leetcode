@@ -20,10 +20,16 @@
 # # 构造突出显示的字符串
 # highlighted_text = text[:i] + RED + text[i] + RESET + text[i+1:]
 
-# # 打印突出显示的字符串
-# print(highlighted_text)
-# print("\033[0;31;44mHello world!\033[0m")  # 不高亮，红字，蓝底
-# print("\033[1;31;40mHello world!\033[0m")  # 高亮，红字，黑底
+# # # 打印突出显示的字符串
+# # print(highlighted_text)
+# # print("\033[0;31;44mHello world!\033[0m")  # 不高亮，红字，蓝底
+# # print("\033[1;31;40mHello world!\033[0m")  # 高亮，红字，黑底
+
+# test = set()
+# test.add(tuple([1]))
+
+print(19%4)
+print(19//4)
 
 
 import time
