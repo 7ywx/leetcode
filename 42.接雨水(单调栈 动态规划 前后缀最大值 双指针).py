@@ -70,30 +70,30 @@ class Solution:
                 right -= 1
         return ans
 
-        # #
-        # # 计算height的长度
-        # lens = len(height)
-        # # 初始化总水量（答案）为0
-        # ans = 0
+        # 动态规划
+        # 计算height的长度
+        lens = len(height)
+        # 初始化总水量（答案）为0
+        ans = 0
 
-        # # 前缀最大值，并将第一个元素设为height的第一个元素
-        # pre_max = [0] * lens
-        # pre_max[0] = height[0]
-        # # 遍历高度列表的每一个元素，计算每个元素之前的最大值
-        # for i in range(1, lens):
-        #     pre_max[i] = max(pre_max[i - 1], height[i])
+        # 前缀最大值，并将第一个元素设为height的第一个元素
+        pre_max = [0] * lens
+        pre_max[0] = height[0]
+        # 遍历高度列表的每一个元素，计算每个元素之前的最大值
+        for i in range(1, lens):
+            pre_max[i] = max(pre_max[i - 1], height[i])
 
-        # # 后缀最大值，并将最后一个元素设为height的最后一个元素
-        # post_max = [0] * lens
-        # post_max[lens - 1] = height[lens - 1]
-        # # 遍历高度列表的每一个元素，计算每个元素之后的最大值
-        # for i in range(lens - 2, -1, -1):
-        #     post_max[i] = max(post_max[i + 1], height[i])
+        # 后缀最大值，并将最后一个元素设为height的最后一个元素
+        post_max = [0] * lens
+        post_max[lens - 1] = height[lens - 1]
+        # 遍历高度列表的每一个元素，计算每个元素之后的最大值
+        for i in range(lens - 2, -1, -1):
+            post_max[i] = max(post_max[i + 1], height[i])
 
-        # # 遍历高度列表的每一个元素，计算该元素可以盛水量
-        # for h, p, q in zip(height, pre_max, post_max):
-        #     ans += min(p, q) - h
+        # 遍历高度列表的每一个元素，计算该元素可以盛水量
+        for h, p, q in zip(height, pre_max, post_max):
+            ans += min(p, q) - h
 
-        # # 返回总水量（答案）
-        # return ans
+        # 返回总水量（答案）
+        return ans
 # @lc code=end
