@@ -7,32 +7,34 @@
    要求：替换后的A‘与B的字典序最小
 """
 def count_visible_students(heights):
-   #  n = len(heights)
-   #  total_visible = 0
+    n = len(heights)
+    total_visible = 0
 
-   #  # 栈用来存储每个同学能看到的数量
-   #  stack = []
+    # 栈用来存储每个同学能看到的数量
+    stack = []
 
-   #  for i in range(n):
-   #      visible_count = 0  # 当前同学能看到的同学数量
+    for i in range(n):
+        visible_count = 0  # 当前同学能看到的同学数量
 
-   #      # 从栈中弹出所有比当前同学矮的同学
-   #      while stack and heights[stack[-1]] <= heights[i]:
-   #          visible_count += 1
-   #          stack.pop()
+        # 从栈中弹出所有比当前同学矮的同学
+        while stack and heights[stack[-1]] <= heights[i]:
+            visible_count += 1
+            stack.pop()
 
-   #      # 当前同学能看到的同学是栈中剩下的所有
-   #      visible_count += len(stack)
+        # 当前同学能看到的同学是栈中剩下的所有
+        visible_count += len(stack)
 
-   #      # 加到总的可见人数
-   #      total_visible += visible_count
+        # 加到总的可见人数
+        total_visible += visible_count
 
-   #      # 将当前同学入栈
-   #      stack.append(i)
+        # 将当前同学入栈
+        stack.append(i)
 
-   #  return total_visible
+    return total_visible
 
 
+
+def count_visible_students2(heights):
    ans = 0
    for i in range(len(heights)):
       for j in range(i+1, len(heights)):
@@ -42,7 +44,6 @@ def count_visible_students(heights):
             ans += 1
             break
    return ans
-# def count_visible_students2(heights):
 #    ans = 0
 #    postfix = [[0, 0]] * (len(heights)-1) + [[heights[-1], len(heights)-1]]
 #    for i in range(len(heights)-2, -1, -1):
@@ -94,4 +95,4 @@ def test_functions(num_tests=10000, max_length=5):
     return True
 
 # 运行测试
-# test_functions()
+test_functions()
