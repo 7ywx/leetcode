@@ -28,8 +28,8 @@
 # test = set()
 # test.add(tuple([1]))
 
-print(19%4)
-print(19//4)
+# print(19%4)
+# print(19//4)
 
 
 import time
@@ -92,25 +92,25 @@ import time
 # if 4 ^ 1 == ~4:
 #     print(1)
 
-n = 2**30 # int(input())
+# n = 2**30 # int(input())
 
-import cmath  # 为了处理可能出现的复数解
-import math
-def solve_quadratic(a, b, c):
-    # 计算判别式
-    delta = b**2 - 4 * a * c
+# import cmath  # 为了处理可能出现的复数解
+# import math
+# def solve_quadratic(a, b, c):
+#     # 计算判别式
+#     delta = b**2 - 4 * a * c
 
-    # 计算两个解
-    root1 = (-b - cmath.sqrt(delta)) / (2 * a)
-    root2 = (-b + cmath.sqrt(delta)) / (2 * a)
+#     # 计算两个解
+#     root1 = (-b - cmath.sqrt(delta)) / (2 * a)
+#     root2 = (-b + cmath.sqrt(delta)) / (2 * a)
 
-    # 如果判别式大于等于0，解是实数
-    if delta >= 0:
-        root1 = root1.real
-        root2 = root2.real
+#     # 如果判别式大于等于0，解是实数
+#     if delta >= 0:
+#         root1 = root1.real
+#         root2 = root2.real
 
-    return (root1, root2)
+#     return (root1, root2)
 
-right = math.ceil(n / 2)
-left = math.ceil(solve_quadratic(1, 1, -n*2)[1])
-print(right, left)
+# right = math.ceil(n / 2)
+# left = math.ceil(solve_quadratic(1, 1, -n*2)[1])
+# print(right, left)
