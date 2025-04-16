@@ -114,3 +114,23 @@ import time
 # right = math.ceil(n / 2)
 # left = math.ceil(solve_quadratic(1, 1, -n*2)[1])
 # print(right, left)
+
+
+# def number_generator(maximum):
+#     """生成从1到maximum的所有整数"""
+#     n = 1
+#     while n <= maximum:
+#         yield n
+#         n += 1
+
+# # 使用生成器遍历数字
+# for number in number_generator(1000000):
+#     if number % 100000 == 0:  # 只打印每10万个数中的第一个
+#         print(number)
+
+def say_hello():
+    print("Hello!")
+
+# 将函数赋值给变量
+greet = say_hello
+greet()  # 输出: Hello!
