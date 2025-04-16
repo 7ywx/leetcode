@@ -60,6 +60,20 @@
 #         self.right = right
 class Solution:
     # 中序遍历得到数组，判断是不是严格单调递增
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def inorder(root):
+            if not root:
+                return []
+            return inorder(root.left) + [root.val] + inorder(root.right)
+
+        inorder_list = inorder(root)
+        prev = float("-inf")
+        for val in inorder_list:
+            if val > prev:
+                prev = val
+            else:
+                return False
+        return True
 
     # 后序
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
@@ -95,7 +109,6 @@ class Solution:
                 self.isValidBST(root.right, x, right)
 
 
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
         # 二叉树的中序遍历（迭代）
         # res = [float('-inf')]  # 存储结果的列表
         res = float('-inf')
