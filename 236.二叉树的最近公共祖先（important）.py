@@ -86,7 +86,7 @@ class Solution:
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
-        # 如果左右子树都找到了节点，说明当前节点就是最近公共祖先
+        # 如果左右子树都找到了节点，说明root就是最近公共祖先
         if left and right:
             return root
 
