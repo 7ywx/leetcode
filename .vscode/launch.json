@@ -5,6 +5,33 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"type": "java",
+			"name": "SampleFilter",
+			"request": "launch",
+			"mainClass": "SampleFilter",
+			"projectName": "leetcode_7ed018f7"
+		},
+		{
+			"type": "java",
+			"name": "Hello",
+			"request": "launch",
+			"mainClass": "Hello",
+			"projectName": "leetcode_7ed018f7"
+		},
+		{
+			"type": "java",
+			"name": "Launch External Terminal",
+			"request": "launch",
+			"console": "externalTerminal",
+			"mainClass": ""
+		},
+		{
+			"type": "java",
+			"name": "Launch Current File",
+			"request": "launch",
+			"mainClass": "${file}"
+		},
+		{
 			"name": "Python 调试程序: 当前文件",
 			"type": "debugpy",
 			"request": "launch",

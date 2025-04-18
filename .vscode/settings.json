@@ -61,5 +61,6 @@
 		"string.h": "c"
 	},
 	"editor.suggest.snippetsPreventQuickSuggestions": false,
-	"aiXcoder.showTrayIcon": true
+	"aiXcoder.showTrayIcon": true,
+	"java.debug.settings.onBuildFailureProceed": true
 }
