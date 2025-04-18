@@ -32,8 +32,6 @@ def count_visible_students(heights):
 
     return total_visible
 
-
-
 def count_visible_students2(heights):
    ans = 0
    for i in range(len(heights)):
