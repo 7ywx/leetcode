@@ -55,6 +55,9 @@ class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
         res = []
         def backtracking(start, path):
+            # 剪枝条件：如果剩余可选元素不足以构成长度为k的组合，则直接跳过
+            if len(path) + (n - start + 1) < k:
+                return
             if len(path) == k:
                 res.append(path[:])
                 return
