@@ -45,16 +45,30 @@ from typing import List, Optional
 # @lc code=start
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        #TODO 搞懂
-        dp = [[[]]]
-        # dp[i]表示s[:i]所有可能的分割方案
-        for i in range(1, len(s) + 1):
-            dp.append([])
-            for j in range(i):
-                tmp = s[j:i]
-                if tmp == tmp[::-1]:
-                    dp[-1].extend(l + [tmp] for l in dp[j])
-        return dp[-1]
+        ans = []
+        s = list(s)
+        n = len(s)
+        def backtrack(start, path):
+            if start == n:
+                ans.append(path[:])
+                return
+            for i in range(start, n):
+                if s[start:i+1] == s[start:i+1][::-1]:
+                    backtrack(i+1, path+["".join(s[start:i+1])])
+
+        backtrack(0, [])
+
+        return ans
+        # #TODO 动态规划 搞懂
+        # dp = [[[]]]
+        # # dp[i]表示s[:i]所有可能的分割方案
+        # for i in range(1, len(s) + 1):
+        #     dp.append([])
+        #     for j in range(i):
+        #         tmp = s[j:i]
+        #         if tmp == tmp[::-1]:
+        #             dp[-1].extend(l + [tmp] for l in dp[j])
+        # return dp[-1]
 
         # 回溯
         path = []
@@ -68,6 +82,7 @@ class Solution:
                 return
             for i in range(startIndex, s_len): # 分割线画在startIndex元素的后面
                 if isPalindrome(s[startIndex:i+1]):
+                    # dfs(i+1, path+[s[startIndex:i+1]])
                     path.append(s[startIndex:i+1])
                     dfs(i+1)
                     path.pop()

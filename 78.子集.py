@@ -48,20 +48,14 @@ from typing import List, Optional
 # @lc code=start
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        #TODO 过于烧脑
+        ans = []
+        n = len(nums)
         def backtrack(start, path):
-            # 将当前路径添加到结果集中
-            result.append(path[:])
-
-            # 递归处理下一个元素
-            for i in range(start, len(nums)):
-                path.append(nums[i])
-                backtrack(i + 1, path)
-                path.pop()  # 回溯，移除当前元素
-
-        result = []
+            ans.append(path[:])
+            for i in range(start, n):
+                backtrack(i+1, path+[nums[i]])
         backtrack(0, [])
-        return result
+        return ans
 # @lc code=end
 solution = Solution()
 print(solution.subsets([1,2,3]))

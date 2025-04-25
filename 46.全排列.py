@@ -53,43 +53,34 @@ from typing import List, Optional
 # @lc code=start
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        #TODO 回溯 迭代 DNS
-        """
-        生成给定列表的所有全排列。
+        ans = []
+        n = len(nums)
+        used = [False] * n
 
-        参数:
-        nums: List[int] - 需要生成全排列的整数列表。
+        def backtrack(used, path):
+            if len(path) == n:
+                ans.append(path[:])
+            for i in range(n):
+                if not used[i]:
+                    used[i] = True
+                    backtrack(used, path+[num[i]])
+                    used[i] = False
 
-        返回值:### 参数传递的方式
-        """
-
-        res = []
-        def backtracking(path, used): # 0:没用 1:用了
-            if len(path) == len(nums):
-                res.append(path[:])
-                return
-            for i in range(len(used)):
-                if used[i] == 0:
-                    path.append(nums[i])
-                    used[i] = 1
-                    backtracking(path, used)
-                    path.pop()
-                    used[i] = 0
-        backtracking([], [0] * len(nums))
-        return res
+        backtrack(used, [])
+        return ans
 
         # v2.1 40ms左右 #TODO 没理解
-        def backtrack(first = 0):
-            # 所有数都填完了
-            if first == n:
+        def backtrack(position = 0):
+            # 所有位置都交换完了
+            if position == n:
                 res.append(nums[:])
-            for i in range(first, n):
-                # 动态维护数组
-                nums[first], nums[i] = nums[i], nums[first]
-                # 继续递归填下一个数
-                backtrack(first + 1)
+            for i in range(position, n):
+                # 交换 first 和 i
+                nums[position], nums[i] = nums[i], nums[position]
+                # 继续递归交换下一个数
+                backtrack(position + 1)
                 # 撤销操作
-                nums[first], nums[i] = nums[i], nums[first]
+                nums[position], nums[i] = nums[i], nums[position]
 
         n = len(nums)
         res = []
@@ -145,24 +136,25 @@ class Solution:
         # 返回所有可能的组合结果
         return res
 
-        # v1 40ms左右
-        # result = []  # 存储所有全排列结果的列表
 
-        # # 如果列表元素个数小于2，则直接返回该列表作为唯一的一种排列
-        # if len(nums) < 2:
-        #     return [nums]
+        # v1 40ms左右 递归
+        result = []  # 存储所有全排列结果的列表
 
-        # # 遍历列表中的每个元素
-        # for num in nums:
-        #     # 递归调用函数，生成不包含当前元素的所有排列
-        #     temp = self.permute([item for item in nums if item != num])
+        # 如果列表元素个数小于2，则直接返回该列表作为唯一的一种排列
+        if len(nums) < 2:
+            return [nums]
 
-        #     # 将当前元素依次添加到每种排列中，并将新的排列添加到结果列表中
-        #     for t in temp:
-        #         t.append(num)
-        #         result.append(t)
+        # 遍历列表中的每个元素
+        for num in nums:
+            # 递归调用函数，生成不包含当前元素的所有排列
+            temp = self.permute([item for item in nums if item != num])
 
-        # return result
+            # 将当前元素依次添加到每种排列中，并将新的排列添加到结果列表中
+            for t in temp:
+                t.append(num)
+                result.append(t)
+
+        return result
 # @lc code=end
 solution = Solution()
 print(solution.permute([1,2,3]))
