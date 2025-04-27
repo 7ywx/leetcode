@@ -128,9 +128,42 @@ import time
 #     if number % 100000 == 0:  # 只打印每10万个数中的第一个
 #         print(number)
 
-def say_hello():
-    print("Hello!")
+# def say_hello():
+#     print("Hello!")
 
-# 将函数赋值给变量
-greet = say_hello
-greet()  # 输出: Hello!
+# # 将函数赋值给变量
+# greet = say_hello
+# greet()  # 输出: Hello!
+
+# res = lambda x: x+x
+# print(res([1,2,3,4]))
+
+# import re
+# strs = 'Type:This is Python'
+# res = re.match('Type:(\w+) is (\w+)',strs)
+# print(res.group(0))
+# print(res.group(1))
+# print(res.group(2))
+
+def min_switches(initial, target):
+    n = len(initial)
+    switches = 0
+
+    for i in range(n):
+        # 如果当前灯泡的状态与目标状态不同
+        if initial[i] != target[i]:
+            # 计算需要切换多少次
+            diff = (target[i] - initial[i]) % 3
+            # 切换当前灯泡及其子树
+            for j in range(i, n):
+                # 对当前灯泡及其子树进行切换
+                initial[j] = (initial[j] + diff) % 3
+            # 记录切换次数
+            switches += 1
+
+    return switches
+
+# 测试示例
+initial = [1,2,3,0,1]
+target = [2,3,1,0,2]
+print(min_switches(initial, target))  # 输出最少的开关次数
