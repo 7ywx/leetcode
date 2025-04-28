@@ -55,25 +55,26 @@ from typing import List
 # @lc code=start
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        # nums = [i  for i in range(n)]
-        # path = [-1] * n
-        # ans = []
-        # m = 2 * n - 1
-        # diag1 = [False] * m
-        # diag2 = [False] * m
-        # def dfs(i, s):
-        #     if i == n:
-        #         ans.append(['.'*c + 'Q' + '.' * (n-1-c) for c in path])
-        #         return
-        #     for c in s:
-        #         # if all(i+c != R+path[R] and i-c != R - path[R] for R in range(i)):
-        #         if not diag1[i+c] and not diag2[i-c]:
-        #             diag1[i+c] = diag2[i-c] = True
-        #             path[i] = c
-        #             dfs(i+1, s-{c})
-        #             diag1[i+c] = diag2[i-c] = False
-        # dfs(0, set(nums))
-        # return ans
+        # 灵神版本
+        nums = [i  for i in range(n)]
+        path = [-1] * n
+        ans = []
+        m = 2 * n - 1
+        diag1 = [False] * m
+        diag2 = [False] * m
+        def dfs(i, s):
+            if i == n:
+                ans.append(['.'*c + 'Q' + '.' * (n-1-c) for c in path])
+                return
+            for c in s:
+                # if all(i+c != R+path[R] and i-c != R - path[R] for R in range(i)):
+                if not diag1[i+c] and not diag2[i-c]:
+                    diag1[i+c] = diag2[i-c] = True
+                    path[i] = c
+                    dfs(i+1, s-{c})
+                    diag1[i+c] = diag2[i-c] = False
+        dfs(0, set(nums))
+        return ans
 
         grid = [["."] * n for _ in range(n)]
         res = []
@@ -97,40 +98,22 @@ class Solution:
                 p -= 1
                 q += 1
             return True
-        def dfs(row):
-            candidates = []
-            for j in range(n):
-                if isValid(row, j):
-                    candidates.append(j)
-            if not candidates:
-                return False
-            for j in candidates:
-                grid[row][j] = "Q"
-
-                if row == n - 1:
-                    res.append(["".join(row) for row in grid])
-                else:
-                    dfs(row + 1)
-
-                grid[row][j] = "."
-
         def backtrack(row):
-            n = len(board)
             # 如果到最后一行了，则将结果添加到res里
             if row == n:
-                tmp = [''.join(i) for i in board]
+                tmp = [''.join(i) for i in grid]
                 res.append(tmp)
                 return
 
             for col in range(n):
-                if not self.isValid(board, row, col):
+                if not isValid(row, col):
                     continue
-                board[row][col] = 'Q'
+                grid[row][col] = 'Q'
                 backtrack(row + 1)
-                board[row][col] = '.'
+                grid[row][col] = '.'
         # backtrack(0)
         dfs(0)
         return res
 # @lc code=end
 s = Solution()
-print(s.solveNQueens(4))
+print(s.solveNQueens(100))
