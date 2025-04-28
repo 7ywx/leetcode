@@ -98,6 +98,7 @@ class Solution:
                 q += 1
             return True
         def backtrack(row):
+            n = len(grid)
             # 如果到最后一行了，则将结果添加到res里
             if row == n:
                 tmp = [''.join(i) for i in grid]
@@ -105,13 +106,13 @@ class Solution:
                 return
 
             for col in range(n):
-                if not isValid(row, col):
+                if not self.isValid(grid, row, col):
                     continue
                 grid[row][col] = 'Q'
                 backtrack(row + 1)
                 grid[row][col] = '.'
-        # backtrack(0)
-        dfs(0)
+        backtrack(0)
+        # dfs(0)
         return res
 # @lc code=end
 s = Solution()

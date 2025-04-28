@@ -59,15 +59,11 @@ class Solution:
         返回一个布尔值，True表示可以跳跃到数组的结束位置，False表示不能。
         """
         jump = 0  # 当前能够跳跃的最远位置
+        i = 0
 
-        for i in range(len(nums)):
-            # 如果当前位置已经超过当前能跳的最远位置，表示无法继续跳跃到数组末尾
-            if jump < i:
-                return False
-
-            # 更新当前能够跳跃的最远位置
-            if i + nums[i] > jump:
-                jump = i + nums[i]
-
-        return True
+        while i <= jump:
+            jump = max(i + nums[i], jump)
+            if jump >= len(nums) - 1: return True
+            i += 1
+        return False
 # @lc code=end
