@@ -63,13 +63,10 @@ class Solution:
         current_max = global_max = nums[0]
 
         for num in nums[1:]:
-            # # 更新当前子数组的最大和
-            # current_max = max(num, current_max + num)
-            # # 更新全局最大子数组和
-            # global_max = max(global_max, current_max)
-            if current_max > 0: current_max = current_max + num
-            else: current_max = num
-            if current_max > global_max: global_max = current_max
+            # 更新当前子数组的最大和
+            current_max = max(num, current_max + num)
+            # 更新全局最大子数组和
+            global_max = max(global_max, current_max)
         return global_max
 
         for i in range(1, len(nums)):
