@@ -76,48 +76,48 @@ class Solution:
         如果能找到一个位置，使得从该位置开始能够遍历整个gas列表，返回最小的开始位置索引；
         如果不能完成遍历，返回-1。
         """
-        # 计算每个加油站的剩余燃料，即提供的燃料量减去到该加油站的成本
-        rest = [g - c for g, c in zip(gas, cost)]
-        # 如果所有加油站的剩余燃料总和小于0，表示无法遍历整个列表，返回-1
-        if sum(rest) < 0:
+        # 检查是否有足够的总汽油量完成一圈的旅行，如果没有，则返回-1
+        if sum(gas) < sum(cost):
             return -1
-        # 初始化油箱中的燃料量和开始位置
-        tank = 0
-        start = 0
-        # 遍历每个加油站的剩余燃料，累计油箱中的燃料量
-        for i, r in enumerate(rest):
-            tank += r
-            # 如果油箱中的燃料量小于0，说明从开始位置到当前位置的加油站无法遍历，更新开始位置
-            if tank < 0:
-                tank = 0
-                start = i + 1
-        return start
 
-        # # 暴力法 v1 超时
-        # n = len(gas)
-        # def check(i):
-        #     tank = 0
-        #     for j in range(i, i + n):
-        #         tank += gas[j % n] - cost[j % n]
-        #         if tank < 0:
-        #             return False
-        #     return True
-        # for i, g in enumerate(gas):
-        #     if g < cost[i] or g == 0:
-        #         continue
-        #     if check(i):
-        #         return i
-        #     # flag = 1
-        #     # while flag:
-        #     #     tank = 0 # 油箱油量
-        #     #     for j in range(i, i + n):
-        #     #         tank += gas[j % n] - cost[j % n]
-        #     #         if tank < 0:
-        #     #             flag = 0
-        #     #             break
-        #     #     if flag:
-        #     #         return i
-        # return -1
+        # 获取加油站的数量
+        n = len(gas)
+        # 初始化起始加油站的索引为-1，表示尚未找到合适的起始点
+        start = -1
+        # 初始化总的汽油量为0
+        total_gas = 0
+
+        # 遍历两倍的加油站数量，以确保可以尝试从每个加油站出发
+        for i in range(2*n):
+            # 使用模运算来循环遍历加油站
+            i = i % n
+            # 如果当前加油站的汽油量小于到达下一个加油站所需的成本
+            if gas[i] < cost[i]:
+                # 如果总的汽油量加上当前加油站的汽油仍然不足以到达下一个加油站
+                if total_gas + gas[i] < cost[i]:
+                    # 重置起始加油站索引为-1，表示从当前加油站出发不可行
+                    start = -1
+                    # 重置总的汽油量为0
+                    total_gas = 0
+                    # 继续下一次循环
+                    continue
+                else:
+                    # 如果已经找到了一个潜在的起始加油站
+                    if start == -1:
+                        # 将当前加油站设置为潜在的起始点
+                        start = i
+                    # 更新总的汽油量
+                    total_gas += gas[i] - cost[i]
+            else:
+                # 如果已经找到了一个潜在的起始加油站
+                if start == -1:
+                    # 将当前加油站设置为潜在的起始点
+                    start = i
+                # 更新总的汽油量
+                total_gas += gas[i] - cost[i]
+
+        # 返回起始加油站的索引，如果不存在，则为-1
+        return start
 # @lc code=end
 s = Solution()
 print(s.canCompleteCircuit([1,2,3,4,5], [3,4,5,1,2])) # 3
