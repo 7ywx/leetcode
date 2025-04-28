@@ -55,7 +55,6 @@ from typing import List
 # @lc code=start
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        # 灵神版本
         nums = [i  for i in range(n)]
         path = [-1] * n
         ans = []
