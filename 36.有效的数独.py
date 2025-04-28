@@ -94,34 +94,34 @@ class Solution:
                         return False
                     row[i][num] = col[j][num] = box[box_id][num] = 1
 
-        # # 1. 检查行
-        # for i in range(9):
-        #     row = set()
-        #     for j in range(9):
-        #         if board[i][j] != '.':
-        #             if board[i][j] in row:
-        #                 return False
-        #             row.add(board[i][j])
+        # 1. 检查行
+        for i in range(9):
+            row = set()
+            for j in range(9):
+                if board[i][j] != '.':
+                    if board[i][j] in row:
+                        return False
+                    row.add(board[i][j])
 
-        # # 2. 检查列
-        # for j in range(9):
-        #     col = set()
-        #     for i in range(9):
-        #         if board[i][j] != '.':
-        #             if board[i][j] in col:
-        #                 return False
-        #             col.add(board[i][j])
+        # 2. 检查列
+        for j in range(9):
+            col = set()
+            for i in range(9):
+                if board[i][j] != '.':
+                    if board[i][j] in col:
+                        return False
+                    col.add(board[i][j])
 
-        # # 3. 检查九宫格
-        # for i in range(0, 9, 3):
-        #     for j in range(0, 9, 3):
-        #         square = set()
-        #         for x in range(i, i+3):
-        #             for y in range(j, j+3):
-        #                 if board[x][y] != '.':
-        #                     if board[x][y] in square:
-        #                         return False
-        #                     square.add(board[x][y])
+        # 3. 检查九宫格
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                square = set()
+                for x in range(i, i+3):
+                    for y in range(j, j+3):
+                        if board[x][y] != '.':
+                            if board[x][y] in square:
+                                return False
+                            square.add(board[x][y])
 
         return True
 # @lc code=end
