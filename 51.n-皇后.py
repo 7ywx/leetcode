@@ -115,21 +115,21 @@ class Solution:
                 grid[row][j] = "."
 
         def backtrack(row):
-            n = len(board)
+            n = len(grid)
             # 如果到最后一行了，则将结果添加到res里
             if row == n:
-                tmp = [''.join(i) for i in board]
+                tmp = [''.join(i) for i in grid]
                 res.append(tmp)
                 return
 
             for col in range(n):
-                if not self.isValid(board, row, col):
+                if not self.isValid(grid, row, col):
                     continue
-                board[row][col] = 'Q'
+                grid[row][col] = 'Q'
                 backtrack(row + 1)
-                board[row][col] = '.'
-        # backtrack(0)
-        dfs(0)
+                grid[row][col] = '.'
+        backtrack(0)
+        # dfs(0)
         return res
 # @lc code=end
 s = Solution()
