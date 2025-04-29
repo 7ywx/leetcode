@@ -64,9 +64,7 @@ class Solution:
         end = 0 # 记录当前位置的边界
         step = 0 # 记录跳跃次数
         for i in range(n - 1):
-            # maxPos = max(maxPos, i + nums[i])
-            if i + nums[i] > maxPos:
-                maxPos = i + nums[i]
+            maxPos = max(maxPos, i + nums[i])
             if i == end:
                 end = maxPos
                 step += 1
@@ -86,14 +84,14 @@ class Solution:
         #     step += 1
         # return step
 
-        # jump = {0:0} # 存储每个位置的最小跳跃次数
-        # maxJump = 0
-        # for i in range(len(nums)):
-        #     maxJump = max(maxJump, i + nums[i])
-        #     for j in range(i+1, maxJump+1): # 遍历当前位置能到达的所有位置
-        #         if j not in jump or jump[j] > jump[i] + 1: # 如果当前位置能到达的位置没有记录，或者记录的次数比当前位置的次数多
-        #             jump[j] = jump[i] + 1
-        # return jump[len(nums)-1]
+        jump = {0:0} # 存储每个位置的最小跳跃次数
+        maxJump = 0
+        for i in range(len(nums)):
+            maxJump = max(maxJump, i + nums[i])
+            for j in range(i+1, maxJump+1): # 遍历当前位置能到达的所有位置
+                if j not in jump or jump[j] > jump[i] + 1: # 如果当前位置能到达的位置没有记录，或者记录的次数比当前位置的次数多
+                    jump[j] = jump[i] + 1
+        return jump[len(nums)-1]
 # @lc code=end
 s = Solution()
 print(s.jump([2,3,1,1,4]))
