@@ -85,7 +85,8 @@ class Solution:
         while i < n:
             start, end = points[i]
             j = i + 1
-            while j < n and points[j][0] >= start and points[j][0] <= end:
+            while j < n and points[j][0] >= start and points[j][0] <= end: # 有交集
+                # start, end 变为交集的范围
                 start = max(start, points[j][0])
                 end = min(end, points[j][1])
                 j += 1
@@ -93,54 +94,5 @@ class Solution:
             i = j
 
         return len(interPoints)
-
-
-        # a = points
-        # ansList = []
-        # def dfs(points):
-        #     if len(points) == 0:
-        #         return 0
-        #     ans = 0
-        #     points.sort()
-        #     hashmap = defaultdict(set)
-        #     maxBoom = -1
-        #     maxBooomList = []
-        #     for i in range(len(points)):
-        #         if hashmap[points[i][0]] is not None:
-        #             for j in range(0, i+1):
-        #                 if points[j][1] >= points[i][0]:
-        #                     hashmap[points[i][0]].add(j)
-        #                     if hashmap[points[i][0]].__len__() > maxBoom:
-        #                         maxBoom = hashmap[points[i][0]].__len__()
-        #         if hashmap[points[i][1]] is not None:
-        #             j = 0
-        #             while j < len(points) and points[j][0] <= points[i][1]:
-        #                 if points[j][1] >= points[i][1]:
-        #                     hashmap[points[i][1]].add(j)
-        #                     if hashmap[points[i][1]].__len__() > maxBoom:
-        #                         maxBoom = hashmap[points[i][1]].__len__()
-        #                 j += 1
-        #     print(hashmap)
-        #     print(maxBoom)
-        #     for k, v in hashmap.items():
-        #         if v.__len__() == maxBoom:
-        #             maxBooomList.append(k)
-        #     print(maxBooomList)
-
-        #     if all(len(value) == 1 for value in hashmap.values()):
-        #         ans += len(hashmap)
-        #         return ans
-
-        #     for i in range(len(maxBooomList)):
-        #         pointsNext = [points[_] for _ in range(len(points)) if _ not in hashmap[maxBooomList[i]]]
-        #         ans += 1
-        #         Next = dfs(pointsNext)
-        #         ansList.append(ans + Next)
-        #         ans = 0
-        # dfs(points)
-        # print(f"ansList:{ansList}")
-        # return min(ansList)
-
-        # def fms()
 # @lc code=end
 print(Solution.findMinArrowShots(Solution,[[10,16],[2,8],[1,6],[7,12]]))
